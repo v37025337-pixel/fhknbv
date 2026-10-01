@@ -30,6 +30,8 @@ jobs:
         run: python examples/use_as_module.py --report examples/module_demo.json
       - name: Train, develop and run capability benchmark
         run: python tools/train_and_benchmark.py --steps 640 --report examples/training_capability_report.json
+      - name: Diagnose L0 admission on design and blind seeds
+        run: python tools/l0_admission_experiment.py --steps 800 --report examples/l0_admission_experiment.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -37,3 +39,4 @@ jobs:
             examples/module_demo.json
             examples/legacy_test_results.json
             examples/training_capability_report.json
+            examples/l0_admission_experiment.json
