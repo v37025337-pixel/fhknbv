@@ -34,6 +34,8 @@ jobs:
         run: python tools/l0_admission_experiment.py --steps 800 --report examples/l0_admission_experiment.json
       - name: Validate Predictive Digital Self on blind seeds
         run: python tools/predictive_self_benchmark.py --steps 800 --report examples/predictive_self_benchmark.json
+      - name: Validate paired self-counterfactuals
+        run: python tools/self_counterfactual_benchmark.py --steps 800 --report examples/self_counterfactual_benchmark.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -43,3 +45,4 @@ jobs:
             examples/training_capability_report.json
             examples/l0_admission_experiment.json
             examples/predictive_self_benchmark.json
+            examples/self_counterfactual_benchmark.json
