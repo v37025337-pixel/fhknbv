@@ -1,13 +1,15 @@
 {
-  "schema": "unified-kernel.github-binding.v1",
+  "schema": "unified-kernel.github-binding.v2",
   "repository": "v37025337-pixel/fhknbv",
   "branch": "main",
-  "bound_commit": "6da405bd70b45d3f5d93799452a56441ec8a9c20",
+  "tracking_mode": "branch_head",
+  "integration_base_commit": "6da405bd70b45d3f5d93799452a56441ec8a9c20",
+  "first_sidecar_commit": "7e968dea1f4286c8a1f36d3815a1cb014e8527c5",
   "role": "canonical_code_host",
   "kernel": "UnifiedKernel",
   "runtime_line": "v1.5+",
   "integration": "sidecar_plugin",
   "model_weights_modified": false,
   "write_credentials_stored_in_repository": false,
-  "note": "The model remains unchanged. GitHub is a code/provenance host for the external kernel module."
+  "note": "Track main by branch HEAD; exact commits are provenance checkpoints, not a self-referential permanent expected HEAD."
 }
