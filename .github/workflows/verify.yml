@@ -11,7 +11,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     env:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
@@ -50,6 +50,12 @@ jobs:
           python tools/self_hypothesis.py
           --assessment examples/self_assessment.json
           --report examples/self_hypothesis.json
+      - name: Blind-test the self-selected L0 hypothesis
+        run: >-
+          python tools/l0_self_hypothesis_experiment.py
+          --hypothesis examples/self_hypothesis.json
+          --steps 640
+          --report examples/l0_self_hypothesis_experiment.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -62,3 +68,4 @@ jobs:
             examples/self_counterfactual_benchmark.json
             examples/self_assessment.json
             examples/self_hypothesis.json
+            examples/l0_self_hypothesis_experiment.json

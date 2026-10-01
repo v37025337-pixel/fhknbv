@@ -89,6 +89,13 @@ class L0PredictiveModel(PredictiveModel):
         self.ensemble_losses = []
         self.weights = []
         self.shadow_benefits = deque(maxlen=80)
+        # Read-only observability for external shadow experiments. These fields
+        # expose the already-computed transition pieces and do not affect policy.
+        self.last_baseline_error = None
+        self.last_correction = None
+        self.last_runtime_error = None
+        self.last_runtime_weight = 0.0
+        self.last_shadow_weight = 0.0
 
     @property
     def l0_weight(self):
@@ -140,6 +147,11 @@ class L0PredictiveModel(PredictiveModel):
         err = np.asarray(next_obs) - pred
         baseline_err = next_obs - baseline
         shadow_err = baseline_err - shadow_weight * correction
+        self.last_baseline_error = np.asarray(baseline_err, float).copy()
+        self.last_correction = np.asarray(correction, float).copy()
+        self.last_runtime_error = np.asarray(err, float).copy()
+        self.last_runtime_weight = float(weight)
+        self.last_shadow_weight = float(shadow_weight)
         self.shadow_benefits.append(float(np.mean(baseline_err ** 2) - np.mean(shadow_err ** 2)))
         super().update(obs, action, next_obs)
         self.cross_ema = 0.98 * self.cross_ema + 0.02 * float(np.mean(baseline_err * correction))
