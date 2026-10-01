@@ -123,5 +123,21 @@ class CognitionTests(unittest.TestCase):
             self.assertTrue(all(q['value'] for q in result['inferences']))
 
 
+    def test_evolution_has_no_arbitrary_three_attempt_ceiling(self):
+        class AlwaysRejectCore:
+            def synthesize_mechanism(self, *args, **kwargs):
+                return {'status': 'NO_MECHANISM_FOUND',
+                        'source': None, 'explanation': 'deliberate rejection'}
+
+        evolution = MechanismEvolution(AlwaysRejectCore())
+        # _advance() runs before the current sample is appended.  Enough
+        # observations should therefore drive more than the former 3 attempts.
+        for i in range(81):
+            evolution.choose(float(i + 3), float(i + 1))
+        self.assertGreater(evolution.attempts, 3)
+        self.assertIsNone(evolution.report()['attempt_limit'])
+
+
+
 if __name__ == '__main__':
     unittest.main()

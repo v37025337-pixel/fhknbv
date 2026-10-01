@@ -33,7 +33,7 @@ class MechanismEvolution:
             self.events.append({'event': 'restored', 'name': self.name})
 
     def _advance(self):
-        if not self.enabled or self.active or len(self.samples) < 16 or self.attempts >= 3:
+        if not self.enabled or self.active or len(self.samples) < 16:
             return
         if self.attempts and self.observations - self._last_attempt_samples < 16:
             return
@@ -97,6 +97,7 @@ class MechanismEvolution:
     def report(self):
         return {'enabled': self.enabled, 'active': self.active, 'attempts': self.attempts,
                 'planning_examples': self.observations, 'l0_calls': self.calls,
+                'attempt_limit': None,
                 'hold_selections': self.hold_selections,
                 'model_predicted_cost_saved': self.model_cost_saved,
                 'label_source': 'frozen world-model rollout costs; not real-world counterfactual outcomes',

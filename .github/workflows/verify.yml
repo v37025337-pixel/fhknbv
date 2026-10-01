@@ -28,9 +28,12 @@ jobs:
         run: python tools/verify_legacy.py
       - name: Exercise the callable module
         run: python examples/use_as_module.py --report examples/module_demo.json
+      - name: Train, develop and run capability benchmark
+        run: python tools/train_and_benchmark.py --steps 192 --report examples/training_capability_report.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
           path: |
             examples/module_demo.json
             examples/legacy_test_results.json
+            examples/training_capability_report.json
