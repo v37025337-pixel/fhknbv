@@ -1,0 +1,33 @@
+name: Kernel Self Diagnostic
+
+on:
+  push:
+    paths:
+      - "digital_mind_core/**"
+      - "tests/**"
+      - "tools/self_diagnostic.py"
+      - ".github/workflows/**"
+      - "development/**"
+      - "pyproject.toml"
+      - "UNIFIED_KERNEL_BINDING.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  self-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e .
+      - name: Kernel audits its own code, systems and modules
+        run: python tools/self_diagnostic.py --report kernel_self_diagnostic.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kernel-self-diagnostic
+          path: kernel_self_diagnostic.json
