@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from dataclasses import dataclass, field
+import copy
 import json
 from pathlib import Path
 
@@ -228,11 +229,17 @@ class UnifiedMind(DigitalMindV07):
         self._initial_mechanisms = None
         self._external_tasks = 0
         self._connections = 0
+        self._external_journal = []
+
+    def _record_external(self, event):
+        row = {'step': self.fast_steps, **copy.deepcopy(event)}
+        self._external_journal.append(row)
 
     def process(self, task):
         """Use the same symbolic state for explicit logical/planning tasks."""
         result = self.cognition.process(task)
         self._external_tasks += 1
+        self._record_external({'kind': 'process', 'task': task})
         return result
 
     def _self_state_vector(self):
@@ -272,11 +279,25 @@ class UnifiedMind(DigitalMindV07):
         """Model-based self counterfactual; this is not a causal claim."""
         if self._decision is None:
             raise RuntimeError('run at least one internal decision first')
-        return self.predictive_self.counterfactual(
+        result = self.predictive_self.counterfactual(
             self._self_state_vector(),
             self._self_decision_vector(),
             **decision_overrides,
         )
+        self._record_external({
+            'kind': 'self_counterfactual',
+            'overrides': decision_overrides,
+        })
+        return result
+
+    def run_mechanism(self, name, **inputs):
+        value = self.cognition.run_mechanism(name, **inputs)
+        self._record_external({
+            'kind': 'run_mechanism',
+            'name': name,
+            'inputs': inputs,
+        })
+        return value
 
     def connect(self, target, **kwargs):
         result = self.cognition.connect(target, **kwargs)
@@ -288,10 +309,17 @@ class UnifiedMind(DigitalMindV07):
             facts.append(('dataset_rows', namespace, schema['row_count']))
             facts.extend(('dataset_field', namespace, field['name'], field['type'])
                          for field in schema.get('fields', []))
-        self.process({'observations': [{'source': namespace, 'domain': result.domain,
-                                        'attached': result.attached, 'schema': schema}],
-                      'facts': facts, 'persist_facts': True,
-                      'context': 'external:' + result.domain})
+        task = {'observations': [{'source': namespace, 'domain': result.domain,
+                                  'attached': result.attached, 'schema': schema}],
+                'facts': facts, 'persist_facts': True,
+                'context': 'external:' + result.domain}
+        self.cognition.process(task)
+        self._external_tasks += 1
+        self._record_external({
+            'kind': 'connect',
+            'connection_index': self._connections,
+            'task': task,
+        })
         return result
 
     def save_mechanisms(self, path):

@@ -1,4 +1,4 @@
-# DIGITAL_MIND: подключаемый модуль 0.2.3
+# DIGITAL_MIND: подключаемый модуль 0.2.4
 
 Объединённое экспериментальное ядро DIGITAL_MIND + L0 + mechanism genesis v0.28, оформленное как Python-модуль и процесс с JSON-запросами. Программа-помощник может вызывать его для симуляции, логических выводов и исполнения сгенерированных механизмов через L0, а затем использовать результаты в своей работе.
 
@@ -109,6 +109,14 @@ curl http://127.0.0.1:8765/kernel/self-diagnostic
 
 По умолчанию сервер слушает только `127.0.0.1`. Если в Codespaces сделать forwarded port публичным для внешнего black-box теста, после аудита его следует снова закрыть: `execute` изменяет состояние ядра, а self-diagnostic потребляет вычислительные ресурсы.
 
+## Единый атомарный checkpoint
+
+`--checkpoint FILE` теперь создаёт канонический `digital-mind-atomic-checkpoint-v1`, а не только replay-рецепт. В одном файле находятся code/source/git identity, детерминированный replay и журнал внешних событий с номером шага, cognition, autobiographical memory, goals/questions, Predictive Self, generated mechanisms и `development/autodev_state.json`, если он доступен.
+
+Запись выполняется во временный файл в том же каталоге, затем через `fsync` и atomic replace. Перед публикацией checkpoint ядро делает контрольное восстановление; если любой компонент после round-trip отличается либо состояние/исходники изменились во время сохранения, старый checkpoint остаётся нетронутым.
+
+Старые `digital-mind-replay-v2/v3` по-прежнему читаются через `--resume`. Новый `--resume` автоматически различает atomic checkpoint и legacy replay.
+
 ## Установка и проверка
 
 Нужны Python 3.10+, NumPy, SciPy:
@@ -121,6 +129,8 @@ python examples/use_as_module.py --report examples/module_demo.json
 ```
 
 GitHub Actions выполняет эти проверки и сохраняет результаты как скачиваемый артефакт. Файл `examples/verification_summary.json` фиксирует локальные проверки данной сборки. Проверка Actions и запуск контейнера Codespaces считаются выполненными только после реального запуска в GitHub.
+
+Версия 0.2.4 добавляет единый атомарный checkpoint: один JSON содержит code identity, replay/event journal, cognition, autobiographical memory, self-model, generated mechanisms и autodev state. Файл сначала полностью проверяется, fsync'ится и только затем атомарно заменяет предыдущий checkpoint.
 
 Версия 0.2.3 добавляет versioned replay migrations: изменение source SHA или библиотек больше не уничтожает совместимый checkpoint автоматически; совместимость подтверждается воспроизведённым state fingerprint, а несовместимый replay требует явной миграции.
 

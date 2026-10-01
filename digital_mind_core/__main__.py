@@ -7,7 +7,7 @@ import sys
 import numpy as np
 
 from .kernel import KernelConfig, UnifiedMind, planning_benchmark
-from .persistence import load_replay, save_replay
+from .checkpoint import load_checkpoint_or_replay, save_checkpoint
 
 
 def output(document, report):
@@ -50,7 +50,7 @@ def main(argv=None):
             if (args.seed is not None or args.horizon is not None or args.no_l0_learning
                     or args.no_questions or args.no_cognition or args.no_evolution or args.mechanisms):
                 parser.error('--resume uses its saved config; do not combine with config overrides')
-            mind = load_replay(args.resume)
+            mind = load_checkpoint_or_replay(args.resume)
         else:
             mind = UnifiedMind(KernelConfig(seed=args.seed if args.seed is not None else 0,
                 horizon=args.horizon if args.horizon is not None else 7,
@@ -60,7 +60,7 @@ def main(argv=None):
                 mind.load_mechanisms(args.mechanisms)
         mind.run(args.steps)
         if args.checkpoint:
-            save_replay(mind, args.checkpoint)
+            save_checkpoint(mind, args.checkpoint)
         if args.save_mechanisms:
             mind.save_mechanisms(args.save_mechanisms)
         output(mind.report(), args.report)

@@ -85,7 +85,7 @@ class MindModule:
             raise ValueError('name must be a string and inputs must be a JSON object')
         if not all(isinstance(key, str) for key in inputs):
             raise ValueError('input names must be strings')
-        return {'name': name, 'value': self.mind.cognition.run_mechanism(name, **inputs),
+        return {'name': name, 'value': self.mind.run_mechanism(name, **inputs),
                 'execution': self.mind.cognition.mechanism_info(name).get('execution')}
 
 

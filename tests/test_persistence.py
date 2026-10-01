@@ -144,5 +144,23 @@ class PersistenceTests(unittest.TestCase):
             )
 
 
+    def test_external_reasoning_events_are_part_of_replay(self):
+        mind = UnifiedMind(KernelConfig(seed=9, l0_learning=False))
+        mind.run(12)
+        mind.process({
+            "facts": [("persisted_external", "fact")],
+            "persist_facts": True,
+            "queries": [("persisted_external", "fact")],
+        })
+        mind.run(6)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "state.json"
+            save_replay(mind, path)
+            restored = load_replay(path)
+            self.assertEqual(state_fingerprint(restored), state_fingerprint(mind))
+            self.assertEqual(restored._external_tasks, 1)
+            self.assertEqual(len(restored._external_journal), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
