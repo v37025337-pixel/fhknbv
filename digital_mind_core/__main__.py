@@ -28,12 +28,13 @@ def main(argv=None):
     run.add_argument('--no-questions', action='store_true')
     run.add_argument('--no-cognition', action='store_true')
     run.add_argument('--no-evolution', action='store_true')
+    run.add_argument('--no-adaptive-learning', action='store_true')
     run.add_argument('--mechanisms', type=Path, help='load stored mechanisms before starting')
     run.add_argument('--save-mechanisms', type=Path, help='persist generated mechanisms as JSON AST')
     run.add_argument('--report', type=Path)
     run.add_argument('--checkpoint', type=Path)
     run.add_argument('--resume', type=Path, help='restore by deterministic replay, then run --steps more')
-    compare = commands.add_parser('compare', help='compare full kernel and three component ablations')
+    compare = commands.add_parser('compare', help='compare full kernel and four component ablations')
     compare.add_argument('--steps', type=int, default=640)
     compare.add_argument('--seeds', type=int, nargs='+', default=[0, 1, 2])
     compare.add_argument('--report', type=Path)
@@ -48,14 +49,16 @@ def main(argv=None):
     if args.command == 'run':
         if args.resume:
             if (args.seed is not None or args.horizon is not None or args.no_l0_learning
-                    or args.no_questions or args.no_cognition or args.no_evolution or args.mechanisms):
+                    or args.no_questions or args.no_cognition or args.no_evolution
+                    or args.no_adaptive_learning or args.mechanisms):
                 parser.error('--resume uses its saved config; do not combine with config overrides')
             mind = load_replay(args.resume)
         else:
             mind = UnifiedMind(KernelConfig(seed=args.seed if args.seed is not None else 0,
                 horizon=args.horizon if args.horizon is not None else 7,
                 l0_learning=not args.no_l0_learning, questions=not args.no_questions,
-                cognition=not args.no_cognition, mechanism_evolution=not args.no_evolution))
+                cognition=not args.no_cognition, mechanism_evolution=not args.no_evolution,
+                adaptive_learning=not args.no_adaptive_learning))
             if args.mechanisms:
                 mind.load_mechanisms(args.mechanisms)
         mind.run(args.steps)
@@ -71,9 +74,10 @@ def main(argv=None):
     for seed in args.seeds:
         base = KernelConfig(seed=seed)
         settings = {
-            'full': base, 'no_evolution': replace(base, mechanism_evolution=False),
+            'full': base, 'no_adaptive_learning': replace(base, adaptive_learning=False),
+            'no_evolution': replace(base, mechanism_evolution=False),
             'no_cognition': replace(base, cognition=False),
-            'v01_behavior': replace(base, cognition=False, mechanism_evolution=False),
+            'v01_behavior': replace(base, cognition=False, mechanism_evolution=False, adaptive_learning=False),
         }
         for name, config in settings.items():
             print(f'Running {name}, seed={seed}, steps={args.steps}', file=sys.stderr, flush=True)
@@ -88,7 +92,8 @@ def main(argv=None):
                 'goals': report['goals'],
                 'l0_weight': report['l0']['mean_innovation_weight'],
                 'mechanism_evolution': report['mechanism_evolution'],
-                'cognitive_cycles': report['cognition']['cycles']})
+                'cognitive_cycles': report['cognition']['cycles'],
+                'adaptive_learning': report['adaptive_learning']})
     summaries = {}
     for name in settings:
         selected = [r for r in rows if r['mode'] == name]

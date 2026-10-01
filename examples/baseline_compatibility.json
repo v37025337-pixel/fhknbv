@@ -1,0 +1,23 @@
+{
+  "reference_commit": "d478397c10af51cc03ca497bd850336dd4c388c3",
+  "seed": 0,
+  "steps": 96,
+  "old_and_disabled_adaptive_equal": true,
+  "verified_metrics": {
+    "prediction": {
+      "baseline_loss_on_same_transitions": 0.006704323484864122,
+      "change_events": 0,
+      "mean_loss": 0.006704323484864122,
+      "post_change_final80": null,
+      "post_change_first40": null,
+      "pre_change_last80": null
+    },
+    "reward_components_mean": [
+      -0.025573589755269712,
+      -0.12824844823079126,
+      0.01792680197154264,
+      -0.03606020126784954
+    ],
+    "world_state_sha256": "81a4a33a983778cddc6044135d424777eb8fcdffe02f6350399dc03e07d0fb1c"
+  }
+}
