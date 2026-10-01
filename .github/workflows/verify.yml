@@ -45,6 +45,11 @@ jobs:
           --counterfactual examples/self_counterfactual_benchmark.json
           --evidence research/external_evidence.json
           --report examples/self_assessment.json
+      - name: Generate first self-selected technical hypothesis
+        run: >-
+          python tools/self_hypothesis.py
+          --assessment examples/self_assessment.json
+          --report examples/self_hypothesis.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -56,3 +61,4 @@ jobs:
             examples/predictive_self_benchmark.json
             examples/self_counterfactual_benchmark.json
             examples/self_assessment.json
+            examples/self_hypothesis.json
