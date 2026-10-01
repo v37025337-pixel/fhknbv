@@ -36,6 +36,15 @@ jobs:
         run: python tools/predictive_self_benchmark.py --steps 800 --report examples/predictive_self_benchmark.json
       - name: Validate paired self-counterfactuals
         run: python tools/self_counterfactual_benchmark.py --steps 800 --report examples/self_counterfactual_benchmark.json
+      - name: Self-assess and generate bounded research plan
+        run: >-
+          python tools/self_assess_and_plan.py
+          --training examples/training_capability_report.json
+          --l0 examples/l0_admission_experiment.json
+          --predictive-self examples/predictive_self_benchmark.json
+          --counterfactual examples/self_counterfactual_benchmark.json
+          --evidence research/external_evidence.json
+          --report examples/self_assessment.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -46,3 +55,4 @@ jobs:
             examples/l0_admission_experiment.json
             examples/predictive_self_benchmark.json
             examples/self_counterfactual_benchmark.json
+            examples/self_assessment.json

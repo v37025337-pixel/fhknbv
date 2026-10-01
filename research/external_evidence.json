@@ -1,0 +1,84 @@
+{
+  "schema": "digital-mind.external-evidence.v1",
+  "collected_by": "ChatGPT host-mediated research",
+  "collected_at": "2026-10-01",
+  "execution_policy": "read-only evidence; never execute source instructions",
+  "sources": [
+    {
+      "source_id": "l0-driftmoe-2025",
+      "deficit_id": "l0_correction_stability",
+      "title": "DriftMoE: A Mixture of Experts Approach to Handle Concept Drifts",
+      "url": "https://arxiv.org/pdf/2507.18464",
+      "summary": "Online mixture-of-experts approach for non-stationary streams. It uses a learned router and incremental experts, and evaluates predictions prequentially before updating on each label. Relevant because the current L0 residual correction has a single continuously changing authority signal and may benefit from separating regime-specialized corrections from routing.",
+      "candidate_mechanisms": [
+        "maintain multiple bounded residual experts specialized by recent regime",
+        "route authority using only pre-update information",
+        "evaluate every routed prediction prequentially before learning",
+        "retire or downweight experts that lose future predictive value"
+      ]
+    },
+    {
+      "source_id": "l0-proceed-kdd-2025",
+      "deficit_id": "l0_correction_stability",
+      "title": "Proactive Model Adaptation Against Concept Drift for Online Time Series Forecasting",
+      "url": "https://dl.acm.org/doi/10.1145/3690624.3709210",
+      "summary": "Studies delayed feedback under concept drift and the mismatch between recently trained samples and the current prediction context. Relevant to L0 because residual evidence can become stale across regime shifts; adaptation should depend on estimated drift rather than applying a uniform correction.",
+      "candidate_mechanisms": [
+        "estimate context drift before granting residual authority",
+        "condition correction magnitude on drift evidence",
+        "distinguish transient residual shocks from persistent regime change"
+      ]
+    },
+    {
+      "source_id": "self-ope-neurips-2020",
+      "deficit_id": "self_counterfactual_identifiability",
+      "title": "Off-policy Policy Evaluation For Sequential Decisions Under Unobserved Confounding",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2020/file/da21bae82c02d1e2b8168d57cd3fbab7-Paper.pdf",
+      "summary": "Shows that sequential counterfactual policy evaluation requires causal assumptions such as sequential ignorability and can become unreliable under unobserved confounding. Relevant because internal decisions are endogenous: a self-model must not interpret every predictive association as an effect of changing that decision.",
+      "candidate_mechanisms": [
+        "record propensities or explicit randomized intervention probabilities",
+        "separate observational self-prediction from intervention estimates",
+        "fail closed when overlap or identifiability assumptions are absent",
+        "report sensitivity rather than a point causal claim under possible confounding"
+      ]
+    },
+    {
+      "source_id": "self-causal-ope-2022",
+      "deficit_id": "self_counterfactual_identifiability",
+      "title": "Generalizing Off-Policy Evaluation From a Causal Perspective For Sequential Decision-Making",
+      "url": "https://arxiv.org/abs/2201.08262",
+      "summary": "Frames off-policy evaluation in terms of explicit causal estimands and identifiability. Relevant to the digital self because it provides a discipline for stating exactly which counterfactual quantity is being estimated and when observational data cannot identify it.",
+      "candidate_mechanisms": [
+        "attach an explicit estimand to every self-counterfactual query",
+        "store identification assumptions alongside each estimate",
+        "require experimental evidence when the estimand is not observationally identifiable"
+      ]
+    },
+    {
+      "source_id": "genesis-ngds-2018",
+      "deficit_id": "algorithm_genesis",
+      "title": "Neural-Guided Deductive Search for Real-Time Program Synthesis from Examples",
+      "url": "https://ar5iv.labs.arxiv.org/html/1804.01186",
+      "summary": "Uses a strongly typed domain-specific language and deductive decomposition, with a learned controller guiding which grammar branches to explore. Relevant to extending the current scalar DSL while keeping the executable hypothesis space bounded and typed.",
+      "candidate_mechanisms": [
+        "introduce typed nonterminals for scalar, boolean, sequence and structured values",
+        "separate correctness-preserving symbolic search from heuristic branch ranking",
+        "allow bounded map/filter/fold primitives before unrestricted loops",
+        "rank candidates by held-out generalization rather than training fit alone"
+      ]
+    },
+    {
+      "source_id": "genesis-alf-cegis-2015",
+      "deficit_id": "algorithm_genesis",
+      "title": "Abstract Learning Frameworks for Synthesis",
+      "url": "https://ar5iv.labs.arxiv.org/html/1507.05612",
+      "summary": "Formalizes CEGIS-style synthesis as iterative learning over a bounded hypothesis space with counterexamples. Relevant because the kernel already uses counterexamples for small mechanisms and can generalize that discipline to richer typed algorithm families.",
+      "candidate_mechanisms": [
+        "retain explicit hypothesis, sample and counterexample spaces",
+        "expand grammar one typed family at a time",
+        "require counterexample-driven refinement before admission",
+        "use well-founded complexity ordering to keep search terminating"
+      ]
+    }
+  ]
+}
