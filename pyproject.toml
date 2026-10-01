@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "digital-mind-core"
-version = "0.2.2"
+version = "0.2.3"
 description = "Unified experimental kernel combining DIGITAL_MIND, canonical L0 and v0.28 mechanism synthesis"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24", "scipy>=1.10"]
