@@ -360,11 +360,8 @@ def save_checkpoint(
     return document["integrity"]["checkpoint_id"]
 
 
-def read_checkpoint_document(path):
-    try:
-        document = json.loads(Path(path).read_text(encoding="utf-8"))
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise AtomicCheckpointError(f"cannot read checkpoint: {exc}") from exc
+def validate_checkpoint_document(document):
+    document = copy.deepcopy(document)
     if not isinstance(document, dict) or document.get("format") != CHECKPOINT_FORMAT:
         raise AtomicCheckpointError("unsupported atomic checkpoint format")
     if document.get("schema_version") != CHECKPOINT_SCHEMA_VERSION:
@@ -381,8 +378,16 @@ def read_checkpoint_document(path):
     return document
 
 
-def load_checkpoint(path):
-    document = read_checkpoint_document(path)
+def read_checkpoint_document(path):
+    try:
+        document = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise AtomicCheckpointError(f"cannot read checkpoint: {exc}") from exc
+    return validate_checkpoint_document(document)
+
+
+def restore_checkpoint_document(document):
+    document = validate_checkpoint_document(document)
     mind = restore_replay_document(copy.deepcopy(document["replay"]))
     actual = component_documents(mind)
     expected = document.get("components")
@@ -404,6 +409,10 @@ def load_checkpoint(path):
     }
     mind._autodev_state = copy.deepcopy(document.get("autodev"))
     return mind
+
+
+def load_checkpoint(path):
+    return restore_checkpoint_document(read_checkpoint_document(path))
 
 
 def load_checkpoint_or_replay(path):

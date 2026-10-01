@@ -60,6 +60,13 @@ jobs:
         run: >-
           python tools/google_search_probe.py
           --report examples/google_search_probe.json
+      - name: Build verified Supabase checkpoint artifact
+        run: >-
+          python tools/materialize_supabase_checkpoint.py
+          --steps 16
+          --seed 0
+          --checkpoint-out examples/supabase_checkpoint.json
+          --no-upload
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -74,3 +81,4 @@ jobs:
             examples/self_hypothesis.json
             examples/l0_self_hypothesis_experiment.json
             examples/google_search_probe.json
+            examples/supabase_checkpoint.json
