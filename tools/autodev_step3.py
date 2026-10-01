@@ -63,12 +63,23 @@ def run(seed,steps=640,train_end=400):
     # Warm the ordinary kernel first.
     while mind.fast_steps < 128:
         mind.step()
+    checkpoints=list(range(128,train_end,8))
+    # Complete randomized design with marginal propensity 0.5: each field gets
+    # equal numbers of 0/1 interventions, in a seed-randomized order.
+    schedules={}
+    for field in FIELDS:
+        n=len(checkpoints)
+        actions=np.asarray(([0]*(n//2))+([1]*(n//2)),dtype=int)
+        if n%2:
+            actions=np.concatenate([actions,[int(rng.integers(0,2))]])
+        rng.shuffle(actions)
+        schedules[field]=iter(actions.tolist())
     # Randomized shadow logging: one arm observed per field with known p=0.5.
     while mind.fast_steps < train_end:
         if mind.fast_steps % 8 == 0:
             for field in FIELDS:
                 x=context(mind,field)
-                a=int(rng.integers(0,2))
+                a=int(next(schedules[field]))
                 y=branch(mind,field,a)
                 models[field].add(x,a,0.5,y)
         mind.step()

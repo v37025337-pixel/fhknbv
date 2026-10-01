@@ -45,9 +45,19 @@ class DoublyRobustSelfEffectModel:
         if len(self.samples) < 24:
             raise ValueError("at least 24 randomized samples required")
         pseudo=[]; contexts=[]
+        # Stratified cross-fitting: each fold contains support from both
+        # randomized arms. This changes only the evaluation harness, not the
+        # intervention hypothesis or production runtime.
+        fold_of={}
+        for arm in (0,1):
+            indices=[i for i,s in enumerate(self.samples) if s[1]==arm]
+            if len(indices) < 8:
+                raise ValueError("insufficient positivity support for one arm")
+            for j,i in enumerate(indices):
+                fold_of[i]=j%2
         for fold in (0,1):
-            train=[s for i,s in enumerate(self.samples) if i%2 != fold]
-            hold=[s for i,s in enumerate(self.samples) if i%2 == fold]
+            train=[s for i,s in enumerate(self.samples) if fold_of[i] != fold]
+            hold=[s for i,s in enumerate(self.samples) if fold_of[i] == fold]
             if not train or not hold:
                 continue
             dim=len(train[0][3])
