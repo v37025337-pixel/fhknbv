@@ -19,6 +19,7 @@ from . import __version__, l0
 from .components import DigitalMindV07, MultiTimescalePlanner, PredictiveModel
 from .cognition import CognitiveCore
 from .evolution import MechanismEvolution
+from .predictive_self import PredictiveSelfModel
 
 
 @dataclass(frozen=True)
@@ -211,6 +212,7 @@ class UnifiedMind(DigitalMindV07):
         self.planned_goal_id = None
         self.cognition = CognitiveCore()
         self.evolution = MechanismEvolution(self.cognition, self.config.mechanism_evolution)
+        self.predictive_self = PredictiveSelfModel()
         self._initial_mechanisms = None
         self._external_tasks = 0
         self._connections = 0
@@ -220,6 +222,49 @@ class UnifiedMind(DigitalMindV07):
         result = self.cognition.process(task)
         self._external_tasks += 1
         return result
+
+    def _self_state_vector(self):
+        recent_loss = self._step_errors[-1] if self._step_errors else 0.0
+        unresolved = sum(not q.resolved for q in self.questions.questions)
+        active_goal = self.goals.active_leaf()
+        confidence = (
+            self.cognition.self_model.estimate('world_prediction')
+            if self.config.cognition else 0.5
+        )
+        return np.asarray([
+            np.clip(float(np.mean(self.self_trace)), 0.0, 1.0),
+            np.clip(float(np.mean(self.competence)), 0.0, 1.0),
+            np.clip(float(np.mean(self.narrative.social_trust)), 0.0, 1.0),
+            np.clip(float(confidence), 0.0, 1.0),
+            np.clip(float(np.tanh(max(0.0, recent_loss) / 0.05)), 0.0, 1.0),
+            np.clip(float(unresolved) / 8.0, 0.0, 1.0),
+            np.clip(float(active_goal.depth) / 3.0, 0.0, 1.0),
+            np.clip(float(self.model.shadow_weight) / 0.5, 0.0, 1.0),
+            np.clip(float(self.model.fast_gate), 0.0, 1.0),
+        ], dtype=float)
+
+    def _self_decision_vector(self):
+        decision = self._decision or {}
+        return np.asarray([
+            float(bool(decision.get('replan', False))),
+            float(bool(decision.get('reflect', False))),
+            float(bool(decision.get('consolidate', False))),
+            float(bool(decision.get('allow_probe', False))),
+            float(bool(decision.get('macro_reflect', False))),
+            np.clip(float(decision.get('exploration', 0.0)), 0.0, 1.0),
+            np.clip(float(decision.get('budget', 0.0)) / 1.2, 0.0, 1.0),
+            float(self.pending_treatment is not None),
+        ], dtype=float)
+
+    def predict_self_counterfactual(self, **decision_overrides):
+        """Model-based self counterfactual; this is not a causal claim."""
+        if self._decision is None:
+            raise RuntimeError('run at least one internal decision first')
+        return self.predictive_self.counterfactual(
+            self._self_state_vector(),
+            self._self_decision_vector(),
+            **decision_overrides,
+        )
 
     def connect(self, target, **kwargs):
         result = self.cognition.connect(target, **kwargs)
@@ -391,6 +436,8 @@ class UnifiedMind(DigitalMindV07):
         if t != self.fast_steps:
             raise ValueError('step index must match the persistent clock')
         action = self._choose_action(t)
+        self_state_before = self._self_state_vector()
+        self_decision = self._self_decision_vector()
         ws = self.world.step(action)
         _, err, phi = self.model.update(self.obs, action, ws.obs)
         self.questions.observe(err, phi, t)
@@ -423,6 +470,11 @@ class UnifiedMind(DigitalMindV07):
         if self._decision['consolidate']:
             self.slow_ticks += 1
             self._consolidate()
+        self.predictive_self.observe(
+            self_state_before,
+            self_decision,
+            self._self_state_vector(),
+        )
         self.trace.append({'t': t, 'loss': loss, 'goal': self.current_goal.gid,
                            'l0_weight': self.model.weights[-1],
                            'experiment': self.experiment.status if self.experiment else None})
@@ -454,6 +506,7 @@ class UnifiedMind(DigitalMindV07):
                           'mechanisms': self.cognition.mechanism_info(),
                           'generated_l0_calls': self.cognition.mechanism_calls},
             'mechanism_evolution': self.evolution.report(),
+            'predictive_self': self.predictive_self.report(),
             'l0': {'version': l0.VERSION, 'executive_ticks': self.executive_ticks,
                    'executive_statuses': dict(self.executive_statuses),
                    'learner': lr, 'mean_innovation_weight': average(self.model.weights)},
