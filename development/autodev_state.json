@@ -1,0 +1,52 @@
+{
+  "schema": "digital-mind.autodev-state.v1",
+  "development_cycle": 1,
+  "deficits": [
+    {
+      "deficit_id": "l0_correction_stability",
+      "severity": 1,
+      "failed_attempts": 1,
+      "passed_attempts": 0,
+      "question": "Why is the learned residual correction unstable on future transitions despite nonzero shadow authority?"
+    },
+    {
+      "deficit_id": "self_counterfactual_identifiability",
+      "severity": 0.95,
+      "failed_attempts": 0,
+      "passed_attempts": 0,
+      "question": "Which self-counterfactual effects are identifiable under an adaptive endogenous policy, and with what uncertainty?"
+    },
+    {
+      "deficit_id": "algorithm_genesis",
+      "severity": 0.85,
+      "failed_attempts": 0,
+      "passed_attempts": 0,
+      "question": "How can the bounded synthesis grammar expand to typed algorithms over sequences and structured data without arbitrary execution?"
+    },
+    {
+      "deficit_id": "string_program_synthesis",
+      "severity": 0.65,
+      "failed_attempts": 0,
+      "passed_attempts": 0,
+      "question": "What restricted typed string DSL can be synthesized from examples without adding arbitrary Python execution?"
+    }
+  ],
+  "attempt_history": [
+    {
+      "attempt_id": "cycle1-l0-drift-router",
+      "deficit_id": "l0_correction_stability",
+      "result": "REJECTED_ON_DESIGN",
+      "mechanisms": [
+        "drift-aware routing",
+        "retire/downweight losing residual experts",
+        "condition correction magnitude on drift evidence"
+      ],
+      "github_head": "4dd9dbc5f7ed99071c17aae6842635276bfdbb3a"
+    }
+  ],
+  "capability_state": {
+    "google_public_search": "CONNECTED_HOST_TINYFISH",
+    "github": "CONNECTED",
+    "persistence": "CONNECTED_SUPABASE"
+  }
+}
