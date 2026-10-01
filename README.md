@@ -1,4 +1,4 @@
-# DIGITAL_MIND: подключаемый модуль 0.2.1
+# DIGITAL_MIND: подключаемый модуль 0.2.2
 
 Объединённое экспериментальное ядро DIGITAL_MIND + L0 + mechanism genesis v0.28, оформленное как Python-модуль и процесс с JSON-запросами. Программа-помощник может вызывать его для симуляции, логических выводов и исполнения сгенерированных механизмов через L0, а затем использовать результаты в своей работе.
 
@@ -66,6 +66,49 @@ python -m digital_mind_core.tool_module --seed 0
 
 Логический ответ по умолчанию содержит выводы и решение. `"include_state":true` добавляет полный снимок символического состояния для диагностики.
 
+
+## HTTP API для black-box аудита
+
+HTTP-адаптер использует тот же stateful `MindModule`, что и JSONL-процесс: отдельной копии логики ядра нет, а состояние сохраняется между запросами одного процесса.
+
+Локальный запуск:
+
+```bash
+digital-mind-http --host 127.0.0.1 --port 8765
+```
+
+В Codespaces, чтобы порт можно было форвардить:
+
+```bash
+digital-mind-http --host 0.0.0.0 --port 8765
+```
+
+Доступны четыре точки:
+
+```text
+POST /kernel/execute
+GET  /kernel/status
+POST /kernel/research
+GET  /kernel/self-diagnostic
+```
+
+Примеры:
+
+```bash
+curl http://127.0.0.1:8765/kernel/status
+curl -X POST http://127.0.0.1:8765/kernel/execute \
+  -H 'Content-Type: application/json' \
+  -d '{"id":"audit-1","op":"simulate","steps":4}'
+curl -X POST http://127.0.0.1:8765/kernel/research \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"bounded program synthesis","num":5}'
+curl http://127.0.0.1:8765/kernel/self-diagnostic
+```
+
+`/kernel/research` использует существующий Google adapter и требует `GOOGLE_API_KEY` + `GOOGLE_CSE_ID` либо проверенный Google-backed host callback. `/kernel/self-diagnostic` запускает полный репозиторный аудит, включая тесты, поэтому параллельный второй diagnostic получает HTTP 409.
+
+По умолчанию сервер слушает только `127.0.0.1`. Если в Codespaces сделать forwarded port публичным для внешнего black-box теста, после аудита его следует снова закрыть: `execute` изменяет состояние ядра, а self-diagnostic потребляет вычислительные ресурсы.
+
 ## Установка и проверка
 
 Нужны Python 3.10+, NumPy, SciPy:
@@ -79,4 +122,4 @@ python examples/use_as_module.py --report examples/module_demo.json
 
 GitHub Actions выполняет эти проверки и сохраняет результаты как скачиваемый артефакт. Файл `examples/verification_summary.json` фиксирует локальные проверки данной сборки. Проверка Actions и запуск контейнера Codespaces считаются выполненными только после реального запуска в GitHub.
 
-Версия 0.2.1 добавляет модуль, Codespaces и CI к ядру 0.2.0. Архитектура и ограничения базового ядра описаны в `CORE_README.md`; приведённые там старые результаты относятся к 0.2.0. Старые replay-файлы привязаны к исходному коду и не переносятся между версиями; JSON-механизмы имеют отдельный формат.
+Версия 0.2.2 добавляет stateful HTTP-адаптер для black-box аудита поверх существующего MindModule.\n\nВерсия 0.2.1 добавляет модуль, Codespaces и CI к ядру 0.2.0. Архитектура и ограничения базового ядра описаны в `CORE_README.md`; приведённые там старые результаты относятся к 0.2.0. Старые replay-файлы привязаны к исходному коду и не переносятся между версиями; JSON-механизмы имеют отдельный формат.
