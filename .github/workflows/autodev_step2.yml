@@ -1,0 +1,25 @@
+name: Autonomous Development Step 2
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hypothesize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e .
+      - name: Kernel selects mechanisms and hypothesis
+        run: python tools/autodev_step2.py --step1 development/autodev_step1.json --evidence development/autodev_step2_evidence.json --report autodev_step2.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: autodev-step2
+          path: autodev_step2.json

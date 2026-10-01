@@ -1,0 +1,21 @@
+{
+  "action": "RESEARCH",
+  "capability_request": {
+    "avoid_repeating_mechanisms": [],
+    "capability": "google_public_search",
+    "provider_preference": "google",
+    "purpose": "Which self-counterfactual effects are identifiable under an adaptive endogenous policy, and with what uncertainty?",
+    "query": "sequential causal inference adaptive agents endogenous policy randomized interventions propensity logging doubly robust counterfactual effect uncertainty calibration",
+    "result_limit": 6
+  },
+  "chosen_by": "measured severity minus own failed/passed attempt penalties",
+  "host_chose_target": false,
+  "ranking": [
+    {"deficit_id":"self_counterfactual_identifiability","failed_attempts":0,"score":0.95,"severity":0.95},
+    {"deficit_id":"l0_correction_stability","failed_attempts":1,"score":0.9,"severity":1.0},
+    {"deficit_id":"algorithm_genesis","failed_attempts":0,"score":0.85,"severity":0.85},
+    {"deficit_id":"string_program_synthesis","failed_attempts":0,"score":0.65,"severity":0.65}
+  ],
+  "schema":"digital-mind.autodev-step1.v1",
+  "selected_target":{"deficit_id":"self_counterfactual_identifiability","development_score":0.95,"failed_attempts":0,"passed_attempts":0,"question":"Which self-counterfactual effects are identifiable under an adaptive endogenous policy, and with what uncertainty?","severity":0.95}
+}

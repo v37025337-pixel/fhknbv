@@ -94,3 +94,70 @@ def step1(state):
         "chosen_by":"measured severity minus own failed/passed attempt penalties",
         "host_chose_target":False,
     }
+
+
+def step2(step1_document, evidence_document):
+    target = step1_document.get("selected_target") or {}
+    deficit_id = target.get("deficit_id")
+    if evidence_document.get("target_deficit") != deficit_id:
+        raise ValueError("evidence target does not match autonomously selected deficit")
+    query = (step1_document.get("capability_request") or {}).get("query", "")
+    query_tokens = _tokens(query + " " + target.get("question", ""))
+
+    candidates = []
+    for source in evidence_document.get("sources", []):
+        source_id = source.get("source_id")
+        for mechanism in source.get("mechanisms", []):
+            tokens = _tokens(mechanism)
+            overlap = len(tokens & query_tokens)
+            causal_bonus = sum(
+                word in tokens for word in (
+                    "propensity","randomized","randomized","positivity",
+                    "counterfactual","uncertainty","causal","adaptive"
+                )
+            )
+            score = 2.0 * overlap + 0.75 * causal_bonus
+            candidates.append({
+                "mechanism": mechanism,
+                "source_id": source_id,
+                "source_title": source.get("title"),
+                "url": source.get("url"),
+                "score": score,
+            })
+    candidates.sort(key=lambda x: (-x["score"], x["mechanism"]))
+
+    selected = []
+    used_sources = set()
+    for item in candidates:
+        if item["source_id"] not in used_sources:
+            selected.append(copy.deepcopy(item))
+            used_sources.add(item["source_id"])
+        if len(selected) >= 3:
+            break
+    if len(selected) < 3:
+        for item in candidates:
+            if item not in selected:
+                selected.append(copy.deepcopy(item))
+            if len(selected) >= 3:
+                break
+    if not selected:
+        raise ValueError("no research mechanisms available")
+
+    return {
+        "schema":"digital-mind.autodev-step2.v1",
+        "action":"HYPOTHESIS",
+        "selected_target":copy.deepcopy(target),
+        "selected_mechanisms":selected,
+        "hypothesis":(
+            "For " + deficit_id + ", combine " +
+            "; ".join(item["mechanism"] for item in selected) +
+            " and test the resulting counterfactual estimator against the current "
+            "observational PredictiveSelf counterfactual baseline."
+        ),
+        "required_evaluation":{
+            "design_then_blind":True,
+            "production_influence_before_pass":False,
+            "effect_uncertainty_required":True,
+        },
+        "host_chose_mechanisms":False,
+    }

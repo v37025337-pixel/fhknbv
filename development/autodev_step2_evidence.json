@@ -1,0 +1,41 @@
+{
+  "schema": "digital-mind.autodev-evidence.v1",
+  "target_deficit": "self_counterfactual_identifiability",
+  "query": "sequential causal inference adaptive agents endogenous policy randomized interventions propensity logging doubly robust counterfactual effect uncertainty calibration",
+  "sources": [
+    {
+      "source_id": "google-arxiv-pwocp-2026",
+      "title": "Counterfactual Online Conformal Prediction Under Adaptive Logging",
+      "url": "https://arxiv.org/html/2609.30811v1",
+      "mechanisms": [
+        "log the behavior propensity for every adaptive internal intervention",
+        "require positivity so every compared internal action retains nonzero exploration probability",
+        "use inverse propensity weighting to debias outcomes under endogenous logging",
+        "use a doubly robust estimator combining an outcome model with propensity correction",
+        "report calibrated counterfactual uncertainty rather than only a point effect"
+      ]
+    },
+    {
+      "source_id": "google-arxiv-sequential-causal-2021",
+      "title": "Sequential causal inference in a single world of connected units",
+      "url": "https://arxiv.org/abs/2101.07380",
+      "mechanisms": [
+        "define an explicit counterfactual estimand before estimating an internal intervention effect",
+        "mix adaptive optimization with an explicit randomized exploration distribution",
+        "use inference designed for temporally dependent adaptive data",
+        "use adaptive stopping only with valid sequential inference"
+      ]
+    },
+    {
+      "source_id": "google-stanford-causal-book",
+      "title": "Causal Inference: A Statistical Learning Approach",
+      "url": "https://web.stanford.edu/~swager/causal_inf_book.pdf",
+      "mechanisms": [
+        "prefer randomized intervention evidence when available",
+        "separate predictive association from causal treatment effect estimation",
+        "carry uncertainty intervals with treatment effect estimates"
+      ]
+    }
+  ],
+  "host_role": "transport_and_normalization_only"
+}
