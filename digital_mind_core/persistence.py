@@ -28,6 +28,8 @@ def state_fingerprint(mind):
     digest = hashlib.sha256()
     for array in (mind.obs, mind.model.W, mind.model.W_fast, mind.self_trace):
         digest.update(np.asarray(array, dtype='<f8').tobytes())
+    if hasattr(mind.model, 'learning_state_fingerprint'):
+        digest.update(mind.model.learning_state_fingerprint().encode())
     digest.update(json.dumps(mind.report(), sort_keys=True, allow_nan=False).encode())
     digest.update(json.dumps({'cognitive_state': mind.cognition.state,
                               'self_stats': mind.cognition.self_model._stats,

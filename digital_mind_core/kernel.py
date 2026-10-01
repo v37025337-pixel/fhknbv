@@ -10,6 +10,7 @@ from __future__ import annotations
 from collections import Counter, deque
 from dataclasses import dataclass, field
 import json
+import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -19,6 +20,7 @@ from . import __version__, l0
 from .components import DigitalMindV07, MultiTimescalePlanner, PredictiveModel
 from .cognition import CognitiveCore
 from .evolution import MechanismEvolution
+from .learning import ProspectiveSelection
 
 
 @dataclass(frozen=True)
@@ -34,6 +36,7 @@ class KernelConfig:
     experiment_fraction: float = 0.25
     cognition: bool = True
     mechanism_evolution: bool = True
+    adaptive_learning: bool = True
 
     def __post_init__(self):
         for name in ('seed', 'horizon', 'beam', 'control_period', 'experiment_samples'):
@@ -41,7 +44,7 @@ class KernelConfig:
                 raise ValueError(f'{name} must be an integer')
         if self.seed < 0:
             raise ValueError('seed must be nonnegative')
-        for name in ('l0_learning', 'questions', 'cognition', 'mechanism_evolution'):
+        for name in ('l0_learning', 'questions', 'cognition', 'mechanism_evolution', 'adaptive_learning'):
             if type(getattr(self, name)) is not bool:
                 raise ValueError(f'{name} must be boolean')
         if self.horizon < 1 or self.beam < 1 or self.control_period < 1:
@@ -149,6 +152,65 @@ class L0PredictiveModel(PredictiveModel):
         return pred, err, phi
 
 
+class AdaptivePredictiveModel(L0PredictiveModel):
+    """Train temporal hypotheses in shadow and admit from future forecast errors."""
+    def __init__(self, d_obs, d_action, seed, enabled=True):
+        super().__init__(d_obs, d_action, seed, enabled)
+        self.experts = {name: PredictiveModel(d_obs, d_action, seed + offset)
+                        for name, offset in (('recent', 201), ('stable', 202))}
+        self.experts['recent'].forgetting_normal = .98
+        self.experts['stable'].forgetting_normal = .999
+        self.selection = ProspectiveSelection(self.experts)
+        self.used_model = 'baseline'
+
+    def predict(self, obs, action, prev1=None, prev2=None, prev3=None):
+        selected = self.selection.active
+        if selected == 'baseline':
+            return super().predict(obs, action, prev1, prev2, prev3)
+        return self.experts[selected].predict(obs, action, prev1, prev2, prev3)
+
+    def update(self, obs, action, next_obs):
+        # Freeze both the authority and candidate forecasts before training.
+        selected = self.selection.active
+        forecasts = {name: expert.predict(obs, action) for name, expert in self.experts.items()}
+        baseline, _, phi = super().update(obs, action, next_obs)
+        forecasts['baseline'] = baseline
+        prediction = forecasts[selected].copy()
+        error = np.asarray(next_obs) - prediction
+        self.selection.observe(next_obs, forecasts, selected)
+        for expert in self.experts.values():
+            expert.update(obs, action, next_obs)
+        self.ensemble_losses[-1] = float(np.mean(error ** 2))
+        if selected != 'baseline':
+            self.weights[-1] = 0.  # The alternative forecast does not use L0 innovation.
+        self.used_model = selected
+        return prediction, error, phi
+
+    def action_sensitivity(self):
+        if self.selection.active == 'baseline':
+            return super().action_sensitivity()
+        return self.experts[self.selection.active].action_sensitivity()
+
+    def learning_report(self):
+        return {**self.selection.report(),
+                'hypothesis_family': 'same nonlinear features, different RLS forgetting rates',
+                'forgetting_rates': {name: expert.forgetting_normal for name, expert in self.experts.items()}}
+
+    def learning_state_fingerprint(self):
+        digest = hashlib.sha256()
+        digest.update(json.dumps(self.selection.state_document(), sort_keys=True,
+                                 allow_nan=False).encode())
+        for name, expert in self.experts.items():
+            digest.update(name.encode())
+            for array in (expert.W, expert.P, expert.W_fast, expert.residual_var, *expert.prev_actions):
+                digest.update(np.asarray(array, dtype='<f8').tobytes())
+            digest.update(json.dumps({'fast_gate': expert.fast_gate,
+                'fast_adapt_left': expert.fast_adapt_left, 'loss_ema': expert.loss_ema,
+                'change_events': expert.change_events, 'history_length': len(expert.loss_history),
+                'recent_losses': expert.loss_history[-64:]}, sort_keys=True, allow_nan=False).encode())
+        return digest.hexdigest()
+
+
 @dataclass
 class Intervention:
     qid: int
@@ -190,8 +252,9 @@ class UnifiedMind(DigitalMindV07):
     def __init__(self, config=None):
         self.config = config or KernelConfig()
         super().__init__(self.config.seed)
-        self.model = L0PredictiveModel(self.d_obs, self.d_action,
-                                       self.config.seed + 1, self.config.l0_learning)
+        model_type = AdaptivePredictiveModel if self.config.adaptive_learning else L0PredictiveModel
+        self.model = model_type(self.d_obs, self.d_action,
+                               self.config.seed + 1, self.config.l0_learning)
         self.questions_enabled = self.config.questions
         self.questions.feature_names = tuple(self.model.feature_names)
         self.executive = l0.compile_file(Path(__file__).with_name('executive.l0'))
@@ -251,7 +314,8 @@ class UnifiedMind(DigitalMindV07):
         if not self.config.cognition:
             return False
         selected = self.goals.active_leaf()
-        facts = [('observed',), ('goal', selected.gid)]
+        prediction_model = self.model.selection.active if self.config.adaptive_learning else 'baseline'
+        facts = [('observed',), ('goal', selected.gid), ('prediction_model', prediction_model)]
         if t > 40 and surprise > 2.4:
             facts.append(('prediction_surprise',))
         if self.current_goal.status != 'active':
@@ -381,6 +445,7 @@ class UnifiedMind(DigitalMindV07):
             'goal_outcomes': dict(Counter(g.status for g in self.goals.goals.values() if g.depth >= 2)),
             'operational_prediction_confidence': self.cognition.self_model.estimate('world_prediction'),
             'generated_mechanisms': sorted(self.cognition._mechanism_objects),
+            'active_prediction_model': self.model.selection.active if self.config.adaptive_learning else 'baseline',
         }
         # Learned predictability feeds the structural social goal's priority.
         self.goals.social.priority = float(.3 + .4 * self.narrative.social_trust.mean())
@@ -447,6 +512,8 @@ class UnifiedMind(DigitalMindV07):
         lr['digital_geometry'].pop('operator', None)
         return {
             'version': __version__, 'seed': self.config.seed, 'steps': self.fast_steps,
+            'adaptive_learning': self.model.learning_report() if self.config.adaptive_learning else {
+                'enabled': False, 'active_model': 'baseline'},
             'cognition': {'cycles': self.cognition.state['cycle'],
                           'logic_queries': len(self.cognition.state.get('inferences', [])),
                           'prediction_confidence': self.cognition.self_model.estimate('world_prediction'),

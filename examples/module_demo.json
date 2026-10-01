@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.3.0",
   "simulation_steps": 96,
   "cognitive_cycles": 96,
   "evolution": {
@@ -8,6 +8,7 @@
     "attempts": 1,
     "planning_examples": 25,
     "l0_calls": 9,
+    "attempt_limit": null,
     "hold_selections": 0,
     "model_predicted_cost_saved": 0.0,
     "label_source": "frozen world-model rollout costs; not real-world counterfactual outcomes",

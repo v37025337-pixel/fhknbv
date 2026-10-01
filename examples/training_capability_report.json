@@ -1,0 +1,226 @@
+{
+  "schema": "digital-mind.training-capability-report.v1",
+  "phase_order": [
+    "learning_and_development",
+    "independent_tasks",
+    "negative_capability_probes"
+  ],
+  "training": {
+    "runs": [
+      {
+        "seed": 1,
+        "steps": 640,
+        "evolution_active": true,
+        "evolution_attempts": 1,
+        "evolution_calls": 160,
+        "attempt_limit": null,
+        "model_predicted_cost_saved": 0.0,
+        "prediction_mean_loss": 0.005841815610315357,
+        "l0_mean_innovation_weight": 0.0,
+        "l0_final_weight": 0.0,
+        "l0_shadow_weight": 0.0,
+        "l0_model_version": 640,
+        "l0_tail_baseline_loss": 0.005125273012330449,
+        "l0_tail_ensemble_loss": 0.005114615496429607,
+        "questions_created": 34,
+        "questions_predictively_explained": 30,
+        "supported_interventions": 3,
+        "cognitive_cycles": 640,
+        "plan_ticks": 176,
+        "mechanisms": [
+          "choose_plan_cost",
+          "stability_switch"
+        ]
+      },
+      {
+        "seed": 2,
+        "steps": 640,
+        "evolution_active": true,
+        "evolution_attempts": 1,
+        "evolution_calls": 167,
+        "attempt_limit": null,
+        "model_predicted_cost_saved": 0.0,
+        "prediction_mean_loss": 0.005528015269799798,
+        "l0_mean_innovation_weight": 0.0,
+        "l0_final_weight": 0.0,
+        "l0_shadow_weight": 0.0,
+        "l0_model_version": 640,
+        "l0_tail_baseline_loss": 0.004440696375950106,
+        "l0_tail_ensemble_loss": 0.0044446645528991085,
+        "questions_created": 29,
+        "questions_predictively_explained": 27,
+        "supported_interventions": 3,
+        "cognitive_cycles": 640,
+        "plan_ticks": 183,
+        "mechanisms": [
+          "choose_plan_cost",
+          "stability_switch"
+        ]
+      },
+      {
+        "seed": 3,
+        "steps": 640,
+        "evolution_active": true,
+        "evolution_attempts": 1,
+        "evolution_calls": 158,
+        "attempt_limit": null,
+        "model_predicted_cost_saved": 0.008014685663024934,
+        "prediction_mean_loss": 0.005074334461399798,
+        "l0_mean_innovation_weight": 0.0,
+        "l0_final_weight": 0.0,
+        "l0_shadow_weight": 0.2638144297583293,
+        "l0_model_version": 640,
+        "l0_tail_baseline_loss": 0.004823836425019817,
+        "l0_tail_ensemble_loss": 0.004786085114241285,
+        "questions_created": 29,
+        "questions_predictively_explained": 28,
+        "supported_interventions": 3,
+        "cognitive_cycles": 640,
+        "plan_ticks": 174,
+        "mechanisms": [
+          "choose_plan_cost",
+          "stability_switch"
+        ]
+      }
+    ],
+    "all_closed_loop_mechanisms_active": true,
+    "development": {
+      "status": "FOUND",
+      "admission": "holdout_passed",
+      "execution": "L0-Control-IR",
+      "cost": 3,
+      "hidden_input": {
+        "a": 11.0,
+        "b": -13.0
+      },
+      "hidden_output": -13.0,
+      "hidden_pass": true
+    }
+  },
+  "tasks": {
+    "passed": 10,
+    "total": 10,
+    "results": [
+      {
+        "name": "symbolic_multihop_logic",
+        "pass": true,
+        "details": {
+          "inference": true
+        }
+      },
+      {
+        "name": "graph_path_planning",
+        "pass": true,
+        "details": {
+          "plan": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      {
+        "name": "generated_mechanism_transfer",
+        "pass": true,
+        "details": {
+          "value": -4.0
+        }
+      },
+      {
+        "name": "mechanism_persistence_roundtrip",
+        "pass": true,
+        "details": {
+          "value": -21.0,
+          "restored_admission": "holdout_passed"
+        }
+      },
+      {
+        "name": "structured_data_to_logic",
+        "pass": true,
+        "details": {
+          "domain": "data",
+          "query_values": [
+            true,
+            true
+          ]
+        }
+      },
+      {
+        "name": "delayed_reward_planning",
+        "pass": true,
+        "details": {
+          "horizon_1_score": 0.0,
+          "horizon_8_score": 130.70644317193154,
+          "steps_equal": true
+        }
+      },
+      {
+        "name": "randomized_intervention_fixed_analysis",
+        "pass": true,
+        "details": {
+          "status": "supported",
+          "effect": 4.0,
+          "confidence_interval": [
+            3.99515351692303,
+            4.00484648307697
+          ]
+        }
+      },
+      {
+        "name": "deterministic_replay_continuity",
+        "pass": true,
+        "details": {
+          "same_before": true,
+          "same_after_8_more_steps": true
+        }
+      },
+      {
+        "name": "stateful_json_module_interface",
+        "pass": true,
+        "details": {
+          "inference": true
+        }
+      },
+      {
+        "name": "github_sidecar_binding",
+        "pass": true,
+        "details": {
+          "status": "SYNCED",
+          "head": "0000000000000000000000000000000000000000"
+        }
+      }
+    ]
+  },
+  "negative_capability_probes": [
+    {
+      "capability": "general_algorithm_synthesis",
+      "supported": false,
+      "evidence": "CognitiveCore.synthesize_algorithm attribute"
+    },
+    {
+      "capability": "arbitrary_self_rewrite",
+      "supported": false,
+      "evidence": "CognitiveCore.rewrite_self attribute"
+    },
+    {
+      "capability": "native_unrestricted_internet",
+      "supported": false,
+      "evidence": "CognitiveCore.internet_fetch attribute"
+    },
+    {
+      "capability": "native_image_perception",
+      "supported": false,
+      "evidence": "CognitiveCore.perceive_image attribute"
+    },
+    {
+      "capability": "string_program_synthesis",
+      "supported": false,
+      "evidence": "status=NO_MECHANISM_FOUND; explanation=current synthesis grammar supports finite numeric scalar examples only"
+    }
+  ],
+  "summary": {
+    "training_success": true,
+    "task_pass_rate": 1.0,
+    "supported_negative_probe_count": 0
+  }
+}

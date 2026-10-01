@@ -32,6 +32,8 @@ jobs:
         run: python tools/train_and_benchmark.py --steps 640 --report examples/training_capability_report.json
       - name: Diagnose L0 admission on design and blind seeds
         run: python tools/l0_admission_experiment.py --steps 800 --report examples/l0_admission_experiment.json
+      - name: Compare adaptive forecasts on shared evaluation experience
+        run: python tools/benchmark_learning.py --report examples/learning_benchmark.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -40,3 +42,4 @@ jobs:
             examples/legacy_test_results.json
             examples/training_capability_report.json
             examples/l0_admission_experiment.json
+            examples/learning_benchmark.json
