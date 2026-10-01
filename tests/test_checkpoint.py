@@ -70,7 +70,7 @@ class AtomicCheckpointTests(unittest.TestCase):
             path = Path(directory) / "checkpoint.json"
             save_checkpoint(mind, path, autodev_state=AUTODEV)
             restored = load_checkpoint(path)
-            answer = restored.process({"queries": [("persistent_external", "yes")]})
+            answer = restored.process({"queries": [("persistent_external", "yes")], "persist_facts": True})
             self.assertTrue(answer["inferences"][0]["value"])
             self.assertEqual(restored.fast_steps, 40)
 
@@ -91,6 +91,7 @@ class AtomicCheckpointTests(unittest.TestCase):
             restored = load_checkpoint(checkpoint)
             self.assertEqual(restored._connections, 1)
             query = restored.process({
+                "persist_facts": True,
                 "queries": [
                     ("dataset_rows", "connection_1", 2),
                     ("dataset_field", "connection_1", "Population", "int"),
