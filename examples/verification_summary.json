@@ -1,0 +1,62 @@
+{
+  "version": "0.2.1",
+  "source_sha256": "dacaa577268da614f629816041c35510035147414b4b1da526951c27df36a493",
+  "checks": {
+    "unittest": {
+      "passed": 47,
+      "total": 47,
+      "exit_code": 0,
+      "log": "test_results.txt"
+    },
+    "v028_scripts": {
+      "passed": 18,
+      "total": 18,
+      "exit_code": 0,
+      "log": "legacy_test_results.json"
+    },
+    "compileall": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "devcontainer_json": {
+      "valid": true,
+      "codespaces_run": "not_performed"
+    },
+    "workflow_yaml": {
+      "valid": true,
+      "github_actions_run": "not_performed"
+    },
+    "cold_wheel": {
+      "passed": true,
+      "exit_code": 0,
+      "source_checkout_used": false,
+      "steps": 96,
+      "operations": [
+        "simulate",
+        "reason",
+        "run_mechanism",
+        "status"
+      ],
+      "log": "cold_wheel_results.json"
+    },
+    "live_module": {
+      "passed": true,
+      "steps": 96,
+      "logic_inference": true,
+      "l0_result": 2,
+      "log": "live_module_results.json"
+    }
+  },
+  "github": {
+    "connection_verified": true,
+    "account": "v37025337-pixel",
+    "publication_status": "prepared_for_selected_repository",
+    "repository": "v37025337-pixel/fhknbv"
+  },
+  "wheel_sha256": "8b3029bb433a5b0e505fba358953de76c8ae357839d51036adc880c6a1159584",
+  "limits": [
+    "External computational module; does not replace the chat model.",
+    "Automatic arbiter behavioral benefit is not established.",
+    "Process state is retained only while its execution environment is alive."
+  ]
+}

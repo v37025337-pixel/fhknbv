@@ -1,0 +1,40 @@
+program cognitive_executive
+semantics arc
+
+input surprise
+input trust
+input unresolved
+input episode_phase
+input macro_phase
+input control_phase
+input slow_phase
+input action_budget
+input symbolic_replan
+cell exploration = 0
+cell reflect = false
+cell replan = false
+cell macro_reflect = false
+cell consolidate = false
+cell allow_probe = false
+cell budget = 1
+observe exploration
+observe reflect
+observe replan
+observe macro_reflect
+observe consolidate
+observe allow_probe
+observe budget
+
+relation curiosity (surprise, trust) -> (exploration) {
+    propose exploration set min(0.25, add(0.05, add(mul(0.04, surprise), mul(0.04, sub(1, trust)))))
+}
+relation clocks (episode_phase, macro_phase, control_phase, slow_phase, symbolic_replan) -> (reflect, replan, macro_reflect, consolidate) {
+    propose reflect set eq(episode_phase, 0)
+    propose replan set or(eq(control_phase, 0), eq(macro_phase, 0), symbolic_replan)
+    propose macro_reflect set eq(macro_phase, 0)
+    propose consolidate set eq(slow_phase, 0)
+}
+relation intervention (unresolved, action_budget) -> (allow_probe, budget) {
+    propose allow_probe set and(gt(unresolved, 0), gt(action_budget, 0))
+    propose budget set max(0, min(1.2, action_budget))
+}

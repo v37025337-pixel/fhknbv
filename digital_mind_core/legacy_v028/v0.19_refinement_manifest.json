@@ -1,0 +1,14 @@
+{
+  "architecture": {
+    "state_mode": "state",
+    "arbitration": "adaptive",
+    "reflection": true,
+    "trace_mode": "full"
+  },
+  "architecture_id": "669f7fc777",
+  "holdout_A_passed": 12,
+  "holdout_A_total": 12,
+  "holdout_A_accuracy": 1.0,
+  "complexity": 1.5999999999999999,
+  "failed_tasks": []
+}

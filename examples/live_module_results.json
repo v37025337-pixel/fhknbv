@@ -1,0 +1,299 @@
+[
+  {
+    "id": "live-simulation",
+    "ok": true,
+    "result": {
+      "version": "0.2.1",
+      "seed": 0,
+      "steps": 96,
+      "cognition": {
+        "cycles": 96,
+        "logic_queries": 1,
+        "prediction_confidence": 0.7938144329896907,
+        "trace_events": 576,
+        "mechanisms": {
+          "stability_switch": {
+            "status": "FOUND",
+            "name": "stability_switch",
+            "args": [
+              "history",
+              "current"
+            ],
+            "source": "def stability_switch(history, current):\n    if (float((-float(1))) > float((-float(abs(float((float(history) - float(current)))))))):\n        return current\n    return history\n",
+            "cost": 11,
+            "examples_passed": 0,
+            "examples_total": 0,
+            "explored_numeric": 0,
+            "explored_boolean": 0,
+            "explanation": "migrated packaged v0.28 mechanism",
+            "execution": "L0-Control-IR",
+            "admission": "legacy_examples_only",
+            "origin": "v0.28 packaged mechanism",
+            "source_sha256": "65a9f385d4018f72c5216873c5bb58c1e09f6c1d3f0b6959f3dc819fa9b6e591",
+            "legacy_source_sha256": "b485b2953e5d8e483b846ca388b47cb610a7973f9701b4f9471ce4acde5d40f7"
+          },
+          "choose_plan_cost": {
+            "status": "FOUND",
+            "name": "choose_plan_cost",
+            "args": [
+              "history_cost",
+              "current_cost"
+            ],
+            "source": "def choose_plan_cost(history_cost, current_cost):\n    return min(float(history_cost), float(current_cost))\n",
+            "cost": 3,
+            "examples_passed": 12,
+            "examples_total": 12,
+            "explored_numeric": 24,
+            "explored_boolean": 9,
+            "explanation": "take minimum of (use input history_cost) and (use input current_cost)",
+            "history": [
+              {
+                "round": 1,
+                "status": "FOUND",
+                "source": "def choose_plan_cost(history_cost, current_cost):\n    return min(float(history_cost), float(current_cost))\n",
+                "cost": 3,
+                "training_examples": 12,
+                "validation_passed": 4,
+                "validation_total": 4,
+                "failure_count": 0
+              }
+            ],
+            "counterexamples_added": 0,
+            "execution": "L0-Control-IR",
+            "source_sha256": "fc3a6dd7edfb77a9cb8234c8aac731df70c0632f238b9b6135ecfbc35e90544e",
+            "admission": "holdout_passed",
+            "holdout_count": 6,
+            "holdout_examples": [
+              {
+                "inputs": {
+                  "history_cost": 0.18849972062850942,
+                  "current_cost": 0.18849972062850942
+                },
+                "output": 0.18849972062850942
+              },
+              {
+                "inputs": {
+                  "history_cost": 0.21335247822714806,
+                  "current_cost": 0.21335247822714806
+                },
+                "output": 0.21335247822714806
+              },
+              {
+                "inputs": {
+                  "history_cost": 0.19604040705825806,
+                  "current_cost": 0.19604040705825806
+                },
+                "output": 0.19604040705825806
+              },
+              {
+                "inputs": {
+                  "history_cost": 0.20604714066286803,
+                  "current_cost": 0.20604714066286803
+                },
+                "output": 0.20604714066286803
+              },
+              {
+                "inputs": {
+                  "history_cost": 0.2373486935402842,
+                  "current_cost": 0.2373486935402842
+                },
+                "output": 0.2373486935402842
+              },
+              {
+                "inputs": {
+                  "history_cost": 0.2464920263520075,
+                  "current_cost": 0.2464920263520075
+                },
+                "output": 0.2464920263520075
+              }
+            ]
+          }
+        },
+        "generated_l0_calls": 9
+      },
+      "mechanism_evolution": {
+        "enabled": true,
+        "active": true,
+        "attempts": 1,
+        "planning_examples": 25,
+        "l0_calls": 9,
+        "hold_selections": 0,
+        "model_predicted_cost_saved": 0,
+        "label_source": "frozen world-model rollout costs; not real-world counterfactual outcomes",
+        "events": [
+          {
+            "event": "admitted",
+            "name": "choose_plan_cost",
+            "status": "FOUND",
+            "source": "def choose_plan_cost(history_cost, current_cost):\n    return min(float(history_cost), float(current_cost))\n",
+            "training_count": 12,
+            "validation_count": 4,
+            "holdout_count": 6,
+            "explanation": "take minimum of (use input history_cost) and (use input current_cost)"
+          }
+        ]
+      },
+      "l0": {
+        "version": "1.0.2-canonical",
+        "executive_ticks": 96,
+        "executive_statuses": {
+          "STABLE_EXACT": 96
+        },
+        "learner": {
+          "version": 96,
+          "observations": 96,
+          "trained_observations": 96,
+          "calibrated": true,
+          "calibration_warmup": 21,
+          "input_calibration_rank": 12,
+          "output_calibration_rank": 18,
+          "target_kind": "vector",
+          "ambient_output_dimension": 18,
+          "relations": 0,
+          "backend_relation_effective_dimensions": [],
+          "proposals": 1,
+          "admitted": 0,
+          "rejected": 0,
+          "recalibrations": 0,
+          "calibration_status": "ready",
+          "geometry": "digital",
+          "metric": "causal",
+          "digital_geometry": {
+            "meaning": "dimensionless digital distinguishability for this directed relation",
+            "observations": 96,
+            "metric_updates": 96,
+            "effective_dimension": 3.190952599544983,
+            "storage_mode": "dense",
+            "metric_representation": "dense-full",
+            "neighbor_backend": "ckdtree-exact",
+            "neighbor_k": 14,
+            "activity_eigenvalues": [
+              1,
+              0.6172234193128142,
+              0.3429255799767699,
+              0.23203391585612707,
+              0.21357066553732051,
+              0.16522858803844803,
+              0.15445067435152177,
+              0.12010868198797646,
+              0.10587036656105957,
+              0.08943138163275823,
+              0.08427088253752736,
+              0.06583844375265786
+            ],
+            "covariance_mode": "full",
+            "invariance": "full linear-basis whitening (up to numerical rank)"
+          }
+        },
+        "mean_innovation_weight": 0
+      },
+      "prediction": {
+        "mean_loss": 0.006704323484864122,
+        "baseline_loss_on_same_transitions": 0.006704323484864122,
+        "pre_change_last80": null,
+        "post_change_first40": null,
+        "post_change_final80": null,
+        "change_events": 0
+      },
+      "reward_components_mean": [
+        -0.025573589755269712,
+        -0.12824844823079126,
+        0.01792680197154264,
+        -0.03606020126784954
+      ],
+      "questions": {
+        "created": 5,
+        "predictively_explained": 3,
+        "examples": [
+          "Какая зависимость между обнаруженными факторами [o9:-0.60, o9^2:-0.55, o9*o14:+0.55, o1:-0.53] объясняет необъяснённое направление [o17:+0.64, o15:-0.51, o9:+0.30]?",
+          "Какая зависимость между обнаруженными факторами [o2:+0.33, a3_4:+0.33, o3:+0.30, a5:+0.29] объясняет необъяснённое направление [o9:+0.61, o14:-0.42, o16:+0.32]?",
+          "Какая зависимость между обнаруженными факторами [a5:+0.34, a3_4:+0.24, o2:+0.22, o10:-0.21] объясняет необъяснённое направление [o16:+0.61, o9:+0.43, o14:-0.37]?"
+        ]
+      },
+      "interventions": [
+        {
+          "question": 1,
+          "action_dim": 3,
+          "status": "collecting",
+          "samples": 24,
+          "effect": null,
+          "ci95": null
+        }
+      ],
+      "intervention_steps": 24,
+      "goals": {
+        "completed": 6,
+        "active": 4
+      },
+      "memory": {
+        "episodes": 12,
+        "edges": 33,
+        "themes": 1
+      },
+      "clocks": {
+        "fast": 96,
+        "meso": 12,
+        "macro": 4,
+        "plans": 25,
+        "slow": 1
+      },
+      "consolidated_self": {
+        "t": 64,
+        "theme_weights": {
+          "0": 1
+        },
+        "social_trust": [
+          0.5429196064919892,
+          0.6924418364346445,
+          0.536269947302313
+        ],
+        "competence": [
+          0.7520985027084247,
+          0.7867538969651823,
+          0.70883770063538,
+          0.7543119995498407,
+          0.7867538969582928,
+          0.7819070292269776
+        ],
+        "goal_outcomes": {
+          "completed": 2,
+          "active": 4
+        },
+        "operational_prediction_confidence": 0.8307692307692308,
+        "generated_mechanisms": [
+          "stability_switch"
+        ]
+      }
+    }
+  },
+  {
+    "id": "live-reasoning",
+    "ok": true,
+    "result": {
+      "cycle": 97,
+      "action": null,
+      "reason": "no candidate action",
+      "plan": [],
+      "inferences": [
+        {
+          "query": [
+            "needs_review",
+            "world_prediction"
+          ],
+          "value": true
+        }
+      ],
+      "conflicts": [],
+      "challenge": null
+    }
+  },
+  {
+    "id": "live-l0",
+    "ok": true,
+    "result": {
+      "name": "choose_plan_cost",
+      "value": 2,
+      "execution": "L0-Control-IR"
+    }
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "category": "self_model",
+  "winner": {
+    "variant": "list_only",
+    "batch": true,
+    "single_regression": true,
+    "score": 2.99,
+    "complexity": 1.0
+  },
+  "candidates": [
+    {
+      "variant": "list_only",
+      "batch": true,
+      "single_regression": true,
+      "score": 2.99,
+      "complexity": 1.0
+    },
+    {
+      "variant": "sequence",
+      "batch": true,
+      "single_regression": true,
+      "score": 2.989,
+      "complexity": 1.1
+    },
+    {
+      "variant": "single_or_sequence_guard",
+      "batch": true,
+      "single_regression": true,
+      "score": 2.988,
+      "complexity": 1.2
+    }
+  ]
+}

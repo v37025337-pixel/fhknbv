@@ -1,0 +1,1834 @@
+{
+  "final_version": "v0.27",
+  "active_core_sha256": "57c5aff2a72b6e393b50f6e71c6d3dbf8d453806ccb80762f62e47dc80107d1d",
+  "compile": {
+    "compiled_python_files": 32,
+    "pass": true,
+    "failures": {}
+  },
+  "development_sequence": [
+    {
+      "stage": "v0.19 initial integration search",
+      "generated_candidates": 16,
+      "selected": {
+        "state_mode": "state",
+        "arbitration": "attention",
+        "reflection": false,
+        "trace_mode": "compact"
+      },
+      "selection_benchmark": "9/9"
+    },
+    {
+      "stage": "v0.19 holdout-A refinement",
+      "selected": {
+        "state_mode": "state",
+        "arbitration": "adaptive",
+        "reflection": true,
+        "trace_mode": "full"
+      },
+      "holdout_A_before": "9/12",
+      "development_score": "12/12"
+    },
+    {
+      "stage": "v0.20 meta-arbitration",
+      "selected": "record_only",
+      "trigger": "holdout-B policy/challenge conflict"
+    },
+    {
+      "stage": "v0.20b meta-arbitration refinement",
+      "selected": "hybrid_evidence",
+      "trigger": "holdout-C rapid regime shift"
+    },
+    {
+      "stage": "v0.21 memory integration",
+      "selected": "facts_context",
+      "trigger": "holdout-D memory integration deficit"
+    },
+    {
+      "stage": "v0.22 scalability",
+      "selected": "trace/memory limit 1000",
+      "trigger": "holdout-D unbounded cognitive trace"
+    },
+    {
+      "stage": "v0.23 state integrity",
+      "selected": "deepcopy",
+      "trigger": "holdout-D nested state aliasing"
+    },
+    {
+      "stage": "v0.24 self-model loop",
+      "selected": "explicit_outcome",
+      "trigger": "holdout-D self-model not updated by outcomes"
+    },
+    {
+      "stage": "v0.25 batch self-model feedback",
+      "selected": "list_only",
+      "trigger": "holdout-E batch outcome deficit"
+    },
+    {
+      "stage": "v0.26 persistent rules",
+      "selected": "rules_only",
+      "trigger": "holdout-E persistent rule deficit"
+    },
+    {
+      "stage": "v0.27 rule deduplication",
+      "selected": "equality",
+      "trigger": "holdout-F duplicate persistent rules"
+    }
+  ],
+  "blind_holdouts": {
+    "A": {
+      "suite": "v0.19 external holdout A (not used in first architecture selection)",
+      "baseline_v018": {
+        "passed": 0,
+        "total": 12,
+        "accuracy": 0.0,
+        "results": [
+          {
+            "name": "native_process",
+            "pass": false,
+            "detail": {
+              "has_process": false,
+              "has_cycle": false
+            }
+          },
+          {
+            "name": "shared_state_identity",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "semantic_reason_trace",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "cross_module_conflict_detection",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "stronger_signal_controls_attention",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "decision_provenance_to_self_model",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "self_report_consistency",
+            "pass": false,
+            "detail": "no explain"
+          },
+          {
+            "name": "feedback_changes_future_choice",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "integrated_self_challenge",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "trace_preserves_observation_content",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "integrated_counterfactual_block",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "logic_and_planning_compete_in_workspace",
+            "pass": false,
+            "detail": "no process"
+          }
+        ]
+      },
+      "selected_v019": {
+        "passed": 9,
+        "total": 12,
+        "accuracy": 0.75,
+        "results": [
+          {
+            "name": "native_process",
+            "pass": true,
+            "detail": {
+              "has_process": true,
+              "has_cycle": true
+            }
+          },
+          {
+            "name": "shared_state_identity",
+            "pass": true,
+            "detail": {
+              "cycle": 1
+            }
+          },
+          {
+            "name": "semantic_reason_trace",
+            "pass": true,
+            "detail": {
+              "stages": [
+                "decision",
+                "inference",
+                "observation",
+                "planning",
+                "workspace"
+              ]
+            }
+          },
+          {
+            "name": "cross_module_conflict_detection",
+            "pass": true,
+            "detail": {
+              "conflicts": [
+                {
+                  "topic": "choice",
+                  "sources": [
+                    "p1",
+                    "p2"
+                  ],
+                  "values": [
+                    "left",
+                    "right"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "stronger_signal_controls_attention",
+            "pass": true,
+            "detail": {
+              "action": "right",
+              "reason": "workspace attention"
+            }
+          },
+          {
+            "name": "decision_provenance_to_self_model",
+            "pass": true,
+            "detail": {
+              "action": "A",
+              "reason": "first viable coordinated action",
+              "evidence": [
+                "cycle:5",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          },
+          {
+            "name": "self_report_consistency",
+            "pass": true,
+            "detail": {
+              "decision": "A",
+              "cycle": 5,
+              "trace_len": 25
+            }
+          },
+          {
+            "name": "feedback_changes_future_choice",
+            "pass": false,
+            "detail": {
+              "action": "L",
+              "arch": {
+                "state_mode": "state",
+                "arbitration": "attention",
+                "reflection": false,
+                "trace_mode": "compact"
+              }
+            }
+          },
+          {
+            "name": "integrated_self_challenge",
+            "pass": false,
+            "detail": {
+              "new_stages": [
+                "observation",
+                "inference",
+                "planning",
+                "workspace",
+                "decision"
+              ],
+              "challenge": null
+            }
+          },
+          {
+            "name": "trace_preserves_observation_content",
+            "pass": false,
+            "detail": {
+              "items": null
+            }
+          },
+          {
+            "name": "integrated_counterfactual_block",
+            "pass": true,
+            "detail": {
+              "plan": [
+                "S",
+                "B",
+                "G"
+              ]
+            }
+          },
+          {
+            "name": "logic_and_planning_compete_in_workspace",
+            "pass": true,
+            "detail": {
+              "action": "logic-go",
+              "conflicts": [
+                {
+                  "topic": "action",
+                  "sources": [
+                    "thinking",
+                    "logic"
+                  ],
+                  "values": [
+                    "Y",
+                    "logic-go"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "B": {
+      "suite": "v0.19 external holdout B (created after refinement/promotion)",
+      "baseline_v018": {
+        "passed": 0,
+        "total": 14,
+        "accuracy": 0.0,
+        "results": [
+          {
+            "name": "three_cycle_temporal_continuity",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "recursive_reasoning_plus_replanning",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "reflect_without_unnecessary_flip",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "reward_regime_reversal_adaptation",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "cross_context_policy_separation",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "full_observation_trace_fidelity",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "graceful_no_action_state",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "unreachable_goal_graceful",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "three_way_conflict_trace",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "reasoning_overrides_weaker_plan_signal",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "learned_policy_can_override_salient_signal_with_feedback",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "returned_state_top_level_isolation",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "integrated_event_memory_growth",
+            "pass": false,
+            "detail": "no process"
+          },
+          {
+            "name": "explanation_links_action_evidence_and_cycle",
+            "pass": false,
+            "detail": "no process"
+          }
+        ]
+      },
+      "refined_v019": {
+        "passed": 13,
+        "total": 14,
+        "accuracy": 0.9285714285714286,
+        "results": [
+          {
+            "name": "three_cycle_temporal_continuity",
+            "pass": true,
+            "detail": {
+              "ids": [
+                1,
+                2,
+                3
+              ],
+              "max_trace_cycle": 3
+            }
+          },
+          {
+            "name": "recursive_reasoning_plus_replanning",
+            "pass": true,
+            "detail": {
+              "inferences": [
+                {
+                  "query": [
+                    "ancestor",
+                    "a",
+                    "d"
+                  ],
+                  "value": true
+                }
+              ],
+              "plan": [
+                "S",
+                "B",
+                "G"
+              ]
+            }
+          },
+          {
+            "name": "reflect_without_unnecessary_flip",
+            "pass": true,
+            "detail": {
+              "action": "go",
+              "challenge": {
+                "source": "critic",
+                "topic": "move",
+                "value": "wait",
+                "confidence": 0.75,
+                "urgency": 0.7,
+                "action": "wait"
+              }
+            }
+          },
+          {
+            "name": "reward_regime_reversal_adaptation",
+            "pass": true,
+            "detail": {
+              "before_flip": "B",
+              "after_flip": "A"
+            }
+          },
+          {
+            "name": "cross_context_policy_separation",
+            "pass": true,
+            "detail": {
+              "day": "L",
+              "night": "R"
+            }
+          },
+          {
+            "name": "full_observation_trace_fidelity",
+            "pass": true,
+            "detail": {
+              "items": [
+                {
+                  "novel": "payload",
+                  "id": 731
+                }
+              ],
+              "arch": {
+                "state_mode": "state",
+                "arbitration": "adaptive",
+                "reflection": true,
+                "trace_mode": "full"
+              }
+            }
+          },
+          {
+            "name": "graceful_no_action_state",
+            "pass": true,
+            "detail": {
+              "result": null,
+              "decision": {
+                "action": null,
+                "reason": "no candidate action",
+                "evidence": [
+                  "cycle:51",
+                  "inferences:0",
+                  "plan_length:0",
+                  "conflicts:0"
+                ]
+              }
+            }
+          },
+          {
+            "name": "unreachable_goal_graceful",
+            "pass": true,
+            "detail": {
+              "plan": [],
+              "action": null
+            }
+          },
+          {
+            "name": "three_way_conflict_trace",
+            "pass": true,
+            "detail": {
+              "conflicts": [
+                {
+                  "topic": "policy",
+                  "sources": [
+                    "one",
+                    "two",
+                    "three"
+                  ],
+                  "values": [
+                    "x",
+                    "y",
+                    "z"
+                  ]
+                }
+              ],
+              "stages": [
+                "workspace",
+                "decision",
+                "observation",
+                "inference",
+                "planning",
+                "workspace",
+                "challenge",
+                "decision"
+              ]
+            }
+          },
+          {
+            "name": "reasoning_overrides_weaker_plan_signal",
+            "pass": true,
+            "detail": {
+              "action": "reasoned",
+              "conflicts": [
+                {
+                  "topic": "action",
+                  "sources": [
+                    "thinking",
+                    "logic"
+                  ],
+                  "values": [
+                    "Q",
+                    "reasoned"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "learned_policy_can_override_salient_signal_with_feedback",
+            "pass": false,
+            "detail": {
+              "action": "fast",
+              "reason": "self-challenge found stronger alternative"
+            }
+          },
+          {
+            "name": "returned_state_top_level_isolation",
+            "pass": true,
+            "detail": {
+              "internal_cycle": 61,
+              "returned_cycle": -999
+            }
+          },
+          {
+            "name": "integrated_event_memory_growth",
+            "pass": true,
+            "detail": {
+              "before": 360,
+              "after": 365,
+              "tail": [
+                "workspace",
+                "challenge",
+                "decision",
+                "observation",
+                "inference",
+                "planning",
+                "workspace",
+                "decision"
+              ]
+            }
+          },
+          {
+            "name": "explanation_links_action_evidence_and_cycle",
+            "pass": true,
+            "detail": {
+              "last_decision": {
+                "action": "only",
+                "reason": "adaptive policy",
+                "evidence": [
+                  "cycle:63",
+                  "inferences:0",
+                  "plan_length:0",
+                  "conflicts:0"
+                ]
+              },
+              "cycle": 63
+            }
+          }
+        ]
+      },
+      "notice": "Operational integration test only; not evidence of subjective consciousness or general intelligence."
+    },
+    "C": {
+      "suite": "v0.20 external holdout C (created after record-only meta-arbitration promotion)",
+      "passed": 11,
+      "total": 12,
+      "accuracy": 0.9166666666666666,
+      "results": [
+        {
+          "name": "rapid_regime_shift_uses_current_evidence",
+          "pass": false,
+          "detail": {
+            "action": "A",
+            "reason": "adaptive policy after feedback",
+            "challenge": {
+              "source": "current_sensor",
+              "topic": "action",
+              "value": "B",
+              "confidence": 1.0,
+              "urgency": 1.0,
+              "action": "B"
+            }
+          }
+        },
+        {
+          "name": "stable_learned_reward_resists_conflicting_noise",
+          "pass": true,
+          "detail": {
+            "action": "A",
+            "reason": "adaptive policy after feedback"
+          }
+        },
+        {
+          "name": "eventual_reward_reversal_recovery",
+          "pass": true,
+          "detail": {
+            "action": "R"
+          }
+        },
+        {
+          "name": "counterproposal_is_reportable",
+          "pass": true,
+          "detail": {
+            "challenge": {
+              "source": "b",
+              "topic": "q",
+              "value": "y",
+              "confidence": 0.8,
+              "urgency": 0.7,
+              "action": "y"
+            },
+            "stages": [
+              "observation",
+              "inference",
+              "planning",
+              "workspace",
+              "challenge",
+              "decision"
+            ]
+          }
+        },
+        {
+          "name": "separate_context_models",
+          "pass": true,
+          "detail": {
+            "red": "x",
+            "blue": "y"
+          }
+        },
+        {
+          "name": "logic_to_action_integration_novel_predicate",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "connected",
+                  "u",
+                  "w"
+                ],
+                "value": true
+              }
+            ],
+            "action": "accept"
+          }
+        },
+        {
+          "name": "trace_spans_multiple_cycles",
+          "pass": true,
+          "detail": {
+            "cycles": [
+              65,
+              66,
+              67,
+              68
+            ],
+            "state_cycle": 68
+          }
+        },
+        {
+          "name": "structured_observation_preserved",
+          "pass": true,
+          "detail": {
+            "items": [
+              {
+                "kind": "novel",
+                "value": [
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "no_path_does_not_invent_action",
+          "pass": true,
+          "detail": {
+            "plan": [],
+            "action": null
+          }
+        },
+        {
+          "name": "explanation_matches_current_self_state",
+          "pass": true,
+          "detail": {
+            "decision": "only",
+            "cycle": 71
+          }
+        },
+        {
+          "name": "self_environment_boundary_survives_integration",
+          "pass": true,
+          "detail": {
+            "capability": "web",
+            "origin": "network",
+            "detail": "offline",
+            "boundary": "environment"
+          }
+        },
+        {
+          "name": "intelligence_transfer_still_available",
+          "pass": true,
+          "detail": {
+            "pred": 31.0
+          }
+        }
+      ]
+    },
+    "D": {
+      "suite": "v0.20 external holdout D (created after hybrid evidence promotion)",
+      "passed": 6,
+      "total": 12,
+      "accuracy": 0.5,
+      "by_category": {
+        "memory_integration": {
+          "passed": 0,
+          "total": 2
+        },
+        "self_model_loop": {
+          "passed": 1,
+          "total": 3
+        },
+        "scalability": {
+          "passed": 0,
+          "total": 1
+        },
+        "state_integrity": {
+          "passed": 0,
+          "total": 1
+        },
+        "transfer": {
+          "passed": 1,
+          "total": 1
+        },
+        "meta_arbitration": {
+          "passed": 2,
+          "total": 2
+        },
+        "self_report": {
+          "passed": 1,
+          "total": 1
+        },
+        "logic_integrity": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "results": [
+        {
+          "name": "explicit_cross_cycle_fact_persistence",
+          "category": "memory_integration",
+          "pass": false,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "knows",
+                  "agent",
+                  "map"
+                ],
+                "value": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "explicit_context_continuity",
+          "category": "memory_integration",
+          "pass": false,
+          "detail": {
+            "context": "default"
+          }
+        },
+        {
+          "name": "automatic_self_calibration_from_outcomes",
+          "category": "self_model_loop",
+          "pass": false,
+          "detail": {
+            "before": 0.5,
+            "after": 0.5
+          }
+        },
+        {
+          "name": "automatic_self_calibration_on_failure",
+          "category": "self_model_loop",
+          "pass": false,
+          "detail": {
+            "estimate": 0.5
+          }
+        },
+        {
+          "name": "bounded_long_run_cognitive_trace",
+          "category": "scalability",
+          "pass": false,
+          "detail": {
+            "trace_len": 6000,
+            "memory_len": 6000
+          }
+        },
+        {
+          "name": "deep_state_snapshot_isolation",
+          "category": "state_integrity",
+          "pass": false,
+          "detail": {
+            "before": 5,
+            "after": 6
+          }
+        },
+        {
+          "name": "novel_symbol_end_to_end_reasoning",
+          "category": "transfer",
+          "pass": true,
+          "detail": {
+            "action": "advance",
+            "plan": [
+              "m",
+              "n",
+              "o"
+            ]
+          }
+        },
+        {
+          "name": "rapid_shift_after_meta_refinement",
+          "category": "meta_arbitration",
+          "pass": true,
+          "detail": {
+            "action": "new",
+            "reason": "self-challenge won combined learned-and-current evidence"
+          }
+        },
+        {
+          "name": "stable_policy_after_meta_refinement",
+          "category": "meta_arbitration",
+          "pass": true,
+          "detail": {
+            "action": "good",
+            "reason": "adaptive policy after feedback"
+          }
+        },
+        {
+          "name": "late_cycle_self_report_consistency",
+          "category": "self_report",
+          "pass": true,
+          "detail": {
+            "decision": "good",
+            "cycle": 35
+          }
+        },
+        {
+          "name": "integrated_unsupported_inference_refusal",
+          "category": "logic_integrity",
+          "pass": true,
+          "detail": {
+            "inference": {
+              "query": [
+                "blue",
+                "item"
+              ],
+              "value": false
+            },
+            "action": "safe"
+          }
+        },
+        {
+          "name": "self_environment_boundary",
+          "category": "self_model_loop",
+          "pass": true,
+          "detail": {
+            "capability": "vision",
+            "origin": "external_provider",
+            "detail": "missing",
+            "boundary": "environment"
+          }
+        }
+      ]
+    },
+    "E": {
+      "suite": "v0.24 external holdout E (created after memory/scalability/integrity/self-loop repairs)",
+      "passed": 14,
+      "total": 16,
+      "accuracy": 0.875,
+      "by_category": {
+        "memory": {
+          "passed": 3,
+          "total": 4
+        },
+        "scalability": {
+          "passed": 2,
+          "total": 2
+        },
+        "integrity": {
+          "passed": 1,
+          "total": 1
+        },
+        "self_model": {
+          "passed": 3,
+          "total": 4
+        },
+        "meta": {
+          "passed": 2,
+          "total": 2
+        },
+        "transfer": {
+          "passed": 1,
+          "total": 1
+        },
+        "report": {
+          "passed": 1,
+          "total": 1
+        },
+        "logic": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "results": [
+        {
+          "name": "persistent_fact_deduplication",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "facts": [
+              [
+                "k",
+                "a"
+              ]
+            ]
+          }
+        },
+        {
+          "name": "explicit_rule_persistence",
+          "category": "memory",
+          "pass": false,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "reach",
+                  "a",
+                  "c"
+                ],
+                "value": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "persistent_context_can_be_overridden",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "context": "two"
+          }
+        },
+        {
+          "name": "nonpersistent_facts_do_not_leak",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "temp",
+                  "x"
+                ],
+                "value": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "bounded_trace_after_1600_cycles",
+          "category": "scalability",
+          "pass": true,
+          "detail": {
+            "trace": 1000,
+            "memory": 1000,
+            "cycle": 1600
+          }
+        },
+        {
+          "name": "bounded_trace_keeps_recent_information",
+          "category": "scalability",
+          "pass": true,
+          "detail": {
+            "tail": [
+              {
+                "cycle": 399,
+                "stage": "decision",
+                "payload": {
+                  "action": null,
+                  "reason": "no candidate action",
+                  "evidence": [
+                    "cycle:399",
+                    "inferences:0",
+                    "plan_length:0",
+                    "conflicts:0"
+                  ]
+                }
+              },
+              {
+                "cycle": 400,
+                "stage": "observation",
+                "payload": {
+                  "count": 1,
+                  "items": [
+                    "m399"
+                  ]
+                }
+              },
+              {
+                "cycle": 400,
+                "stage": "inference",
+                "payload": []
+              },
+              {
+                "cycle": 400,
+                "stage": "planning",
+                "payload": {
+                  "path": [],
+                  "cost": Infinity
+                }
+              },
+              {
+                "cycle": 400,
+                "stage": "workspace",
+                "payload": {
+                  "attention": null,
+                  "conflicts": []
+                }
+              },
+              {
+                "cycle": 400,
+                "stage": "decision",
+                "payload": {
+                  "action": null,
+                  "reason": "no candidate action",
+                  "evidence": [
+                    "cycle:400",
+                    "inferences:0",
+                    "plan_length:0",
+                    "conflicts:0"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "deep_nested_snapshot_isolation",
+          "category": "integrity",
+          "pass": true,
+          "detail": {
+            "internal": [
+              {
+                "a": {
+                  "b": [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "self_model_updates_from_mixed_outcomes",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "estimate": 0.6666666666666666
+          }
+        },
+        {
+          "name": "batch_outcome_self_calibration",
+          "category": "self_model",
+          "pass": false,
+          "detail": {
+            "reader": 0.5,
+            "writer": 0.5
+          }
+        },
+        {
+          "name": "incomplete_outcome_is_ignored",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "estimate": 0.5
+          }
+        },
+        {
+          "name": "hybrid_meta_arbitration_generalizes",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "new",
+            "reason": "self-challenge won combined learned-and-current evidence"
+          }
+        },
+        {
+          "name": "hybrid_meta_arbitration_resists_noise",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "good",
+            "reason": "adaptive policy after feedback"
+          }
+        },
+        {
+          "name": "novel_end_to_end_transfer",
+          "category": "transfer",
+          "pass": true,
+          "detail": {
+            "action": "act",
+            "plan": [
+              "s",
+              "m",
+              "g"
+            ]
+          }
+        },
+        {
+          "name": "self_report_after_all_layers",
+          "category": "report",
+          "pass": true,
+          "detail": {
+            "decision": "only",
+            "trace_len": 6
+          }
+        },
+        {
+          "name": "self_environment_boundary_bidirectional",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "internal": "self",
+            "external": "environment"
+          }
+        },
+        {
+          "name": "logic_contradiction_survives_full_integration",
+          "category": "logic",
+          "pass": true,
+          "detail": {
+            "contradictions": [
+              [
+                "safe",
+                [
+                  "x"
+                ]
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "F": {
+      "suite": "v0.26 external holdout F (created after all measured v0.20-D/E deficits were repaired)",
+      "passed": 14,
+      "total": 15,
+      "accuracy": 0.9333333333333333,
+      "by_category": {
+        "memory": {
+          "passed": 2,
+          "total": 2
+        },
+        "memory_edge": {
+          "passed": 0,
+          "total": 1
+        },
+        "self_model": {
+          "passed": 3,
+          "total": 3
+        },
+        "scalability": {
+          "passed": 2,
+          "total": 2
+        },
+        "integrity": {
+          "passed": 2,
+          "total": 2
+        },
+        "meta": {
+          "passed": 2,
+          "total": 2
+        },
+        "transfer": {
+          "passed": 1,
+          "total": 1
+        },
+        "report": {
+          "passed": 1,
+          "total": 1
+        },
+        "logic": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "results": [
+        {
+          "name": "combined_fact_rule_context_continuity",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "reach",
+                  "a",
+                  "c"
+                ],
+                "value": true
+              }
+            ],
+            "context": "mission"
+          }
+        },
+        {
+          "name": "persistent_rule_duplicate_control",
+          "category": "memory_edge",
+          "pass": false,
+          "detail": {
+            "persistent_rule_count": 50
+          }
+        },
+        {
+          "name": "three_item_batch_calibration",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "a": 0.6666666666666666,
+            "b": 0.3333333333333333,
+            "c": 0.6666666666666666
+          }
+        },
+        {
+          "name": "single_and_batch_outcomes_same_cycle",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "single": 0.6666666666666666,
+            "batch": 0.3333333333333333
+          }
+        },
+        {
+          "name": "two_thousand_cycle_bound",
+          "category": "scalability",
+          "pass": true,
+          "detail": {
+            "trace": 1000,
+            "memory": 1000,
+            "cycle": 2000
+          }
+        },
+        {
+          "name": "recent_trace_survives_compaction",
+          "category": "scalability",
+          "pass": true,
+          "detail": {
+            "tail": [
+              {
+                "cycle": 299,
+                "stage": "decision",
+                "payload": {
+                  "action": null,
+                  "reason": "no candidate action",
+                  "evidence": [
+                    "cycle:299",
+                    "inferences:0",
+                    "plan_length:0",
+                    "conflicts:0"
+                  ]
+                }
+              },
+              {
+                "cycle": 300,
+                "stage": "observation",
+                "payload": {
+                  "count": 1,
+                  "items": [
+                    "obs-299"
+                  ]
+                }
+              },
+              {
+                "cycle": 300,
+                "stage": "inference",
+                "payload": []
+              },
+              {
+                "cycle": 300,
+                "stage": "planning",
+                "payload": {
+                  "path": [],
+                  "cost": Infinity
+                }
+              },
+              {
+                "cycle": 300,
+                "stage": "workspace",
+                "payload": {
+                  "attention": null,
+                  "conflicts": []
+                }
+              },
+              {
+                "cycle": 300,
+                "stage": "decision",
+                "payload": {
+                  "action": null,
+                  "reason": "no candidate action",
+                  "evidence": [
+                    "cycle:300",
+                    "inferences:0",
+                    "plan_length:0",
+                    "conflicts:0"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "deep_snapshot_integrity_second_shape",
+          "category": "integrity",
+          "pass": true,
+          "detail": {
+            "internal": [
+              {
+                "x": [
+                  {
+                    "y": 1
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "context_latest_override_persists",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "context": "B"
+          }
+        },
+        {
+          "name": "rapid_environment_flip_again",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "new",
+            "reason": "self-challenge won combined learned-and-current evidence"
+          }
+        },
+        {
+          "name": "stable_environment_resists_noise_again",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "good",
+            "reason": "adaptive policy after feedback"
+          }
+        },
+        {
+          "name": "recursive_logic_with_unrelated_plan",
+          "category": "transfer",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "ancestor",
+                  "a",
+                  "d"
+                ],
+                "value": true
+              }
+            ],
+            "plan": [
+              "s",
+              "x",
+              "g"
+            ]
+          }
+        },
+        {
+          "name": "self_report_consistency_final",
+          "category": "report",
+          "pass": true,
+          "detail": {
+            "decision": "one",
+            "last_decision": {
+              "action": "one",
+              "reason": "adaptive policy",
+              "evidence": [
+                "cycle:1",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            },
+            "cycle": 1,
+            "trace": [
+              {
+                "cycle": 1,
+                "stage": "observation",
+                "payload": {
+                  "count": 1,
+                  "items": [
+                    "report"
+                  ]
+                }
+              },
+              {
+                "cycle": 1,
+                "stage": "inference",
+                "payload": []
+              },
+              {
+                "cycle": 1,
+                "stage": "planning",
+                "payload": {
+                  "path": [],
+                  "cost": Infinity
+                }
+              },
+              {
+                "cycle": 1,
+                "stage": "workspace",
+                "payload": {
+                  "attention": null,
+                  "conflicts": []
+                }
+              },
+              {
+                "cycle": 1,
+                "stage": "challenge",
+                "payload": null
+              },
+              {
+                "cycle": 1,
+                "stage": "decision",
+                "payload": {
+                  "action": "one",
+                  "reason": "adaptive policy",
+                  "evidence": [
+                    "cycle:1",
+                    "inferences:0",
+                    "plan_length:0",
+                    "conflicts:0"
+                  ]
+                }
+              }
+            ],
+            "architecture": {
+              "state_mode": "state",
+              "arbitration": "adaptive",
+              "reflection": true,
+              "trace_mode": "full"
+            }
+          }
+        },
+        {
+          "name": "no_action_does_not_invent_choice",
+          "category": "integrity",
+          "pass": true,
+          "detail": {
+            "action": null,
+            "decision": {
+              "action": null,
+              "reason": "no candidate action",
+              "evidence": [
+                "cycle:1",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          }
+        },
+        {
+          "name": "unsupported_inference_still_refused",
+          "category": "logic",
+          "pass": true,
+          "detail": {
+            "inference": {
+              "query": [
+                "blue",
+                "x"
+              ],
+              "value": false
+            },
+            "action": "safe"
+          }
+        },
+        {
+          "name": "environment_boundary_final",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "capability": "remote",
+            "origin": "remote_service",
+            "detail": "down",
+            "boundary": "environment"
+          }
+        }
+      ],
+      "stopping_rule": {
+        "threshold": 0.9,
+        "condition": "stop iterative repair if unseen accuracy >= 0.90 and no core category is catastrophically failing; retain remaining edge failures for next independent research cycle"
+      }
+    },
+    "G": {
+      "suite": "v0.27 external holdout G (created after all previously observed deficits were repaired)",
+      "passed": 18,
+      "total": 18,
+      "accuracy": 1.0,
+      "by_category": {
+        "memory": {
+          "passed": 3,
+          "total": 3
+        },
+        "self_model": {
+          "passed": 4,
+          "total": 4
+        },
+        "scalability": {
+          "passed": 1,
+          "total": 1
+        },
+        "integrity": {
+          "passed": 2,
+          "total": 2
+        },
+        "meta": {
+          "passed": 2,
+          "total": 2
+        },
+        "intelligence": {
+          "passed": 2,
+          "total": 2
+        },
+        "transfer": {
+          "passed": 1,
+          "total": 1
+        },
+        "logic": {
+          "passed": 2,
+          "total": 2
+        },
+        "report": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      "results": [
+        {
+          "name": "four_cycle_fact_rule_context_memory",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "grand",
+                  "a",
+                  "c"
+                ],
+                "value": true
+              }
+            ],
+            "context": "family"
+          }
+        },
+        {
+          "name": "eighty_repeat_rule_dedup",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "count": 1
+          }
+        },
+        {
+          "name": "five_outcome_batch_calibration",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "a": 0.6666666666666666,
+            "b": 0.3333333333333333,
+            "c": 0.6666666666666666,
+            "d": 0.3333333333333333,
+            "e": 0.6666666666666666
+          }
+        },
+        {
+          "name": "simultaneous_single_and_batch_feedback",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "single": 0.6666666666666666,
+            "batch1": 0.6666666666666666,
+            "batch2": 0.3333333333333333
+          }
+        },
+        {
+          "name": "long_run_bound_and_recency_2500",
+          "category": "scalability",
+          "pass": true,
+          "detail": {
+            "trace": 1000,
+            "memory": 1000,
+            "tail_has_latest": true
+          }
+        },
+        {
+          "name": "persistent_memory_snapshot_isolation",
+          "category": "integrity",
+          "pass": true,
+          "detail": {
+            "facts": [
+              [
+                "a",
+                "x"
+              ]
+            ],
+            "rule_count": 1
+          }
+        },
+        {
+          "name": "persistent_context_restores_only_when_requested",
+          "category": "memory",
+          "pass": true,
+          "detail": {
+            "defaulted": "beta",
+            "restored": "alpha"
+          }
+        },
+        {
+          "name": "hybrid_arbitration_new_flip",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "new",
+            "reason": "self-challenge won combined learned-and-current evidence"
+          }
+        },
+        {
+          "name": "hybrid_arbitration_stability_new_noise",
+          "category": "meta",
+          "pass": true,
+          "detail": {
+            "action": "good",
+            "reason": "adaptive policy after feedback"
+          }
+        },
+        {
+          "name": "context_specific_adaptation_after_full_repairs",
+          "category": "intelligence",
+          "pass": true,
+          "detail": {
+            "c1": "A",
+            "c2": "B"
+          }
+        },
+        {
+          "name": "deep_logic_plus_blocked_replanning",
+          "category": "transfer",
+          "pass": true,
+          "detail": {
+            "inferences": [
+              {
+                "query": [
+                  "ancestor",
+                  "a",
+                  "e"
+                ],
+                "value": true
+              }
+            ],
+            "plan": [
+              "s",
+              "b",
+              "g"
+            ],
+            "action": "reasoned"
+          }
+        },
+        {
+          "name": "unsupported_inference_with_safe_fallback",
+          "category": "logic",
+          "pass": true,
+          "detail": {
+            "inference": {
+              "query": [
+                "cold",
+                "x"
+              ],
+              "value": false
+            },
+            "action": "safe"
+          }
+        },
+        {
+          "name": "empty_action_space_remains_empty",
+          "category": "integrity",
+          "pass": true,
+          "detail": {
+            "action": null
+          }
+        },
+        {
+          "name": "explanation_trace_and_decision_alignment",
+          "category": "report",
+          "pass": true,
+          "detail": {
+            "decision": "answer",
+            "stages": [
+              "observation",
+              "inference",
+              "planning",
+              "workspace",
+              "challenge",
+              "decision"
+            ]
+          }
+        },
+        {
+          "name": "self_environment_boundary_two_origins",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "internal": "self",
+            "external": "environment"
+          }
+        },
+        {
+          "name": "contradiction_detection_post_repairs",
+          "category": "logic",
+          "pass": true,
+          "detail": {
+            "contradictions": [
+              [
+                "valid",
+                [
+                  "item"
+                ]
+              ]
+            ]
+          }
+        },
+        {
+          "name": "affine_transfer_negative_slope_unseen",
+          "category": "intelligence",
+          "pass": true,
+          "detail": {
+            "prediction": -7.0
+          }
+        },
+        {
+          "name": "balanced_self_calibration",
+          "category": "self_model",
+          "pass": true,
+          "detail": {
+            "estimate": 0.5
+          }
+        }
+      ],
+      "notice": "Operational out-of-sample evaluation only. It does not establish subjective consciousness or general intelligence."
+    }
+  },
+  "final_holdout_G": {
+    "passed": 18,
+    "total": 18,
+    "accuracy": 1.0
+  },
+  "operational_capabilities": {
+    "logic": "relational inference, recursive rules, contradiction detection, unsupported-inference refusal",
+    "thinking": "multi-step planning, blocked-edge replanning, information-seeking/counterfactual mechanisms from the cognitive core",
+    "self_model": "decision provenance, self/environment failure boundary, single and batch outcome calibration",
+    "conscious_integration": "shared state, cross-module workspace, conflict monitoring, counterproposal trace, cycle continuity, explanation trace",
+    "intelligence": "context-specific reward adaptation, affine transfer, rapid regime-shift arbitration with current evidence",
+    "memory_integration": "persistent facts, rules and opt-in context; rule deduplication",
+    "scalability": "bounded integrated trace and event memory at 1000 recent events",
+    "state_integrity": "deep snapshots returned to callers"
+  },
+  "limitations": [
+    "Passing these tests does not establish subjective or phenomenal consciousness.",
+    "Passing these tests does not establish general intelligence.",
+    "The autonomous development was bounded search over generated/available mutation families and benchmark-defined deficits; it is not unconstrained invention of arbitrary new algorithms from first principles.",
+    "Finite blind suites cannot prove generalization to all future tasks.",
+    "External perception/web capabilities still depend on available host providers."
+  ]
+}

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-mind-core"
+version = "0.2.1"
+description = "Unified experimental kernel combining DIGITAL_MIND, canonical L0 and v0.28 mechanism synthesis"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.scripts]
+digital-mind = "digital_mind_core.__main__:main"
+digital-mind-module = "digital_mind_core.tool_module:main"
+
+[tool.setuptools.packages.find]
+include = ["digital_mind_core*"]
+
+[tool.setuptools.package-data]
+digital_mind_core = ["*.l0"]
+"digital_mind_core.legacy_v028" = ["*.py", "*.json", "providers/*.py", "evaluation/*.json"]

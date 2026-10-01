@@ -1,0 +1,273 @@
+{
+  "cycles": [
+    {
+      "cycle": 1,
+      "selected": "intelligence",
+      "selection": {
+        "dimension": "intelligence",
+        "score": 0.5,
+        "deficit": 0.5,
+        "tie_break": 0.970353570766747,
+        "priority": 0.5000009703535707
+      },
+      "before": {
+        "scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 0.5
+        },
+        "proxy_scores": {
+          "logic": 0.0,
+          "thinking": 0.25,
+          "self_model": 0.5,
+          "conscious_integration": 0.25,
+          "intelligence": 0.5
+        },
+        "functional_scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 0.0
+        },
+        "details": {
+          "logic": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "thinking": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "self_model": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conscious_integration": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "intelligence": [
+            "no general transfer/adaptation mechanism"
+          ]
+        },
+        "mean_score": 0.9,
+        "enabled": [
+          "logic",
+          "thinking",
+          "conscious_integration",
+          "self_model"
+        ]
+      },
+      "gate_stage": "ready",
+      "gate_accepted": true,
+      "gate_reason": "candidate passed compile and tests",
+      "candidate": {
+        "scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 1.0
+        },
+        "proxy_scores": {
+          "logic": 0.0,
+          "thinking": 0.25,
+          "self_model": 0.5,
+          "conscious_integration": 0.25,
+          "intelligence": 0.5
+        },
+        "functional_scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 1.0
+        },
+        "details": {
+          "logic": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "thinking": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "self_model": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conscious_integration": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "intelligence": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "mean_score": 1.0,
+        "enabled": [
+          "logic",
+          "thinking",
+          "conscious_integration",
+          "self_model",
+          "intelligence"
+        ]
+      },
+      "selected_improved": true,
+      "mean_improved": true,
+      "no_regression": true,
+      "status": "promoted",
+      "revision": "7907c26795a2c28c53080802186a6258396d174c0aee20500ee1123eeb7e8747",
+      "after": {
+        "scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 1.0
+        },
+        "proxy_scores": {
+          "logic": 0.0,
+          "thinking": 0.25,
+          "self_model": 0.5,
+          "conscious_integration": 0.25,
+          "intelligence": 0.5
+        },
+        "functional_scores": {
+          "logic": 1.0,
+          "thinking": 1.0,
+          "self_model": 1.0,
+          "conscious_integration": 1.0,
+          "intelligence": 1.0
+        },
+        "details": {
+          "logic": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "thinking": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "self_model": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "conscious_integration": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "intelligence": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        "mean_score": 1.0,
+        "enabled": [
+          "logic",
+          "thinking",
+          "conscious_integration",
+          "self_model",
+          "intelligence"
+        ]
+      }
+    }
+  ],
+  "final": {
+    "scores": {
+      "logic": 1.0,
+      "thinking": 1.0,
+      "self_model": 1.0,
+      "conscious_integration": 1.0,
+      "intelligence": 1.0
+    },
+    "proxy_scores": {
+      "logic": 0.0,
+      "thinking": 0.25,
+      "self_model": 0.5,
+      "conscious_integration": 0.25,
+      "intelligence": 0.5
+    },
+    "functional_scores": {
+      "logic": 1.0,
+      "thinking": 1.0,
+      "self_model": 1.0,
+      "conscious_integration": 1.0,
+      "intelligence": 1.0
+    },
+    "details": {
+      "logic": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "thinking": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "self_model": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "conscious_integration": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "intelligence": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "mean_score": 1.0,
+    "enabled": [
+      "logic",
+      "thinking",
+      "conscious_integration",
+      "self_model",
+      "intelligence"
+    ]
+  },
+  "final_revision": "486741cb66b929b3427a3aefadbadaecc44dac122fc9b0fd9f0c4b3e44d6f382",
+  "notice": "These scores measure operational mechanisms only. They do not establish phenomenal consciousness or general intelligence."
+}

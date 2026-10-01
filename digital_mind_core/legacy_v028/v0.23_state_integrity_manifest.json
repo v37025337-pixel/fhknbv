@@ -1,0 +1,33 @@
+{
+  "category": "state_integrity",
+  "winner": {
+    "variant": "deepcopy",
+    "isolated": true,
+    "type_fidelity": true,
+    "complexity": 1.0,
+    "score": 2.99
+  },
+  "candidates": [
+    {
+      "variant": "deepcopy",
+      "isolated": true,
+      "type_fidelity": true,
+      "complexity": 1.0,
+      "score": 2.99
+    },
+    {
+      "variant": "manual_recursive",
+      "isolated": true,
+      "type_fidelity": true,
+      "complexity": 1.2,
+      "score": 2.988
+    },
+    {
+      "variant": "json_clone",
+      "isolated": true,
+      "type_fidelity": false,
+      "complexity": 0.8,
+      "score": 1.992
+    }
+  ]
+}

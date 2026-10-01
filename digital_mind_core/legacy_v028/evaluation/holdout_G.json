@@ -1,0 +1,257 @@
+{
+  "suite": "v0.27 external holdout G (created after all previously observed deficits were repaired)",
+  "passed": 18,
+  "total": 18,
+  "accuracy": 1.0,
+  "by_category": {
+    "memory": {
+      "passed": 3,
+      "total": 3
+    },
+    "self_model": {
+      "passed": 4,
+      "total": 4
+    },
+    "scalability": {
+      "passed": 1,
+      "total": 1
+    },
+    "integrity": {
+      "passed": 2,
+      "total": 2
+    },
+    "meta": {
+      "passed": 2,
+      "total": 2
+    },
+    "intelligence": {
+      "passed": 2,
+      "total": 2
+    },
+    "transfer": {
+      "passed": 1,
+      "total": 1
+    },
+    "logic": {
+      "passed": 2,
+      "total": 2
+    },
+    "report": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "results": [
+    {
+      "name": "four_cycle_fact_rule_context_memory",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "grand",
+              "a",
+              "c"
+            ],
+            "value": true
+          }
+        ],
+        "context": "family"
+      }
+    },
+    {
+      "name": "eighty_repeat_rule_dedup",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "count": 1
+      }
+    },
+    {
+      "name": "five_outcome_batch_calibration",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "a": 0.6666666666666666,
+        "b": 0.3333333333333333,
+        "c": 0.6666666666666666,
+        "d": 0.3333333333333333,
+        "e": 0.6666666666666666
+      }
+    },
+    {
+      "name": "simultaneous_single_and_batch_feedback",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "single": 0.6666666666666666,
+        "batch1": 0.6666666666666666,
+        "batch2": 0.3333333333333333
+      }
+    },
+    {
+      "name": "long_run_bound_and_recency_2500",
+      "category": "scalability",
+      "pass": true,
+      "detail": {
+        "trace": 1000,
+        "memory": 1000,
+        "tail_has_latest": true
+      }
+    },
+    {
+      "name": "persistent_memory_snapshot_isolation",
+      "category": "integrity",
+      "pass": true,
+      "detail": {
+        "facts": [
+          [
+            "a",
+            "x"
+          ]
+        ],
+        "rule_count": 1
+      }
+    },
+    {
+      "name": "persistent_context_restores_only_when_requested",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "defaulted": "beta",
+        "restored": "alpha"
+      }
+    },
+    {
+      "name": "hybrid_arbitration_new_flip",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "new",
+        "reason": "self-challenge won combined learned-and-current evidence"
+      }
+    },
+    {
+      "name": "hybrid_arbitration_stability_new_noise",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "good",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "context_specific_adaptation_after_full_repairs",
+      "category": "intelligence",
+      "pass": true,
+      "detail": {
+        "c1": "A",
+        "c2": "B"
+      }
+    },
+    {
+      "name": "deep_logic_plus_blocked_replanning",
+      "category": "transfer",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "ancestor",
+              "a",
+              "e"
+            ],
+            "value": true
+          }
+        ],
+        "plan": [
+          "s",
+          "b",
+          "g"
+        ],
+        "action": "reasoned"
+      }
+    },
+    {
+      "name": "unsupported_inference_with_safe_fallback",
+      "category": "logic",
+      "pass": true,
+      "detail": {
+        "inference": {
+          "query": [
+            "cold",
+            "x"
+          ],
+          "value": false
+        },
+        "action": "safe"
+      }
+    },
+    {
+      "name": "empty_action_space_remains_empty",
+      "category": "integrity",
+      "pass": true,
+      "detail": {
+        "action": null
+      }
+    },
+    {
+      "name": "explanation_trace_and_decision_alignment",
+      "category": "report",
+      "pass": true,
+      "detail": {
+        "decision": "answer",
+        "stages": [
+          "observation",
+          "inference",
+          "planning",
+          "workspace",
+          "challenge",
+          "decision"
+        ]
+      }
+    },
+    {
+      "name": "self_environment_boundary_two_origins",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "internal": "self",
+        "external": "environment"
+      }
+    },
+    {
+      "name": "contradiction_detection_post_repairs",
+      "category": "logic",
+      "pass": true,
+      "detail": {
+        "contradictions": [
+          [
+            "valid",
+            [
+              "item"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "name": "affine_transfer_negative_slope_unseen",
+      "category": "intelligence",
+      "pass": true,
+      "detail": {
+        "prediction": -7.0
+      }
+    },
+    {
+      "name": "balanced_self_calibration",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "estimate": 0.5
+      }
+    }
+  ],
+  "notice": "Operational out-of-sample evaluation only. It does not establish subjective consciousness or general intelligence."
+}

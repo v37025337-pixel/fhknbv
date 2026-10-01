@@ -1,0 +1,358 @@
+{
+  "suite": "v0.26 external holdout F (created after all measured v0.20-D/E deficits were repaired)",
+  "passed": 14,
+  "total": 15,
+  "accuracy": 0.9333333333333333,
+  "by_category": {
+    "memory": {
+      "passed": 2,
+      "total": 2
+    },
+    "memory_edge": {
+      "passed": 0,
+      "total": 1
+    },
+    "self_model": {
+      "passed": 3,
+      "total": 3
+    },
+    "scalability": {
+      "passed": 2,
+      "total": 2
+    },
+    "integrity": {
+      "passed": 2,
+      "total": 2
+    },
+    "meta": {
+      "passed": 2,
+      "total": 2
+    },
+    "transfer": {
+      "passed": 1,
+      "total": 1
+    },
+    "report": {
+      "passed": 1,
+      "total": 1
+    },
+    "logic": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "results": [
+    {
+      "name": "combined_fact_rule_context_continuity",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "reach",
+              "a",
+              "c"
+            ],
+            "value": true
+          }
+        ],
+        "context": "mission"
+      }
+    },
+    {
+      "name": "persistent_rule_duplicate_control",
+      "category": "memory_edge",
+      "pass": false,
+      "detail": {
+        "persistent_rule_count": 50
+      }
+    },
+    {
+      "name": "three_item_batch_calibration",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "a": 0.6666666666666666,
+        "b": 0.3333333333333333,
+        "c": 0.6666666666666666
+      }
+    },
+    {
+      "name": "single_and_batch_outcomes_same_cycle",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "single": 0.6666666666666666,
+        "batch": 0.3333333333333333
+      }
+    },
+    {
+      "name": "two_thousand_cycle_bound",
+      "category": "scalability",
+      "pass": true,
+      "detail": {
+        "trace": 1000,
+        "memory": 1000,
+        "cycle": 2000
+      }
+    },
+    {
+      "name": "recent_trace_survives_compaction",
+      "category": "scalability",
+      "pass": true,
+      "detail": {
+        "tail": [
+          {
+            "cycle": 299,
+            "stage": "decision",
+            "payload": {
+              "action": null,
+              "reason": "no candidate action",
+              "evidence": [
+                "cycle:299",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          },
+          {
+            "cycle": 300,
+            "stage": "observation",
+            "payload": {
+              "count": 1,
+              "items": [
+                "obs-299"
+              ]
+            }
+          },
+          {
+            "cycle": 300,
+            "stage": "inference",
+            "payload": []
+          },
+          {
+            "cycle": 300,
+            "stage": "planning",
+            "payload": {
+              "path": [],
+              "cost": Infinity
+            }
+          },
+          {
+            "cycle": 300,
+            "stage": "workspace",
+            "payload": {
+              "attention": null,
+              "conflicts": []
+            }
+          },
+          {
+            "cycle": 300,
+            "stage": "decision",
+            "payload": {
+              "action": null,
+              "reason": "no candidate action",
+              "evidence": [
+                "cycle:300",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "deep_snapshot_integrity_second_shape",
+      "category": "integrity",
+      "pass": true,
+      "detail": {
+        "internal": [
+          {
+            "x": [
+              {
+                "y": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "context_latest_override_persists",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "context": "B"
+      }
+    },
+    {
+      "name": "rapid_environment_flip_again",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "new",
+        "reason": "self-challenge won combined learned-and-current evidence"
+      }
+    },
+    {
+      "name": "stable_environment_resists_noise_again",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "good",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "recursive_logic_with_unrelated_plan",
+      "category": "transfer",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "ancestor",
+              "a",
+              "d"
+            ],
+            "value": true
+          }
+        ],
+        "plan": [
+          "s",
+          "x",
+          "g"
+        ]
+      }
+    },
+    {
+      "name": "self_report_consistency_final",
+      "category": "report",
+      "pass": true,
+      "detail": {
+        "decision": "one",
+        "last_decision": {
+          "action": "one",
+          "reason": "adaptive policy",
+          "evidence": [
+            "cycle:1",
+            "inferences:0",
+            "plan_length:0",
+            "conflicts:0"
+          ]
+        },
+        "cycle": 1,
+        "trace": [
+          {
+            "cycle": 1,
+            "stage": "observation",
+            "payload": {
+              "count": 1,
+              "items": [
+                "report"
+              ]
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "inference",
+            "payload": []
+          },
+          {
+            "cycle": 1,
+            "stage": "planning",
+            "payload": {
+              "path": [],
+              "cost": Infinity
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "workspace",
+            "payload": {
+              "attention": null,
+              "conflicts": []
+            }
+          },
+          {
+            "cycle": 1,
+            "stage": "challenge",
+            "payload": null
+          },
+          {
+            "cycle": 1,
+            "stage": "decision",
+            "payload": {
+              "action": "one",
+              "reason": "adaptive policy",
+              "evidence": [
+                "cycle:1",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          }
+        ],
+        "architecture": {
+          "state_mode": "state",
+          "arbitration": "adaptive",
+          "reflection": true,
+          "trace_mode": "full"
+        }
+      }
+    },
+    {
+      "name": "no_action_does_not_invent_choice",
+      "category": "integrity",
+      "pass": true,
+      "detail": {
+        "action": null,
+        "decision": {
+          "action": null,
+          "reason": "no candidate action",
+          "evidence": [
+            "cycle:1",
+            "inferences:0",
+            "plan_length:0",
+            "conflicts:0"
+          ]
+        }
+      }
+    },
+    {
+      "name": "unsupported_inference_still_refused",
+      "category": "logic",
+      "pass": true,
+      "detail": {
+        "inference": {
+          "query": [
+            "blue",
+            "x"
+          ],
+          "value": false
+        },
+        "action": "safe"
+      }
+    },
+    {
+      "name": "environment_boundary_final",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "capability": "remote",
+        "origin": "remote_service",
+        "detail": "down",
+        "boundary": "environment"
+      }
+    }
+  ],
+  "stopping_rule": {
+    "threshold": 0.9,
+    "condition": "stop iterative repair if unseen accuracy >= 0.90 and no core category is catastrophically failing; retain remaining edge failures for next independent research cycle"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "suite": "v0.20 external holdout C (created after record-only meta-arbitration promotion)",
+  "passed": 11,
+  "total": 12,
+  "accuracy": 0.9166666666666666,
+  "results": [
+    {
+      "name": "rapid_regime_shift_uses_current_evidence",
+      "pass": false,
+      "detail": {
+        "action": "A",
+        "reason": "adaptive policy after feedback",
+        "challenge": {
+          "source": "current_sensor",
+          "topic": "action",
+          "value": "B",
+          "confidence": 1.0,
+          "urgency": 1.0,
+          "action": "B"
+        }
+      }
+    },
+    {
+      "name": "stable_learned_reward_resists_conflicting_noise",
+      "pass": true,
+      "detail": {
+        "action": "A",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "eventual_reward_reversal_recovery",
+      "pass": true,
+      "detail": {
+        "action": "R"
+      }
+    },
+    {
+      "name": "counterproposal_is_reportable",
+      "pass": true,
+      "detail": {
+        "challenge": {
+          "source": "b",
+          "topic": "q",
+          "value": "y",
+          "confidence": 0.8,
+          "urgency": 0.7,
+          "action": "y"
+        },
+        "stages": [
+          "observation",
+          "inference",
+          "planning",
+          "workspace",
+          "challenge",
+          "decision"
+        ]
+      }
+    },
+    {
+      "name": "separate_context_models",
+      "pass": true,
+      "detail": {
+        "red": "x",
+        "blue": "y"
+      }
+    },
+    {
+      "name": "logic_to_action_integration_novel_predicate",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "connected",
+              "u",
+              "w"
+            ],
+            "value": true
+          }
+        ],
+        "action": "accept"
+      }
+    },
+    {
+      "name": "trace_spans_multiple_cycles",
+      "pass": true,
+      "detail": {
+        "cycles": [
+          65,
+          66,
+          67,
+          68
+        ],
+        "state_cycle": 68
+      }
+    },
+    {
+      "name": "structured_observation_preserved",
+      "pass": true,
+      "detail": {
+        "items": [
+          {
+            "kind": "novel",
+            "value": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "no_path_does_not_invent_action",
+      "pass": true,
+      "detail": {
+        "plan": [],
+        "action": null
+      }
+    },
+    {
+      "name": "explanation_matches_current_self_state",
+      "pass": true,
+      "detail": {
+        "decision": "only",
+        "cycle": 71
+      }
+    },
+    {
+      "name": "self_environment_boundary_survives_integration",
+      "pass": true,
+      "detail": {
+        "capability": "web",
+        "origin": "network",
+        "detail": "offline",
+        "boundary": "environment"
+      }
+    },
+    {
+      "name": "intelligence_transfer_still_available",
+      "pass": true,
+      "detail": {
+        "pred": 31.0
+      }
+    }
+  ]
+}

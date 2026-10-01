@@ -1,0 +1,36 @@
+name: Verify DIGITAL_MIND module
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Unit and integration tests
+        run: python -m unittest discover -s tests -v
+      - name: Original v0.28 test scripts
+        run: python tools/verify_legacy.py
+      - name: Exercise the callable module
+        run: python examples/use_as_module.py --report examples/module_demo.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: digital-mind-verification
+          path: |
+            examples/module_demo.json
+            examples/legacy_test_results.json

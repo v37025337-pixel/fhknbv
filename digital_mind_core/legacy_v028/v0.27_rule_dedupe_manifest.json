@@ -1,0 +1,37 @@
+{
+  "category": "memory_edge",
+  "winner": {
+    "variant": "equality",
+    "rule_count": 1,
+    "rule_works": true,
+    "pass": true,
+    "complexity": 1.0,
+    "score": 1.99
+  },
+  "candidates": [
+    {
+      "variant": "equality",
+      "rule_count": 1,
+      "rule_works": true,
+      "pass": true,
+      "complexity": 1.0,
+      "score": 1.99
+    },
+    {
+      "variant": "repr_key",
+      "rule_count": 1,
+      "rule_works": true,
+      "pass": true,
+      "complexity": 1.1,
+      "score": 1.989
+    },
+    {
+      "variant": "normalized_tuple",
+      "rule_count": 1,
+      "rule_works": true,
+      "pass": true,
+      "complexity": 1.4,
+      "score": 1.986
+    }
+  ]
+}

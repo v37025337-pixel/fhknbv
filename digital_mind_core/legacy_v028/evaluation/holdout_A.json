@@ -1,0 +1,223 @@
+{
+  "suite": "v0.19 external holdout A (not used in first architecture selection)",
+  "baseline_v018": {
+    "passed": 0,
+    "total": 12,
+    "accuracy": 0.0,
+    "results": [
+      {
+        "name": "native_process",
+        "pass": false,
+        "detail": {
+          "has_process": false,
+          "has_cycle": false
+        }
+      },
+      {
+        "name": "shared_state_identity",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "semantic_reason_trace",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "cross_module_conflict_detection",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "stronger_signal_controls_attention",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "decision_provenance_to_self_model",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "self_report_consistency",
+        "pass": false,
+        "detail": "no explain"
+      },
+      {
+        "name": "feedback_changes_future_choice",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "integrated_self_challenge",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "trace_preserves_observation_content",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "integrated_counterfactual_block",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "logic_and_planning_compete_in_workspace",
+        "pass": false,
+        "detail": "no process"
+      }
+    ]
+  },
+  "selected_v019": {
+    "passed": 9,
+    "total": 12,
+    "accuracy": 0.75,
+    "results": [
+      {
+        "name": "native_process",
+        "pass": true,
+        "detail": {
+          "has_process": true,
+          "has_cycle": true
+        }
+      },
+      {
+        "name": "shared_state_identity",
+        "pass": true,
+        "detail": {
+          "cycle": 1
+        }
+      },
+      {
+        "name": "semantic_reason_trace",
+        "pass": true,
+        "detail": {
+          "stages": [
+            "decision",
+            "inference",
+            "observation",
+            "planning",
+            "workspace"
+          ]
+        }
+      },
+      {
+        "name": "cross_module_conflict_detection",
+        "pass": true,
+        "detail": {
+          "conflicts": [
+            {
+              "topic": "choice",
+              "sources": [
+                "p1",
+                "p2"
+              ],
+              "values": [
+                "left",
+                "right"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "stronger_signal_controls_attention",
+        "pass": true,
+        "detail": {
+          "action": "right",
+          "reason": "workspace attention"
+        }
+      },
+      {
+        "name": "decision_provenance_to_self_model",
+        "pass": true,
+        "detail": {
+          "action": "A",
+          "reason": "first viable coordinated action",
+          "evidence": [
+            "cycle:5",
+            "inferences:0",
+            "plan_length:0",
+            "conflicts:0"
+          ]
+        }
+      },
+      {
+        "name": "self_report_consistency",
+        "pass": true,
+        "detail": {
+          "decision": "A",
+          "cycle": 5,
+          "trace_len": 25
+        }
+      },
+      {
+        "name": "feedback_changes_future_choice",
+        "pass": false,
+        "detail": {
+          "action": "L",
+          "arch": {
+            "state_mode": "state",
+            "arbitration": "attention",
+            "reflection": false,
+            "trace_mode": "compact"
+          }
+        }
+      },
+      {
+        "name": "integrated_self_challenge",
+        "pass": false,
+        "detail": {
+          "new_stages": [
+            "observation",
+            "inference",
+            "planning",
+            "workspace",
+            "decision"
+          ],
+          "challenge": null
+        }
+      },
+      {
+        "name": "trace_preserves_observation_content",
+        "pass": false,
+        "detail": {
+          "items": null
+        }
+      },
+      {
+        "name": "integrated_counterfactual_block",
+        "pass": true,
+        "detail": {
+          "plan": [
+            "S",
+            "B",
+            "G"
+          ]
+        }
+      },
+      {
+        "name": "logic_and_planning_compete_in_workspace",
+        "pass": true,
+        "detail": {
+          "action": "logic-go",
+          "conflicts": [
+            {
+              "topic": "action",
+              "sources": [
+                "thinking",
+                "logic"
+              ],
+              "values": [
+                "Y",
+                "logic-go"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

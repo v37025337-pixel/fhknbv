@@ -1,0 +1,52 @@
+test_corrupt_store_cannot_partially_publish (test_cognition.CognitionTests.test_corrupt_store_cannot_partially_publish) ... ok
+test_future_proposal_uses_synthesized_rule_and_changes_choice (test_cognition.CognitionTests.test_future_proposal_uses_synthesized_rule_and_changes_choice) ... ok
+test_generated_mechanism_survives_new_core_instance (test_cognition.CognitionTests.test_generated_mechanism_survives_new_core_instance) ... ok
+test_legacy_data_adapter_feeds_shared_logic (test_cognition.CognitionTests.test_legacy_data_adapter_feeds_shared_logic) ... ok
+test_legacy_mechanism_is_executed_by_l0 (test_cognition.CognitionTests.test_legacy_mechanism_is_executed_by_l0) ... ok
+test_logic_request_reaches_l0_replanning (test_cognition.CognitionTests.test_logic_request_reaches_l0_replanning) ... ok
+test_rejected_holdout_is_not_registered (test_cognition.CognitionTests.test_rejected_holdout_is_not_registered) ... ok
+test_runtime_counterexample_rolls_back_underfit_rule (test_cognition.CognitionTests.test_runtime_counterexample_rolls_back_underfit_rule) ... ok
+test_world_cycle_reaches_all_three_branches (test_cognition.CognitionTests.test_world_cycle_reaches_all_three_branches) ... ok
+test_exact_reference_matches_exhaustive_search (test_components.ComponentTests.test_exact_reference_matches_exhaustive_search) ... ok
+test_goal_deadline_and_completion (test_components.ComponentTests.test_goal_deadline_and_completion) ... ok
+test_invalid_spectral_fraction_rejected (test_components.ComponentTests.test_invalid_spectral_fraction_rejected) ... ok
+test_model_remembers_actual_delayed_action (test_components.ComponentTests.test_model_remembers_actual_delayed_action) ... ok
+test_short_spectral_data_rejected (test_components.ComponentTests.test_short_spectral_data_rejected) ... ok
+test_continuation_keeps_world_and_cognitive_clocks_aligned (test_kernel.KernelTests.test_continuation_keeps_world_and_cognitive_clocks_aligned) ... ok
+test_integration_reaches_real_l0_learning_and_memory (test_kernel.KernelTests.test_integration_reaches_real_l0_learning_and_memory) ... ok
+test_l0_current_target_cannot_change_current_prediction (test_kernel.KernelTests.test_l0_current_target_cannot_change_current_prediction) ... ok
+test_l0_decisions_change_with_surprise_and_clocks (test_kernel.KernelTests.test_l0_decisions_change_with_surprise_and_clocks) ... ok
+test_latest_question_can_be_explained (test_kernel.KernelTests.test_latest_question_can_be_explained) ... ok
+test_new_goal_is_replanned_even_when_episode_already_selected_it (test_kernel.KernelTests.test_new_goal_is_replanned_even_when_episode_already_selected_it) ... ok
+test_no_effect_experiment_is_inconclusive (test_kernel.KernelTests.test_no_effect_experiment_is_inconclusive) ... ok
+test_one_randomized_experiment_has_one_fixed_analysis (test_kernel.KernelTests.test_one_randomized_experiment_has_one_fixed_analysis) ... ok
+test_planning_benchmark_uses_equal_executed_horizons (test_kernel.KernelTests.test_planning_benchmark_uses_equal_executed_horizons) ... ok
+test_prediction_is_read_only (test_kernel.KernelTests.test_prediction_is_read_only) ... ok
+test_shared_planner_matches_independent_exact_answer (test_kernel.KernelTests.test_shared_planner_matches_independent_exact_answer) ... ok
+test_unvalidated_l0_correction_stays_in_shadow (test_kernel.KernelTests.test_unvalidated_l0_correction_stays_in_shadow) ... ok
+test_modified_replay_is_detected (test_persistence.PersistenceTests.test_modified_replay_is_detected) ... ok
+test_replay_restores_and_continues_real_learning (test_persistence.PersistenceTests.test_replay_restores_and_continues_real_learning) ... ok
+test_calls_share_one_world_instance (test_tool_module.ToolModuleTests.test_calls_share_one_world_instance) ... ok
+test_invalid_requests_do_not_advance_world (test_tool_module.ToolModuleTests.test_invalid_requests_do_not_advance_world) ... ok
+test_logic_result_is_strict_json_without_changing_legacy_trace (test_tool_module.ToolModuleTests.test_logic_result_is_strict_json_without_changing_legacy_trace) ... ok
+test_logic_uses_persistent_state_across_requests (test_tool_module.ToolModuleTests.test_logic_uses_persistent_state_across_requests) ... ok
+test_mechanism_uses_l0 (test_tool_module.ToolModuleTests.test_mechanism_uses_l0) ... ok
+test_nonfinite_json_is_rejected (test_tool_module.ToolModuleTests.test_nonfinite_json_is_rejected) ... ok
+test_oversized_request_is_drained_before_next_request (test_tool_module.ToolModuleTests.test_oversized_request_is_drained_before_next_request) ... ok
+test_real_cli_accepts_multiple_requests (test_tool_module.ToolModuleTests.test_real_cli_accepts_multiple_requests) ... ok
+test_stream_recovers_after_error_and_preserves_request_ids (test_tool_module.ToolModuleTests.test_stream_recovers_after_error_and_preserves_request_ids) ... ok
+test_external_tasks_do_not_silently_disappear_from_replay (test_unified_persistence.UnifiedPersistenceTests.test_external_tasks_do_not_silently_disappear_from_replay) ... ok
+test_imported_mechanisms_are_part_of_replay_initial_conditions (test_unified_persistence.UnifiedPersistenceTests.test_imported_mechanisms_are_part_of_replay_initial_conditions) ... ok
+test_replay_recreates_generated_rule_and_subsequent_choices (test_unified_persistence.UnifiedPersistenceTests.test_replay_recreates_generated_rule_and_subsequent_choices) ... ok
+test_exported_equality_agrees_with_interpreter (test_v028_regressions.V028RegressionTests.test_exported_equality_agrees_with_interpreter) ... ok
+test_exported_integer_arithmetic_agrees_with_float_interpreter (test_v028_regressions.V028RegressionTests.test_exported_integer_arithmetic_agrees_with_float_interpreter) ... ok
+test_failed_cegis_is_not_reported_found (test_v028_regressions.V028RegressionTests.test_failed_cegis_is_not_reported_found) ... ok
+test_other_public_result_fields_are_detached (test_v028_regressions.V028RegressionTests.test_other_public_result_fields_are_detached) ... ok
+test_persistent_rule_snapshot_cannot_change_live_rule (test_v028_regressions.V028RegressionTests.test_persistent_rule_snapshot_cannot_change_live_rule) ... ok
+test_repeated_variable_keeps_none_binding (test_v028_regressions.V028RegressionTests.test_repeated_variable_keeps_none_binding) ... ok
+test_user_rules_are_detached_on_ingress (test_v028_regressions.V028RegressionTests.test_user_rules_are_detached_on_ingress) ... ok
+
+----------------------------------------------------------------------
+Ran 47 tests in 6.679s
+
+OK

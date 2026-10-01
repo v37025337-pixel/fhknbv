@@ -1,0 +1,17 @@
+{
+  "variant": "facts_context",
+  "passed": 2,
+  "total": 2,
+  "accuracy": 1.0,
+  "complexity": 1.2,
+  "rows": [
+    [
+      "facts",
+      true
+    ],
+    [
+      "context",
+      true
+    ]
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "suite": "v0.19 external holdout B (created after refinement/promotion)",
+  "baseline_v018": {
+    "passed": 0,
+    "total": 14,
+    "accuracy": 0.0,
+    "results": [
+      {
+        "name": "three_cycle_temporal_continuity",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "recursive_reasoning_plus_replanning",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "reflect_without_unnecessary_flip",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "reward_regime_reversal_adaptation",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "cross_context_policy_separation",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "full_observation_trace_fidelity",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "graceful_no_action_state",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "unreachable_goal_graceful",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "three_way_conflict_trace",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "reasoning_overrides_weaker_plan_signal",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "learned_policy_can_override_salient_signal_with_feedback",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "returned_state_top_level_isolation",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "integrated_event_memory_growth",
+        "pass": false,
+        "detail": "no process"
+      },
+      {
+        "name": "explanation_links_action_evidence_and_cycle",
+        "pass": false,
+        "detail": "no process"
+      }
+    ]
+  },
+  "refined_v019": {
+    "passed": 13,
+    "total": 14,
+    "accuracy": 0.9285714285714286,
+    "results": [
+      {
+        "name": "three_cycle_temporal_continuity",
+        "pass": true,
+        "detail": {
+          "ids": [
+            1,
+            2,
+            3
+          ],
+          "max_trace_cycle": 3
+        }
+      },
+      {
+        "name": "recursive_reasoning_plus_replanning",
+        "pass": true,
+        "detail": {
+          "inferences": [
+            {
+              "query": [
+                "ancestor",
+                "a",
+                "d"
+              ],
+              "value": true
+            }
+          ],
+          "plan": [
+            "S",
+            "B",
+            "G"
+          ]
+        }
+      },
+      {
+        "name": "reflect_without_unnecessary_flip",
+        "pass": true,
+        "detail": {
+          "action": "go",
+          "challenge": {
+            "source": "critic",
+            "topic": "move",
+            "value": "wait",
+            "confidence": 0.75,
+            "urgency": 0.7,
+            "action": "wait"
+          }
+        }
+      },
+      {
+        "name": "reward_regime_reversal_adaptation",
+        "pass": true,
+        "detail": {
+          "before_flip": "B",
+          "after_flip": "A"
+        }
+      },
+      {
+        "name": "cross_context_policy_separation",
+        "pass": true,
+        "detail": {
+          "day": "L",
+          "night": "R"
+        }
+      },
+      {
+        "name": "full_observation_trace_fidelity",
+        "pass": true,
+        "detail": {
+          "items": [
+            {
+              "novel": "payload",
+              "id": 731
+            }
+          ],
+          "arch": {
+            "state_mode": "state",
+            "arbitration": "adaptive",
+            "reflection": true,
+            "trace_mode": "full"
+          }
+        }
+      },
+      {
+        "name": "graceful_no_action_state",
+        "pass": true,
+        "detail": {
+          "result": null,
+          "decision": {
+            "action": null,
+            "reason": "no candidate action",
+            "evidence": [
+              "cycle:51",
+              "inferences:0",
+              "plan_length:0",
+              "conflicts:0"
+            ]
+          }
+        }
+      },
+      {
+        "name": "unreachable_goal_graceful",
+        "pass": true,
+        "detail": {
+          "plan": [],
+          "action": null
+        }
+      },
+      {
+        "name": "three_way_conflict_trace",
+        "pass": true,
+        "detail": {
+          "conflicts": [
+            {
+              "topic": "policy",
+              "sources": [
+                "one",
+                "two",
+                "three"
+              ],
+              "values": [
+                "x",
+                "y",
+                "z"
+              ]
+            }
+          ],
+          "stages": [
+            "workspace",
+            "decision",
+            "observation",
+            "inference",
+            "planning",
+            "workspace",
+            "challenge",
+            "decision"
+          ]
+        }
+      },
+      {
+        "name": "reasoning_overrides_weaker_plan_signal",
+        "pass": true,
+        "detail": {
+          "action": "reasoned",
+          "conflicts": [
+            {
+              "topic": "action",
+              "sources": [
+                "thinking",
+                "logic"
+              ],
+              "values": [
+                "Q",
+                "reasoned"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "learned_policy_can_override_salient_signal_with_feedback",
+        "pass": false,
+        "detail": {
+          "action": "fast",
+          "reason": "self-challenge found stronger alternative"
+        }
+      },
+      {
+        "name": "returned_state_top_level_isolation",
+        "pass": true,
+        "detail": {
+          "internal_cycle": 61,
+          "returned_cycle": -999
+        }
+      },
+      {
+        "name": "integrated_event_memory_growth",
+        "pass": true,
+        "detail": {
+          "before": 360,
+          "after": 365,
+          "tail": [
+            "workspace",
+            "challenge",
+            "decision",
+            "observation",
+            "inference",
+            "planning",
+            "workspace",
+            "decision"
+          ]
+        }
+      },
+      {
+        "name": "explanation_links_action_evidence_and_cycle",
+        "pass": true,
+        "detail": {
+          "last_decision": {
+            "action": "only",
+            "reason": "adaptive policy",
+            "evidence": [
+              "cycle:63",
+              "inferences:0",
+              "plan_length:0",
+              "conflicts:0"
+            ]
+          },
+          "cycle": 63
+        }
+      }
+    ]
+  },
+  "notice": "Operational integration test only; not evidence of subjective consciousness or general intelligence."
+}

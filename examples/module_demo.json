@@ -1,0 +1,39 @@
+{
+  "version": "0.2.1",
+  "simulation_steps": 96,
+  "cognitive_cycles": 96,
+  "evolution": {
+    "enabled": true,
+    "active": true,
+    "attempts": 1,
+    "planning_examples": 25,
+    "l0_calls": 9,
+    "hold_selections": 0,
+    "model_predicted_cost_saved": 0.0,
+    "label_source": "frozen world-model rollout costs; not real-world counterfactual outcomes",
+    "events": [
+      {
+        "event": "admitted",
+        "name": "choose_plan_cost",
+        "status": "FOUND",
+        "source": "def choose_plan_cost(history_cost, current_cost):\n    return min(float(history_cost), float(current_cost))\n",
+        "training_count": 12,
+        "validation_count": 4,
+        "holdout_count": 6,
+        "explanation": "take minimum of (use input history_cost) and (use input current_cost)"
+      }
+    ]
+  },
+  "logic_query": {
+    "query": [
+      "needs_review",
+      "world_prediction"
+    ],
+    "value": true
+  },
+  "mechanism_call": {
+    "name": "choose_plan_cost",
+    "value": 2.0,
+    "execution": "L0-Control-IR"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "mechanism": "stability_switch",
+  "origin": "v0.28 Mechanism Genesis",
+  "source_sha256": "b485b2953e5d8e483b846ca388b47cb610a7973f9701b4f9471ce4acde5d40f7",
+  "synthesis_rounds": 7,
+  "counterexamples_added": 6,
+  "training_and_counterexample_validation": "PASS",
+  "post_synthesis_hidden_holdout": "10/10"
+}

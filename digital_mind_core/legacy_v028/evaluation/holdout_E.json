@@ -1,0 +1,281 @@
+{
+  "suite": "v0.24 external holdout E (created after memory/scalability/integrity/self-loop repairs)",
+  "passed": 14,
+  "total": 16,
+  "accuracy": 0.875,
+  "by_category": {
+    "memory": {
+      "passed": 3,
+      "total": 4
+    },
+    "scalability": {
+      "passed": 2,
+      "total": 2
+    },
+    "integrity": {
+      "passed": 1,
+      "total": 1
+    },
+    "self_model": {
+      "passed": 3,
+      "total": 4
+    },
+    "meta": {
+      "passed": 2,
+      "total": 2
+    },
+    "transfer": {
+      "passed": 1,
+      "total": 1
+    },
+    "report": {
+      "passed": 1,
+      "total": 1
+    },
+    "logic": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "results": [
+    {
+      "name": "persistent_fact_deduplication",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "facts": [
+          [
+            "k",
+            "a"
+          ]
+        ]
+      }
+    },
+    {
+      "name": "explicit_rule_persistence",
+      "category": "memory",
+      "pass": false,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "reach",
+              "a",
+              "c"
+            ],
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "persistent_context_can_be_overridden",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "context": "two"
+      }
+    },
+    {
+      "name": "nonpersistent_facts_do_not_leak",
+      "category": "memory",
+      "pass": true,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "temp",
+              "x"
+            ],
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "bounded_trace_after_1600_cycles",
+      "category": "scalability",
+      "pass": true,
+      "detail": {
+        "trace": 1000,
+        "memory": 1000,
+        "cycle": 1600
+      }
+    },
+    {
+      "name": "bounded_trace_keeps_recent_information",
+      "category": "scalability",
+      "pass": true,
+      "detail": {
+        "tail": [
+          {
+            "cycle": 399,
+            "stage": "decision",
+            "payload": {
+              "action": null,
+              "reason": "no candidate action",
+              "evidence": [
+                "cycle:399",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          },
+          {
+            "cycle": 400,
+            "stage": "observation",
+            "payload": {
+              "count": 1,
+              "items": [
+                "m399"
+              ]
+            }
+          },
+          {
+            "cycle": 400,
+            "stage": "inference",
+            "payload": []
+          },
+          {
+            "cycle": 400,
+            "stage": "planning",
+            "payload": {
+              "path": [],
+              "cost": Infinity
+            }
+          },
+          {
+            "cycle": 400,
+            "stage": "workspace",
+            "payload": {
+              "attention": null,
+              "conflicts": []
+            }
+          },
+          {
+            "cycle": 400,
+            "stage": "decision",
+            "payload": {
+              "action": null,
+              "reason": "no candidate action",
+              "evidence": [
+                "cycle:400",
+                "inferences:0",
+                "plan_length:0",
+                "conflicts:0"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "deep_nested_snapshot_isolation",
+      "category": "integrity",
+      "pass": true,
+      "detail": {
+        "internal": [
+          {
+            "a": {
+              "b": [
+                1,
+                2,
+                3
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "self_model_updates_from_mixed_outcomes",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "estimate": 0.6666666666666666
+      }
+    },
+    {
+      "name": "batch_outcome_self_calibration",
+      "category": "self_model",
+      "pass": false,
+      "detail": {
+        "reader": 0.5,
+        "writer": 0.5
+      }
+    },
+    {
+      "name": "incomplete_outcome_is_ignored",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "estimate": 0.5
+      }
+    },
+    {
+      "name": "hybrid_meta_arbitration_generalizes",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "new",
+        "reason": "self-challenge won combined learned-and-current evidence"
+      }
+    },
+    {
+      "name": "hybrid_meta_arbitration_resists_noise",
+      "category": "meta",
+      "pass": true,
+      "detail": {
+        "action": "good",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "novel_end_to_end_transfer",
+      "category": "transfer",
+      "pass": true,
+      "detail": {
+        "action": "act",
+        "plan": [
+          "s",
+          "m",
+          "g"
+        ]
+      }
+    },
+    {
+      "name": "self_report_after_all_layers",
+      "category": "report",
+      "pass": true,
+      "detail": {
+        "decision": "only",
+        "trace_len": 6
+      }
+    },
+    {
+      "name": "self_environment_boundary_bidirectional",
+      "category": "self_model",
+      "pass": true,
+      "detail": {
+        "internal": "self",
+        "external": "environment"
+      }
+    },
+    {
+      "name": "logic_contradiction_survives_full_integration",
+      "category": "logic",
+      "pass": true,
+      "detail": {
+        "contradictions": [
+          [
+            "safe",
+            [
+              "x"
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

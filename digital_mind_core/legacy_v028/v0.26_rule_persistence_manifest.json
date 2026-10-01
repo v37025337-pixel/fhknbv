@@ -1,0 +1,33 @@
+{
+  "category": "memory",
+  "winner": {
+    "variant": "rules_only",
+    "rule_persistence": true,
+    "fact_regression": true,
+    "complexity": 1.0,
+    "score": 2.99
+  },
+  "candidates": [
+    {
+      "variant": "rules_only",
+      "rule_persistence": true,
+      "fact_regression": true,
+      "complexity": 1.0,
+      "score": 2.99
+    },
+    {
+      "variant": "rules_dedupe",
+      "rule_persistence": true,
+      "fact_regression": true,
+      "complexity": 1.2,
+      "score": 2.988
+    },
+    {
+      "variant": "rules_and_context_guard",
+      "rule_persistence": true,
+      "fact_regression": true,
+      "complexity": 1.15,
+      "score": 2.9885
+    }
+  ]
+}

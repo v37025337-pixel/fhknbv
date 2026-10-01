@@ -1,0 +1,145 @@
+{
+  "version": "v0.28",
+  "architecture": "Mechanism Genesis + CEGIS + persisted generated mechanism",
+  "persistent_generated_mechanism": {
+    "name": "stability_switch",
+    "source": {
+      "status": "PERSISTED",
+      "source_sha256": "b485b2953e5d8e483b846ca388b47cb610a7973f9701b4f9471ce4acde5d40f7",
+      "cost": 10,
+      "counterexamples_added": 6
+    },
+    "holdout_H": {
+      "suite": "v0.28 post-promotion holdout H",
+      "passed": 10,
+      "total": 10,
+      "accuracy": 1.0,
+      "results": [
+        {
+          "history": 7.0,
+          "current": 7.99,
+          "expected": 7.0,
+          "observed": 7.0,
+          "pass": true
+        },
+        {
+          "history": 7.0,
+          "current": 8.01,
+          "expected": 8.01,
+          "observed": 8.01,
+          "pass": true
+        },
+        {
+          "history": -7.0,
+          "current": -7.99,
+          "expected": -7.0,
+          "observed": -7.0,
+          "pass": true
+        },
+        {
+          "history": -7.0,
+          "current": -8.01,
+          "expected": -8.01,
+          "observed": -8.01,
+          "pass": true
+        },
+        {
+          "history": 0.25,
+          "current": 1.25,
+          "expected": 0.25,
+          "observed": 0.25,
+          "pass": true
+        },
+        {
+          "history": 0.25,
+          "current": 1.251,
+          "expected": 1.251,
+          "observed": 1.251,
+          "pass": true
+        },
+        {
+          "history": 50.0,
+          "current": 49.0,
+          "expected": 50.0,
+          "observed": 50.0,
+          "pass": true
+        },
+        {
+          "history": 50.0,
+          "current": 48.999,
+          "expected": 48.999,
+          "observed": 48.999,
+          "pass": true
+        },
+        {
+          "history": -0.5,
+          "current": 0.5,
+          "expected": -0.5,
+          "observed": -0.5,
+          "pass": true
+        },
+        {
+          "history": -0.5,
+          "current": 0.501,
+          "expected": 0.501,
+          "observed": 0.501,
+          "pass": true
+        }
+      ]
+    }
+  },
+  "second_unseen_synthesis": {
+    "status": "FOUND",
+    "source": "def novel_composition(x, y):\n    return (y + (x * x))\n",
+    "cost": 5,
+    "elapsed_s": 2.231,
+    "holdout": {
+      "passed": 4,
+      "total": 4,
+      "accuracy": 1.0,
+      "results": [
+        {
+          "x": 4,
+          "y": 10,
+          "expected": 26,
+          "observed": 26.0,
+          "pass": true
+        },
+        {
+          "x": -3,
+          "y": 0,
+          "expected": 9,
+          "observed": 9.0,
+          "pass": true
+        },
+        {
+          "x": 5,
+          "y": -5,
+          "expected": 20,
+          "observed": 20.0,
+          "pass": true
+        },
+        {
+          "x": 7,
+          "y": 2,
+          "expected": 51,
+          "observed": 51.0,
+          "pass": true
+        }
+      ]
+    }
+  },
+  "unsupported_domain_test": {
+    "status": "NO_MECHANISM_FOUND",
+    "explanation": "current synthesis grammar supports finite numeric scalar examples only"
+  },
+  "compile": {
+    "pass": true,
+    "compiled_python_files": 36,
+    "failures": {}
+  },
+  "interpretation": {
+    "what_changed": "The kernel no longer needs a named mutation candidate for these scalar mechanisms. It searches a generic expression grammar and refines accidental solutions using counterexamples.",
+    "important_limit": "This is still bounded program synthesis over a finite pure-expression grammar. It is not unrestricted invention of arbitrary algorithms, architectures, I/O systems, or subjective consciousness."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "strategy": "record_only",
+  "accuracy": 1.0,
+  "passed": 5,
+  "total": 5,
+  "failed": [],
+  "complexity": 1.0,
+  "results": [
+    {
+      "name": "protect_strong_learned_preference",
+      "pass": true,
+      "detail": {
+        "action": "safe",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "allow_overwhelming_current_evidence",
+      "pass": true,
+      "detail": {
+        "action": "B",
+        "reason": "workspace attention"
+      }
+    },
+    {
+      "name": "fresh_context_uses_current_evidence",
+      "pass": true,
+      "detail": {
+        "action": "right"
+      }
+    },
+    {
+      "name": "preserve_counterproposal_trace",
+      "pass": true,
+      "detail": {
+        "stages": [
+          "observation",
+          "inference",
+          "planning",
+          "workspace",
+          "challenge",
+          "decision"
+        ]
+      }
+    },
+    {
+      "name": "no_cross_module_regression",
+      "pass": true,
+      "detail": {
+        "action": "go"
+      }
+    }
+  ]
+}

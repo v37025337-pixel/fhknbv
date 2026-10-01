@@ -1,0 +1,62 @@
+{
+  "strategy": "hybrid_evidence",
+  "passed": 5,
+  "total": 5,
+  "accuracy": 1.0,
+  "complexity": 1.4,
+  "failed": [],
+  "results": [
+    {
+      "name": "rapid_shift_current_evidence",
+      "pass": true,
+      "detail": {
+        "action": "B",
+        "reason": "self-challenge won combined learned-and-current evidence"
+      }
+    },
+    {
+      "name": "stable_reward_resists_noise",
+      "pass": true,
+      "detail": {
+        "action": "A",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "fresh_context_current_signal",
+      "pass": true,
+      "detail": {
+        "action": "R"
+      }
+    },
+    {
+      "name": "challenge_remains_visible",
+      "pass": true,
+      "detail": {
+        "challenge": {
+          "source": "b",
+          "topic": "x",
+          "value": "R",
+          "confidence": 0.7,
+          "urgency": 0.6,
+          "action": "R"
+        },
+        "stages": [
+          "observation",
+          "inference",
+          "planning",
+          "workspace",
+          "challenge",
+          "decision"
+        ]
+      }
+    },
+    {
+      "name": "cross_module_regression",
+      "pass": true,
+      "detail": {
+        "action": "go"
+      }
+    }
+  ]
+}

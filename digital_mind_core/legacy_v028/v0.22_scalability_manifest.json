@@ -1,0 +1,41 @@
+{
+  "category": "scalability",
+  "winner": {
+    "limit": 1000,
+    "bounded": true,
+    "trace_len": 1000,
+    "memory_len": 1000,
+    "retention_score": 1.0,
+    "score": 11.0,
+    "recent_cycle_count": 20
+  },
+  "candidates": [
+    {
+      "limit": 256,
+      "bounded": true,
+      "trace_len": 256,
+      "memory_len": 256,
+      "retention_score": 0.256,
+      "score": 10.256,
+      "recent_cycle_count": 20
+    },
+    {
+      "limit": 512,
+      "bounded": true,
+      "trace_len": 512,
+      "memory_len": 512,
+      "retention_score": 0.512,
+      "score": 10.512,
+      "recent_cycle_count": 20
+    },
+    {
+      "limit": 1000,
+      "bounded": true,
+      "trace_len": 1000,
+      "memory_len": 1000,
+      "retention_score": 1.0,
+      "score": 11.0,
+      "recent_cycle_count": 20
+    }
+  ]
+}

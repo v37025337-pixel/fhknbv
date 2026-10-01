@@ -1,0 +1,81 @@
+{
+  "elapsed_s": 28.503,
+  "status": "FOUND",
+  "source": "def stability_switch(history, current):\n    return (current if (-1 > (-(abs((history - current))))) else history)\n",
+  "cost": 10,
+  "counterexamples_added": 6,
+  "rounds": 7,
+  "history": [
+    {
+      "round": 1,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (history if (-1 < (-(current))) else abs((-2 + abs(history))))\n",
+      "cost": 11,
+      "training_examples": 6,
+      "validation_passed": 2,
+      "validation_total": 8,
+      "failure_count": 6
+    },
+    {
+      "round": 2,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (history if (-1 < (-(current))) else min(current, max(history, (current - history))))\n",
+      "cost": 13,
+      "training_examples": 7,
+      "validation_passed": 4,
+      "validation_total": 8,
+      "failure_count": 4
+    },
+    {
+      "round": 3,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (min(history, abs(current)) if (-1 < (history - current)) else current)\n",
+      "cost": 11,
+      "training_examples": 8,
+      "validation_passed": 5,
+      "validation_total": 8,
+      "failure_count": 3
+    },
+    {
+      "round": 4,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (min(history, abs(current)) if (-1 < (history - current)) else (history - (-2 - min(current, 0))))\n",
+      "cost": 17,
+      "training_examples": 9,
+      "validation_passed": 4,
+      "validation_total": 8,
+      "failure_count": 4
+    },
+    {
+      "round": 5,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (min(history, abs(current)) if (-1 < (history - current)) else max(history, min(current, (current + current))))\n",
+      "cost": 17,
+      "training_examples": 10,
+      "validation_passed": 6,
+      "validation_total": 8,
+      "failure_count": 2
+    },
+    {
+      "round": 6,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (min(history, max(current, 1)) if (-1 < (history - current)) else max(history, min(current, (current + current))))\n",
+      "cost": 18,
+      "training_examples": 11,
+      "validation_passed": 7,
+      "validation_total": 8,
+      "failure_count": 1
+    },
+    {
+      "round": 7,
+      "status": "FOUND",
+      "source": "def stability_switch(history, current):\n    return (current if (-1 > (-(abs((history - current))))) else history)\n",
+      "cost": 10,
+      "training_examples": 12,
+      "validation_passed": 8,
+      "validation_total": 8,
+      "failure_count": 0
+    }
+  ],
+  "self_model_mechanism_estimate": 0.6666666666666666
+}

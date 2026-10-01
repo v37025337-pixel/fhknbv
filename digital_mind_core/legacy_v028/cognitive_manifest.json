@@ -1,0 +1,21 @@
+{
+  "enabled": [
+    "logic",
+    "thinking",
+    "conscious_integration",
+    "self_model",
+    "intelligence"
+  ],
+  "last_selected": "intelligence",
+  "selection": {
+    "dimension": "intelligence",
+    "score": 0.5,
+    "deficit": 0.5,
+    "tie_break": 0.970353570766747,
+    "priority": 0.5000009703535707
+  },
+  "cycle": 1,
+  "parent_mean_score": 0.9,
+  "parent_revision": "d28807b540de1ac045a36d934c1c6a27f7bbb79f0d56b04fa654387628e1b41b",
+  "operational_notice": "conscious_integration is an operational global-access/conflict-monitoring mechanism, not evidence of subjective consciousness"
+}

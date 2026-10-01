@@ -1,0 +1,168 @@
+{
+  "suite": "v0.20 external holdout D (created after hybrid evidence promotion)",
+  "passed": 6,
+  "total": 12,
+  "accuracy": 0.5,
+  "by_category": {
+    "memory_integration": {
+      "passed": 0,
+      "total": 2
+    },
+    "self_model_loop": {
+      "passed": 1,
+      "total": 3
+    },
+    "scalability": {
+      "passed": 0,
+      "total": 1
+    },
+    "state_integrity": {
+      "passed": 0,
+      "total": 1
+    },
+    "transfer": {
+      "passed": 1,
+      "total": 1
+    },
+    "meta_arbitration": {
+      "passed": 2,
+      "total": 2
+    },
+    "self_report": {
+      "passed": 1,
+      "total": 1
+    },
+    "logic_integrity": {
+      "passed": 1,
+      "total": 1
+    }
+  },
+  "results": [
+    {
+      "name": "explicit_cross_cycle_fact_persistence",
+      "category": "memory_integration",
+      "pass": false,
+      "detail": {
+        "inferences": [
+          {
+            "query": [
+              "knows",
+              "agent",
+              "map"
+            ],
+            "value": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "explicit_context_continuity",
+      "category": "memory_integration",
+      "pass": false,
+      "detail": {
+        "context": "default"
+      }
+    },
+    {
+      "name": "automatic_self_calibration_from_outcomes",
+      "category": "self_model_loop",
+      "pass": false,
+      "detail": {
+        "before": 0.5,
+        "after": 0.5
+      }
+    },
+    {
+      "name": "automatic_self_calibration_on_failure",
+      "category": "self_model_loop",
+      "pass": false,
+      "detail": {
+        "estimate": 0.5
+      }
+    },
+    {
+      "name": "bounded_long_run_cognitive_trace",
+      "category": "scalability",
+      "pass": false,
+      "detail": {
+        "trace_len": 6000,
+        "memory_len": 6000
+      }
+    },
+    {
+      "name": "deep_state_snapshot_isolation",
+      "category": "state_integrity",
+      "pass": false,
+      "detail": {
+        "before": 5,
+        "after": 6
+      }
+    },
+    {
+      "name": "novel_symbol_end_to_end_reasoning",
+      "category": "transfer",
+      "pass": true,
+      "detail": {
+        "action": "advance",
+        "plan": [
+          "m",
+          "n",
+          "o"
+        ]
+      }
+    },
+    {
+      "name": "rapid_shift_after_meta_refinement",
+      "category": "meta_arbitration",
+      "pass": true,
+      "detail": {
+        "action": "new",
+        "reason": "self-challenge won combined learned-and-current evidence"
+      }
+    },
+    {
+      "name": "stable_policy_after_meta_refinement",
+      "category": "meta_arbitration",
+      "pass": true,
+      "detail": {
+        "action": "good",
+        "reason": "adaptive policy after feedback"
+      }
+    },
+    {
+      "name": "late_cycle_self_report_consistency",
+      "category": "self_report",
+      "pass": true,
+      "detail": {
+        "decision": "good",
+        "cycle": 35
+      }
+    },
+    {
+      "name": "integrated_unsupported_inference_refusal",
+      "category": "logic_integrity",
+      "pass": true,
+      "detail": {
+        "inference": {
+          "query": [
+            "blue",
+            "item"
+          ],
+          "value": false
+        },
+        "action": "safe"
+      }
+    },
+    {
+      "name": "self_environment_boundary",
+      "category": "self_model_loop",
+      "pass": true,
+      "detail": {
+        "capability": "vision",
+        "origin": "external_provider",
+        "detail": "missing",
+        "boundary": "environment"
+      }
+    }
+  ]
+}
