@@ -17,6 +17,19 @@ test_drift_detected (test_github_sidecar.GitHubSidecarTests.test_drift_detected)
 test_invalid_binding_rejected (test_github_sidecar.GitHubSidecarTests.test_invalid_binding_rejected) ... ok
 test_synced_binding (test_github_sidecar.GitHubSidecarTests.test_synced_binding) ... ok
 test_unbound_repository (test_github_sidecar.GitHubSidecarTests.test_unbound_repository) ... ok
+test_bad_urls_and_nonpublic_destinations_are_rejected_before_io (test_internet.InternetTests.test_bad_urls_and_nonpublic_destinations_are_rejected_before_io) ... ok
+test_cli_enables_transport_without_fetching_for_status (test_internet.InternetTests.test_cli_enables_transport_without_fetching_for_status) ... ok
+test_disabled_network_never_contacts_transport (test_internet.InternetTests.test_disabled_network_never_contacts_transport) ... ok
+test_gzip_response_is_bounded_after_decompression (test_internet.InternetTests.test_gzip_response_is_bounded_after_decompression) ... ok
+test_html_is_extracted_with_source_and_no_script_execution (test_internet.InternetTests.test_html_is_extracted_with_source_and_no_script_execution) ... ok
+test_json_fields_are_data_in_cognitive_observation (test_internet.InternetTests.test_json_fields_are_data_in_cognitive_observation) ... ok
+test_network_error_does_not_advance_kernel_and_stream_recovers (test_internet.InternetTests.test_network_error_does_not_advance_kernel_and_stream_recovers) ... ok
+test_persistence_failure_does_not_announce_observation (test_internet.InternetTests.test_persistence_failure_does_not_announce_observation) ... ok
+test_plugin_exposes_attached_reader_without_network_on_status (test_internet.InternetTests.test_plugin_exposes_attached_reader_without_network_on_status) ... ok
+test_redirect_to_private_destination_is_rejected (test_internet.InternetTests.test_redirect_to_private_destination_is_rejected) ... ok
+test_response_limits_and_binary_format (test_internet.InternetTests.test_response_limits_and_binary_format) ... ok
+test_sources_survive_restart_and_are_bounded (test_internet.InternetTests.test_sources_survive_restart_and_are_bounded) ... ok
+test_unknown_or_corrupt_memory_is_rejected_without_network (test_internet.InternetTests.test_unknown_or_corrupt_memory_is_rejected_without_network) ... ok
 test_continuation_keeps_world_and_cognitive_clocks_aligned (test_kernel.KernelTests.test_continuation_keeps_world_and_cognitive_clocks_aligned) ... ok
 test_integration_reaches_real_l0_learning_and_memory (test_kernel.KernelTests.test_integration_reaches_real_l0_learning_and_memory) ... ok
 test_l0_current_target_cannot_change_current_prediction (test_kernel.KernelTests.test_l0_current_target_cannot_change_current_prediction) ... ok
@@ -64,6 +77,6 @@ test_repeated_variable_keeps_none_binding (test_v028_regressions.V028RegressionT
 test_user_rules_are_detached_on_ingress (test_v028_regressions.V028RegressionTests.test_user_rules_are_detached_on_ingress) ... ok
 
 ----------------------------------------------------------------------
-Ran 64 tests in 9.791s
+Ran 77 tests in 12.740s
 
 OK

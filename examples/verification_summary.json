@@ -1,12 +1,12 @@
 {
-  "version": "0.3.0",
-  "verified_at": "2026-10-01T17:01:42.107892+00:00",
-  "base_commit": "7a1a87ab3aaf7a2bd30de5f608ec63bbad4515c4",
-  "source_sha256": "b95988ed3ebba89722a9ccd33422c2e4c47c1fec3ff2022b254bf2c79dd2ad66",
+  "version": "0.3.1",
+  "verified_at": "2026-10-01T17:32:09.487446+00:00",
+  "base_commit": "4f59c14776cdbbdd642d19aacc66aa9e5e5eacf7",
+  "source_sha256": "58a602703d7d74baced7f6a0f020df6425ab70f036e03f4ca1ff5545eeda0a0e",
   "checks": {
     "unittest": {
-      "passed": 64,
-      "total": 64,
+      "passed": 77,
+      "total": 77,
       "exit_code": 0,
       "log": "test_results.txt"
     },
@@ -20,73 +20,46 @@
       "passed": true,
       "exit_code": 0
     },
-    "configuration": {
-      "workflow_yaml_valid": true,
-      "devcontainer_json_valid": true,
-      "codespaces_run": "not_performed"
-    },
     "cold_wheel": {
-      "version": "0.3.0",
-      "installed_path": "/workspace/MIND_v0_3_DIST/venv/lib/python3.12/site-packages/digital_mind_core/__init__.py",
+      "version": "0.3.1",
+      "installed_path": "/workspace/MIND_v0_3_1_DIST/venv/lib/python3.12/site-packages/digital_mind_core/__init__.py",
       "source_checkout_used": false,
-      "source_sha256": "b95988ed3ebba89722a9ccd33422c2e4c47c1fec3ff2022b254bf2c79dd2ad66",
-      "steps": 96,
-      "learning_observations": 96,
-      "logic_inference": true,
-      "l0_result": 2,
+      "source_sha256": "58a602703d7d74baced7f6a0f020df6425ab70f036e03f4ca1ff5545eeda0a0e",
+      "real_http_status": 200,
+      "html_title": "Example Domain",
+      "kernel_observed_response": true,
+      "cli_internet_flag_verified": true,
       "passed": true
     },
-    "baseline_compatibility": {
+    "live_internet": {
+      "real_requests": 3,
+      "http_statuses": [
+        200,
+        200,
+        200
+      ],
+      "all_observed_by_kernel": true,
+      "api_field_reasoning": true,
+      "web_memory_restored_without_network": true,
+      "log": "internet_live_report.json"
+    },
+    "module_demo": {
       "passed": true,
       "steps": 96,
-      "log": "baseline_compatibility.json"
-    },
-    "capability_suite": {
-      "passed": 10,
-      "total": 10,
-      "training_success": true
-    },
-    "learning_shared_experience": {
-      "all": {
-        "baseline_mse": 0.012608050932792962,
-        "adaptive_mse": 0.01229907139268784,
-        "relative_mse_reduction": 0.02450652696060096,
-        "improved_seeds": 6,
-        "runs": 6
-      },
-      "before_change": {
-        "baseline_mse": 0.010919681361045598,
-        "adaptive_mse": 0.010727768719319818,
-        "relative_mse_reduction": 0.017574930566234492,
-        "improved_seeds": 6,
-        "runs": 6
-      },
-      "after_change": {
-        "baseline_mse": 0.014296420504540322,
-        "adaptive_mse": 0.01387037406605586,
-        "relative_mse_reduction": 0.02980091683433317,
-        "improved_seeds": 6,
-        "runs": 6
-      },
-      "final80": {
-        "baseline_mse": 0.007648290683235262,
-        "adaptive_mse": 0.007509002298539878,
-        "relative_mse_reduction": 0.018211701210663844,
-        "improved_seeds": 2,
-        "runs": 6
-      }
+      "log": "module_demo.json"
     }
   },
-  "wheel_sha256": "dc6bd32fb3997c8baf0c4feecfe5add217c91a96e6d503f025931ec0d8dd2b11",
+  "wheel_sha256": "8cf8825935dcbf0d43df13b1fee9679389ac310e3f3a7261d471590a7eec513b",
   "github": {
     "repository": "v37025337-pixel/fhknbv",
     "publication_status": "prepared",
     "actions_status": "not_yet_run"
   },
+  "historical_learning_benchmark": "learning_benchmark.json and LEARNING.md refer to the v0.3.0 experiment",
   "limits": [
-    "One synthetic world family; developer-specified model alternatives.",
-    "Forecast gain does not establish improved rewards; closed-loop reward results are mixed.",
-    "External computational module; no evidence of consciousness.",
-    "Runtime persists while the connected environment and process remain alive."
+    "HTTP(S) text and structured JSON; no JavaScript browser, search provider or autonomous web exploration.",
+    "Fetched data are unverified observations; text is not executed as instructions.",
+    "Web memory is separate from simulation replay; it does not restore the entire cognitive state.",
+    "Process is available while its connected execution environment remains alive."
   ]
 }

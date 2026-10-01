@@ -18,6 +18,7 @@ from typing import Any, Callable
 
 from .github_sidecar import GitHubRepositorySidecar
 from .kernel import KernelConfig
+from .internet import WebReader
 from .tool_module import MAX_REQUEST_CHARS, MindModule, _json_result, _reject_nonfinite
 
 
@@ -48,8 +49,11 @@ class UnifiedKernelModelPlugin:
         fetch_head: Callable[[str, str], dict[str, Any]] | None = None,
         state_reader: Callable[[], dict[str, Any]] | None = None,
         event_writer: Callable[[dict[str, Any]], Any] | None = None,
+        web_reader=None,
+        web_memory_path=None,
     ):
-        self.module = MindModule(config if config is not None else KernelConfig())
+        self.module = MindModule(config if config is not None else KernelConfig(),
+                                 web_reader=web_reader, web_memory_path=web_memory_path)
         self.repository = GitHubRepositorySidecar(repository=repository, branch=branch)
         self.fetch_head = fetch_head
         self.state_reader = state_reader
@@ -167,6 +171,7 @@ class UnifiedKernelModelPlugin:
             "repository": self.repository_status(),
             "external_state": self.external_state(),
             "kernel": self.module.mind.report(),
+            "internet": self.module.internet_status(),
             "boundaries": {
                 "model_weights_modified": False,
                 "host_capabilities_explicit": True,
@@ -246,12 +251,17 @@ def serve(plugin, input_stream, output_stream):
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Run UnifiedKernel as a model plugin")
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument('--internet', action='store_true', help='attach real HTTP(S) GET transport')
+    parser.add_argument('--web-memory', help='persist the last 16 web sources as JSON; requires --internet')
     args = parser.parse_args(argv)
+    if args.web_memory and not args.internet:
+        parser.error('--web-memory requires --internet')
     try:
         config = KernelConfig(seed=args.seed)
     except ValueError as exc:
         parser.error(str(exc))
-    serve(UnifiedKernelModelPlugin(config), sys.stdin, sys.stdout)
+    serve(UnifiedKernelModelPlugin(config, web_reader=WebReader() if args.internet else None,
+          web_memory_path=args.web_memory), sys.stdin, sys.stdout)
 
 
 if __name__ == "__main__":

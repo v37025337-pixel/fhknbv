@@ -1,0 +1,334 @@
+{
+  "version": "0.3.1",
+  "source_sha256": "58a602703d7d74baced7f6a0f020df6425ab70f036e03f4ca1ff5545eeda0a0e",
+  "real_http_requests": 3,
+  "all_observed_by_kernel": true,
+  "saved_source_reused_for_reasoning": true,
+  "web_memory_restored_without_network": true,
+  "internet_status": {
+    "attached": true,
+    "transport": "HTTP(S) GET",
+    "successful_fetches": 3,
+    "failed_fetches": 0,
+    "cached_sources": 7,
+    "max_sources": 16,
+    "last_error": null,
+    "memory_persistence": true,
+    "max_response_bytes": 262144,
+    "max_text_chars": 12000,
+    "socket_timeout_seconds": 10.0
+  },
+  "fetches": [
+    {
+      "source": {
+        "id": "e2cf01e1e73bcafea4cd5a34",
+        "requested_url": "https://example.com/",
+        "url": "https://example.com/",
+        "retrieved_at": "2026-10-01T17:27:38.624731+00:00",
+        "http_status": 200,
+        "media_type": "text/html",
+        "title": "Example Domain",
+        "text": "Example Domain This domain is for use in documentation examples without needing permission. This is not a service, avoid relying on it for testing and monitoring purposes. Learn more",
+        "json_fields": [],
+        "truncated": false,
+        "bytes_received": 713,
+        "decoded_bytes": 713,
+        "content_sha256": "7d3e61f8f627c8cc640c209ba0777db95f198a64e766f47484c321d5eb5e0962",
+        "elapsed_seconds": 0.07751284699770622,
+        "trust": "unverified_external_data"
+      },
+      "kernel": {
+        "cycle": 1,
+        "action": "observe_source",
+        "reason": "adaptive policy",
+        "inferences": [
+          {
+            "query": [
+              "web_fetched",
+              "e2cf01e1e73bcafea4cd5a34"
+            ],
+            "value": true
+          }
+        ]
+      },
+      "memory_persisted": true
+    },
+    {
+      "source": {
+        "id": "24d4befcbcf1db2da85fa19e",
+        "requested_url": "https://www.python.org/",
+        "url": "https://www.python.org/",
+        "retrieved_at": "2026-10-01T17:27:38.718331+00:00",
+        "http_status": 200,
+        "media_type": "text/html",
+        "title": "Welcome to Python.org",
+        "text": "Welcome to Python.org Notice: This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Skip to content ▼ Close Python PSF Docs PyPI Jobs Community ▲ The Python Network Donate ≡ Menu Search This Site GO A A Smaller Larger Reset Socialize LinkedIn Mastodon Chat on IRC Twitter About Applications Quotes Getting Started Help Downloads All releases Source code Windows macOS Android iOS Other Platforms License Alternative Implementations Documentation Docs Audio/Visual Talks Beginner's Guide FAQ Non-English Docs PEP Index Python Books Python Essays Community Diversity Mailing Lists IRC Forums PSF Annual Impact Report Python Conferences Special Interest Groups Python Logo Python Wiki Code of Conduct Community Awards Get Involved Shared Stories Success Stories Arts Business Education Engineering Government Scientific Software Development News Python News PSF Newsletter PSF News PyCon US News Python Insider News from the Community Events Python Events User Group Events Python Events Archive User Group Events Archive Submit an Event >_ Launch Interactive Shell # Simple arithmetic >>> 1 / 2 0.5 >>> 2 ** 3 8 >>> 17 / 3 # true division returns a float 5.666666666666667 >>> 17 // 3 # floor division 5 Intuitive Interpretation Calculations are simple with Python, and expression syntax is straightforward: the operators + , - , * and / work as expected; parentheses () can be used for grouping. More about simple math functions in Python 3 . # Python 3: List comprehensions >>> fruits = [ 'Banana' , 'Apple' , 'Lime' ] >>> loud_fruits = [ fruit . upper () for fruit in fruits ] >>> print ( loud_fruits ) ['BANANA', 'APPLE', 'LIME'] # List and the enumerate function >>> list ( enumerate ( fruits )) [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')] Compound Data Types Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists in Python 3 # For loop on a list >>> numbers = [ 2 , 4 , 6 , 8 ] >>> product = 1 >>> for number in numbers : ... product = product * number ... >>> print ( 'The product is:' , product ) The product is: 384 All the Flow You’d Expect Python knows the usual control flow statements that other languages speak — if , for , while and range — with some of its own twists, of course. More control flow tools in Python 3 # Python 3: Fibonacci series up to n >>> def fib ( n ): >>> a , b = 0 , 1 >>> while a < n : >>> print ( a , end = ' ' ) >>> a , b = b , a + b >>> print () >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions in Python 3 # Simple output (with Unicode) >>> print ( \"Hello, I'm Python!\" ) Hello, I'm Python! # Input, assignment >>> name = input ( 'What is your name? \\n ' ) >>> print ( f 'Hi, { name } .' ) What is your name? Python Hi, Python. Quick & Easy to Learn Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python 3 overview. Python is a programming language that lets you work quickly and integrate systems more effectively. Learn More Get Started Whether you're new to programming or an experienced developer, it's easy to learn and use Python. Start with our Beginner’s Guide Download Python source code and installers are available for download for all versions! Latest: Python 3.14.8 Docs Documentation for Python's standard library, along with tutorials and guides, are available online. docs.python.org Jobs Looking for work or have a Python related position that you're trying to hire for? Our relaunched community-run job board is the place to go. jobs.python.org Latest News More news 2026- 10-01 Python 3.10.22, 3.11.17, 3.12.15, 3.13.16 and 3.14.8 are now available! 2026- 09-30 Python Language Summit 2026 blog posts are now available 2026- 09-30 Python Language Summit 2026 2026- 09-30 Lightning Talks (Python Language Summit 2026) 2026- 09-30 PEP 827: Type Manipulation (Python Language Summit 2026) Upcoming Events More 2026- 10-03 PyBay 2026 2026- 10-07 PyCon Africa 2026 2026- 10-07 Python Meeting Düsseldorf 2026- 10-08 PyCon Estonia 2026 2026- 10-08 PyEducation – IPAF – Alda de Fátima Success Stories More Python programmability on Algorand makes the entire development lifecycle easier and means more affordable and efficient maintenance and upgrades going forward. Using Python to build a solution for instant tokenized real estate redemptions by Brian Whippo, Head of Developer Relations, Algorand Foundation Use Python for… More Web Development : Django , Pyramid , Bottle , Tornado , Flask , Litestar , FastAPI GUI Development : tkInter , PyGObject , PyQt , PySide , Kivy , wxPython , DearPyGui AI and Machine Learning : PyTorch , TensorFlow , scikit-learn , Transformers , Anthropic , LangChain Scientific and Numeric : SciPy , Pandas , IPython Software Development : Buildbot , Trac , Roundup System Administration : Ansible , Salt , OpenStack , xonsh >>> Python Software Foundation The mission of the Python Software Foundation is to promote, protect, and advance the Python programming language, and to support and facilitate the growth of a diverse and international community of Python programmers. Learn more Become a Member Donate to the PSF ▲ Back to Top About Applications Quotes Getting Started Help Downloads All releases Source code Windows macOS Android iOS Other Platforms License Alternative Implementations Documentation Docs Audio/Visual Talks Beginner's Guide FAQ Non-English Docs PEP Index Python Books Python Essays Community Diversity Mailing Lists IRC Forums PSF Annual Impact Report Python Conferences Special Interest Groups Python Logo Python Wiki Code of Conduct Community Awards Get Involved Shared Stories Success Stories Arts Business Education Engineering Government Scientific Software Development News Python News PSF Newsletter PSF News PyCon US News Python Insider News from the Community Events Python Events User Group Events Python Events Archive User Group Events Archive Submit an Event Contributing Developer's Guide Issue Tracker python-dev list Core Mentorship Report a Security Issue ▲ Back to Top Help & General Contact Diversity Initiatives Submit Website Bug Status Copyright ©2001-2026. Python Software Foundation Legal Statements Privacy Notice",
+        "json_fields": [],
+        "truncated": false,
+        "bytes_received": 11540,
+        "decoded_bytes": 52664,
+        "content_sha256": "c7088d3c06f180b5cd8b4a76df4806aa2b99c709ec7df51446c1b29c0dbb7977",
+        "elapsed_seconds": 0.08444353699451312,
+        "trust": "unverified_external_data"
+      },
+      "kernel": {
+        "cycle": 2,
+        "action": "observe_source",
+        "reason": "adaptive policy",
+        "inferences": [
+          {
+            "query": [
+              "web_fetched",
+              "24d4befcbcf1db2da85fa19e"
+            ],
+            "value": true
+          }
+        ]
+      },
+      "memory_persisted": true
+    },
+    {
+      "source": {
+        "id": "ce0472706241348e45b939b2",
+        "requested_url": "https://api.github.com/repos/v37025337-pixel/fhknbv",
+        "url": "https://api.github.com/repos/v37025337-pixel/fhknbv",
+        "retrieved_at": "2026-10-01T17:27:40.116721+00:00",
+        "http_status": 200,
+        "media_type": "application/json",
+        "title": "",
+        "text": "{\"id\":1335885536,\"node_id\":\"R_kgDOT5_-4A\",\"name\":\"fhknbv\",\"full_name\":\"v37025337-pixel/fhknbv\",\"private\":false,\"owner\":{\"login\":\"v37025337-pixel\",\"id\":279307569,\"node_id\":\"U_kgDOEKXlMQ\",\"avatar_url\":\"https://avatars.githubusercontent.com/u/279307569?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/v37025337-pixel\",\"html_url\":\"https://github.com/v37025337-pixel\",\"followers_url\":\"https://api.github.com/users/v37025337-pixel/followers\",\"following_url\":\"https://api.github.com/users/v37025337-pixel/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/v37025337-pixel/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/v37025337-pixel/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/v37025337-pixel/subscriptions\",\"organizations_url\":\"https://api.github.com/users/v37025337-pixel/orgs\",\"repos_url\":\"https://api.github.com/users/v37025337-pixel/repos\",\"events_url\":\"https://api.github.com/users/v37025337-pixel/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/v37025337-pixel/received_events\",\"type\":\"User\",\"user_view_type\":\"public\",\"site_admin\":false},\"html_url\":\"https://github.com/v37025337-pixel/fhknbv\",\"description\":\"fghjj\",\"fork\":false,\"url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv\",\"forks_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/forks\",\"keys_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/keys{/key_id}\",\"collaborators_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/collaborators{/collaborator}\",\"teams_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/teams\",\"hooks_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/hooks\",\"issue_events_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/issues/events{/number}\",\"events_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/events\",\"assignees_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/assignees{/user}\",\"branches_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/branches{/branch}\",\"tags_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/tags\",\"blobs_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/git/blobs{/sha}\",\"git_tags_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/git/tags{/sha}\",\"git_refs_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/git/refs{/sha}\",\"trees_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/git/trees{/sha}\",\"statuses_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/statuses/{sha}\",\"languages_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/languages\",\"stargazers_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/stargazers\",\"contributors_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/contributors\",\"subscribers_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/subscribers\",\"subscription_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/subscription\",\"commits_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/commits{/sha}\",\"git_commits_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/git/commits{/sha}\",\"comments_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/comments{/number}\",\"issue_comment_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/issues/comments{/number}\",\"contents_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/contents/{+path}\",\"compare_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/compare/{base}...{head}\",\"merges_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/merges\",\"archive_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/{archive_format}{/ref}\",\"downloads_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/downloads\",\"issues_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/issues{/number}\",\"pulls_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/pulls{/number}\",\"milestones_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/milestones{/number}\",\"notifications_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/notifications{?since,all,participating}\",\"labels_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/labels{/name}\",\"releases_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/releases{/id}\",\"deployments_url\":\"https://api.github.com/repos/v37025337-pixel/fhknbv/deployments\",\"created_at\":\"2026-08-16T11:57:22Z\",\"updated_at\":\"2026-10-01T17:26:53Z\",\"pushed_at\":\"2026-10-01T17:26:49Z\",\"git_url\":\"git://github.com/v37025337-pixel/fhknbv.git\",\"ssh_url\":\"git@github.com:v37025337-pixel/fhknbv.git\",\"clone_url\":\"https://github.com/v37025337-pixel/fhknbv.git\",\"svn_url\":\"https://github.com/v37025337-pixel/fhknbv\",\"homepage\":null,\"size\":370,\"stargazers_count\":0,\"watchers_count\":0,\"language\":\"Python\",\"has_issues\":true,\"has_projects\":true,\"has_downloads\":false,\"has_wiki\":true,\"has_pages\":false,\"has_discussions\":false,\"forks_count\":0,\"mirror_url\":null,\"archived\":false,\"disabled\":false,\"open_issues_count\":1,\"license\":{\"key\":\"mit\",\"name\":\"MIT License\",\"spdx_id\":\"MIT\",\"url\":\"https://api.github.com/licenses/mit\",\"node_id\":\"MDc6TGljZW5zZTEz\"},\"allow_forking\":true,\"is_template\":false,\"web_commit_signoff_required\":false,\"has_pull_requests\":true,\"pull_request_creation_policy\":\"all\",\"topics\":[],\"visibility\":\"public\",\"forks\":0,\"open_issues\":1,\"watchers\":0,\"default_branch\":\"main\",\"permissions\":{\"admin\":true,\"maintain\":true,\"push\":true,\"triage\":true,\"pull\":true},\"allow_squash_merge\":true,\"allow_merge_commit\":true,\"allow_rebase_merge\":true,\"allow_auto_merge\":false,\"delete_branch_on_merge\":false,\"allow_update_branch\":false,\"use_squash_pr_title_as_default\":false,\"squash_merge_commit_message\":\"COMMIT_MESSAGES\",\"squash_merge_commit_title\":\"COMMIT_OR_PR_TITLE\",\"merge_commit_message\":\"PR_TITLE\",\"merge_commit_title\":\"MERGE_MESSAGE\",\"network_count\":0,\"subscribers_count\":0}",
+        "json_fields": [
+          [
+            "id",
+            1335885536
+          ],
+          [
+            "node_id",
+            "R_kgDOT5_-4A"
+          ],
+          [
+            "name",
+            "fhknbv"
+          ],
+          [
+            "full_name",
+            "v37025337-pixel/fhknbv"
+          ],
+          [
+            "private",
+            false
+          ],
+          [
+            "owner.login",
+            "v37025337-pixel"
+          ],
+          [
+            "owner.id",
+            279307569
+          ],
+          [
+            "owner.node_id",
+            "U_kgDOEKXlMQ"
+          ],
+          [
+            "owner.avatar_url",
+            "https://avatars.githubusercontent.com/u/279307569?v=4"
+          ],
+          [
+            "owner.gravatar_id",
+            ""
+          ],
+          [
+            "owner.url",
+            "https://api.github.com/users/v37025337-pixel"
+          ],
+          [
+            "owner.html_url",
+            "https://github.com/v37025337-pixel"
+          ],
+          [
+            "owner.followers_url",
+            "https://api.github.com/users/v37025337-pixel/followers"
+          ],
+          [
+            "owner.following_url",
+            "https://api.github.com/users/v37025337-pixel/following{/other_user}"
+          ],
+          [
+            "owner.gists_url",
+            "https://api.github.com/users/v37025337-pixel/gists{/gist_id}"
+          ],
+          [
+            "owner.starred_url",
+            "https://api.github.com/users/v37025337-pixel/starred{/owner}{/repo}"
+          ],
+          [
+            "owner.subscriptions_url",
+            "https://api.github.com/users/v37025337-pixel/subscriptions"
+          ],
+          [
+            "owner.organizations_url",
+            "https://api.github.com/users/v37025337-pixel/orgs"
+          ],
+          [
+            "owner.repos_url",
+            "https://api.github.com/users/v37025337-pixel/repos"
+          ],
+          [
+            "owner.events_url",
+            "https://api.github.com/users/v37025337-pixel/events{/privacy}"
+          ],
+          [
+            "owner.received_events_url",
+            "https://api.github.com/users/v37025337-pixel/received_events"
+          ],
+          [
+            "owner.type",
+            "User"
+          ],
+          [
+            "owner.user_view_type",
+            "public"
+          ],
+          [
+            "owner.site_admin",
+            false
+          ],
+          [
+            "html_url",
+            "https://github.com/v37025337-pixel/fhknbv"
+          ],
+          [
+            "description",
+            "fghjj"
+          ],
+          [
+            "fork",
+            false
+          ],
+          [
+            "url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv"
+          ],
+          [
+            "forks_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/forks"
+          ],
+          [
+            "keys_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/keys{/key_id}"
+          ],
+          [
+            "collaborators_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/collaborators{/collaborator}"
+          ],
+          [
+            "teams_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/teams"
+          ],
+          [
+            "hooks_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/hooks"
+          ],
+          [
+            "issue_events_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/issues/events{/number}"
+          ],
+          [
+            "events_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/events"
+          ],
+          [
+            "assignees_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/assignees{/user}"
+          ],
+          [
+            "branches_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/branches{/branch}"
+          ],
+          [
+            "tags_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/tags"
+          ],
+          [
+            "blobs_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/git/blobs{/sha}"
+          ],
+          [
+            "git_tags_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/git/tags{/sha}"
+          ],
+          [
+            "git_refs_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/git/refs{/sha}"
+          ],
+          [
+            "trees_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/git/trees{/sha}"
+          ],
+          [
+            "statuses_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/statuses/{sha}"
+          ],
+          [
+            "languages_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/languages"
+          ],
+          [
+            "stargazers_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/stargazers"
+          ],
+          [
+            "contributors_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/contributors"
+          ],
+          [
+            "subscribers_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/subscribers"
+          ],
+          [
+            "subscription_url",
+            "https://api.github.com/repos/v37025337-pixel/fhknbv/subscription"
+          ]
+        ],
+        "truncated": false,
+        "bytes_received": 5813,
+        "decoded_bytes": 5813,
+        "content_sha256": "88fc0f38a01fbcdca96c88d8dc3bef546a2cb61aadfc03f67d4e0f90d8f4f20a",
+        "elapsed_seconds": 1.3719500759907532,
+        "trust": "unverified_external_data"
+      },
+      "kernel": {
+        "cycle": 3,
+        "action": "observe_source",
+        "reason": "adaptive policy",
+        "inferences": [
+          {
+            "query": [
+              "web_fetched",
+              "ce0472706241348e45b939b2"
+            ],
+            "value": true
+          }
+        ]
+      },
+      "memory_persisted": true
+    }
+  ],
+  "reasoning": {
+    "cycle": 4,
+    "action": null,
+    "inferences": [
+      {
+        "query": [
+          "web_field",
+          "ce0472706241348e45b939b2",
+          "full_name",
+          "v37025337-pixel/fhknbv"
+        ],
+        "value": true
+      }
+    ]
+  },
+  "scope": "real HTTP text and structured JSON observations; no LLM or free-form understanding"
+}

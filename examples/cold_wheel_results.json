@@ -1,11 +1,11 @@
 {
-  "version": "0.3.0",
-  "installed_path": "/workspace/MIND_v0_3_DIST/venv/lib/python3.12/site-packages/digital_mind_core/__init__.py",
+  "version": "0.3.1",
+  "installed_path": "/workspace/MIND_v0_3_1_DIST/venv/lib/python3.12/site-packages/digital_mind_core/__init__.py",
   "source_checkout_used": false,
-  "source_sha256": "b95988ed3ebba89722a9ccd33422c2e4c47c1fec3ff2022b254bf2c79dd2ad66",
-  "steps": 96,
-  "learning_observations": 96,
-  "logic_inference": true,
-  "l0_result": 2,
+  "source_sha256": "58a602703d7d74baced7f6a0f020df6425ab70f036e03f4ca1ff5545eeda0a0e",
+  "real_http_status": 200,
+  "html_title": "Example Domain",
+  "kernel_observed_response": true,
+  "cli_internet_flag_verified": true,
   "passed": true
 }

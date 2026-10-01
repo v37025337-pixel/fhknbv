@@ -6,28 +6,28 @@
       "test": "test_baseline.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.365,
+      "seconds": 0.354,
       "output": "BASELINE_PASS"
     },
     {
       "test": "test_cognitive_core.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.04,
+      "seconds": 0.041,
       "output": "{\"enabled\": [\"logic\", \"thinking\", \"conscious_integration\", \"self_model\", \"intelligence\"], \"mean_score\": 1.0, \"scores\": {\"conscious_integration\": 1.0, \"intelligence\": 1.0, \"logic\": 1.0, \"self_model\": 1.0, \"thinking\": 1.0}}\nCOGNITIVE_LAB_PASS"
     },
     {
       "test": "test_data_world.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.339,
+      "seconds": 0.299,
       "output": "DATA_WORLD_PASS"
     },
     {
       "test": "test_provider_autodiscovery.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.314,
+      "seconds": 0.329,
       "output": "AUTODISCOVERY_PASS"
     },
     {
@@ -41,14 +41,14 @@
       "test": "test_v019_refined.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.023,
+      "seconds": 0.037,
       "output": "V019_REFINED_PASS"
     },
     {
       "test": "test_v019_search_infra.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.049,
+      "seconds": 0.041,
       "output": "V019_INFRA_PASS"
     },
     {
@@ -69,63 +69,63 @@
       "test": "test_v021_memory.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.021,
+      "seconds": 0.024,
       "output": "V021_MEMORY_PASS"
     },
     {
       "test": "test_v022_scalability.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 7.602,
+      "seconds": 7.113,
       "output": "V022_SCALE_PASS"
     },
     {
       "test": "test_v023_integrity.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.023,
+      "seconds": 0.022,
       "output": "V023_INTEGRITY_PASS"
     },
     {
       "test": "test_v024_self_loop.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.026,
+      "seconds": 0.03,
       "output": "V024_SELF_LOOP_PASS"
     },
     {
       "test": "test_v025_batch.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.028,
+      "seconds": 0.022,
       "output": "V025_BATCH_PASS"
     },
     {
       "test": "test_v026_rules.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.026,
+      "seconds": 0.028,
       "output": "V026_RULES_PASS"
     },
     {
       "test": "test_v027_dedupe.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.075,
+      "seconds": 0.061,
       "output": "V027_DEDUPE_PASS"
     },
     {
       "test": "test_v028_genesis.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 1.992,
+      "seconds": 2.178,
       "output": "V028_GENESIS_PASS"
     },
     {
       "test": "test_v028_persisted_mechanism.py",
       "exit_code": 0,
       "passed": true,
-      "seconds": 0.026,
+      "seconds": 0.021,
       "output": "V028_PERSISTED_MECHANISM_PASS"
     }
   ]

@@ -12,6 +12,7 @@ import sys
 
 from . import __version__
 from .kernel import KernelConfig, UnifiedMind
+from .internet import WebConnection, WebReader
 
 
 MAX_REQUEST_CHARS = 1_000_000
@@ -31,8 +32,14 @@ def _json_result(value):
 
 
 class MindModule:
-    def __init__(self, config=None):
+    def __init__(self, config=None, *, web_reader=None, web_memory_path=None):
+        if web_memory_path is not None and web_reader is None:
+            raise ValueError('web_memory_path requires an attached web_reader')
         self.mind = UnifiedMind(config if config is not None else KernelConfig())
+        self.web = WebConnection(self.mind, web_reader, memory_path=web_memory_path) if web_reader is not None else None
+
+    def internet_status(self):
+        return self.web.status() if self.web is not None else {'attached': False, 'transport': None}
 
     def execute(self, request):
         if not isinstance(request, dict):
@@ -41,16 +48,29 @@ class MindModule:
         fields = {
             'status': {'op', 'id'},
             'simulate': {'op', 'id', 'steps'},
-            'reason': {'op', 'id', 'task', 'include_state'},
+            'reason': {'op', 'id', 'task', 'include_state', 'web_source_id'},
             'run_mechanism': {'op', 'id', 'name', 'inputs'},
+            'fetch_url': {'op', 'id', 'url'},
+            'web_memory': {'op', 'id', 'source_id'},
+            'internet_status': {'op', 'id'},
         }
         if not isinstance(operation, str) or operation not in fields:
-            raise ValueError('op must be status, simulate, reason or run_mechanism')
+            raise ValueError('unknown operation')
         if set(request) - fields[operation]:
             raise ValueError('unknown request fields')
         identifier = request.get('id')
         if identifier is not None and type(identifier) not in (str, int):
             raise ValueError('id must be a string, integer or null')
+        if operation == 'internet_status':
+            return self.internet_status()
+        if operation in {'fetch_url', 'web_memory'}:
+            if self.web is None:
+                raise RuntimeError('internet transport is not attached; use --internet or web_reader=WebReader()')
+            if operation == 'fetch_url':
+                return _json_result(self.web.fetch(request.get('url')))
+            if 'source_id' in request:
+                return {'source': self.web.lookup(request['source_id'])}
+            return self.web.memory()
         if operation == 'status':
             return self.mind.report()
         if operation == 'simulate':
@@ -66,6 +86,10 @@ class MindModule:
             include_state = request.get('include_state', False)
             if type(include_state) is not bool:
                 raise ValueError('include_state must be boolean')
+            if 'web_source_id' in request:
+                if self.web is None:
+                    raise RuntimeError('internet transport is not attached')
+                task = self.web.augment_task(task, self.web.lookup(request['web_source_id']))
             result = self.mind.process(task)
             if not include_state:
                 result.pop('state', None)
@@ -115,12 +139,17 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description='Call DIGITAL_MIND as a JSON-lines module')
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--version', action='version', version=__version__)
+    parser.add_argument('--internet', action='store_true', help='attach real HTTP(S) GET transport')
+    parser.add_argument('--web-memory', help='persist the last 16 web sources as JSON; requires --internet')
     args = parser.parse_args(argv)
+    if args.web_memory and not args.internet:
+        parser.error('--web-memory requires --internet')
     try:
         config = KernelConfig(seed=args.seed)
     except ValueError as exc:
         parser.error(str(exc))
-    serve(MindModule(config), sys.stdin, sys.stdout)
+    serve(MindModule(config, web_reader=WebReader() if args.internet else None,
+                     web_memory_path=args.web_memory), sys.stdin, sys.stdout)
 
 
 if __name__ == '__main__':
