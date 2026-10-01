@@ -21,7 +21,8 @@ from .kernel import KernelConfig, UnifiedMind
 REPLAY_FORMAT_V2 = "digital-mind-replay-v2"
 REPLAY_FORMAT = "digital-mind-replay-v3"
 REPLAY_SCHEMA_VERSION = 3
-STATE_FINGERPRINT_ALGORITHM = "digital-mind-state-v2"
+STATE_FINGERPRINT_ALGORITHM = "digital-mind-state-v3"
+PREVIOUS_STATE_FINGERPRINT_ALGORITHM = "digital-mind-state-v2"
 LEGACY_STATE_FINGERPRINT_ALGORITHM = "digital-mind-state-v1"
 LEGACY_REPORT_VERSIONS = ("0.2.0", "0.2.1", "0.2.2")
 _VALUE_TAG = "__digital_mind_value_type__"
@@ -55,7 +56,7 @@ def _state_payload(mind, *, include_report_version, report_version=None):
     }
 
 
-def _fingerprint(mind, *, include_report_version, report_version=None):
+def _raw_fingerprint(mind, *, include_report_version, report_version=None):
     digest = hashlib.sha256()
     for array in (mind.obs, mind.model.W, mind.model.W_fast, mind.self_trace):
         digest.update(np.asarray(array, dtype="<f8").tobytes())
@@ -68,12 +69,43 @@ def _fingerprint(mind, *, include_report_version, report_version=None):
     return digest.hexdigest()
 
 
+def _fingerprint_json_value(value):
+    if isinstance(value, np.ndarray):
+        return _fingerprint_json_value(value.tolist())
+    if isinstance(value, np.generic):
+        return _fingerprint_json_value(value.item())
+    if isinstance(value, dict):
+        return {key: _fingerprint_json_value(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_fingerprint_json_value(item) for item in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
+def _fingerprint(mind, *, include_report_version, report_version=None):
+    digest = hashlib.sha256()
+    for array in (mind.obs, mind.model.W, mind.model.W_fast, mind.self_trace):
+        digest.update(np.asarray(array, dtype="<f8").tobytes())
+    payload = _fingerprint_json_value(_state_payload(
+        mind,
+        include_report_version=include_report_version,
+        report_version=report_version,
+    ))
+    digest.update(json.dumps(payload, sort_keys=True, allow_nan=False).encode())
+    return digest.hexdigest()
+
+
 def _legacy_state_fingerprint(mind, report_version=None):
-    return _fingerprint(
+    return _raw_fingerprint(
         mind,
         include_report_version=True,
         report_version=report_version,
     )
+
+
+def _previous_state_fingerprint(mind):
+    return _raw_fingerprint(mind, include_report_version=False)
 
 
 def state_fingerprint(mind):
@@ -194,6 +226,12 @@ def _validate_state_fingerprint(mind, document):
         if state_fingerprint(mind) != expected:
             raise ReplayMigrationRequired(
                 "replayed state does not match the saved checkpoint; a state migration is required"
+            )
+        return {"algorithm": algorithm, "legacy_report_version": None}
+    if algorithm == PREVIOUS_STATE_FINGERPRINT_ALGORITHM:
+        if _previous_state_fingerprint(mind) != expected:
+            raise ReplayMigrationRequired(
+                "previous replay state does not match the saved checkpoint; a state migration is required"
             )
         return {"algorithm": algorithm, "legacy_report_version": None}
     if algorithm == LEGACY_STATE_FINGERPRINT_ALGORITHM:

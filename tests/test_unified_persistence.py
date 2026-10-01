@@ -36,12 +36,21 @@ class UnifiedPersistenceTests(unittest.TestCase):
             restored = load_replay(replay)
             self.assertEqual(state_fingerprint(fresh), state_fingerprint(restored))
 
-    def test_external_tasks_do_not_silently_disappear_from_replay(self):
+    def test_external_tasks_are_replayed_in_order(self):
         mind = UnifiedMind(KernelConfig(l0_learning=False))
-        mind.process({'facts': [('p', 'a')]})
+        mind.run(6)
+        mind.process({
+            'facts': [('p', 'a')],
+            'persist_facts': True,
+            'queries': [('p', 'a')],
+        })
+        mind.run(4)
         with tempfile.TemporaryDirectory() as directory:
-            with self.assertRaisesRegex(ValueError, 'external-task'):
-                save_replay(mind, Path(directory) / 'replay.json')
+            path = Path(directory) / 'replay.json'
+            save_replay(mind, path)
+            restored = load_replay(path)
+            self.assertEqual(state_fingerprint(mind), state_fingerprint(restored))
+            self.assertEqual(restored._external_tasks, 1)
 
 
 if __name__ == '__main__':

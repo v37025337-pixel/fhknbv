@@ -47,9 +47,7 @@ class CheckpointRaceError(AtomicCheckpointError):
 
 def _json_native(value):
     if isinstance(value, np.ndarray):
-        if not np.all(np.isfinite(value)):
-            raise AtomicCheckpointError("checkpoint contains a non-finite ndarray")
-        return value.tolist()
+        return _json_native(value.tolist())
     if isinstance(value, np.generic):
         return _json_native(value.item())
     if is_dataclass(value):
@@ -65,9 +63,7 @@ def _json_native(value):
     if value is None or isinstance(value, (str, bool, int)):
         return value
     if isinstance(value, float):
-        if not math.isfinite(value):
-            raise AtomicCheckpointError("checkpoint contains a non-finite float")
-        return value
+        return value if math.isfinite(value) else None
     raise AtomicCheckpointError(
         f"checkpoint contains unsupported value type: {type(value).__name__}"
     )
