@@ -56,6 +56,10 @@ jobs:
           --hypothesis examples/self_hypothesis.json
           --steps 640
           --report examples/l0_self_hypothesis_experiment.json
+      - name: Probe Google Search transport
+        run: >-
+          python tools/google_search_probe.py
+          --report examples/google_search_probe.json
       - uses: actions/upload-artifact@v4
         with:
           name: digital-mind-verification
@@ -69,3 +73,4 @@ jobs:
             examples/self_assessment.json
             examples/self_hypothesis.json
             examples/l0_self_hypothesis_experiment.json
+            examples/google_search_probe.json

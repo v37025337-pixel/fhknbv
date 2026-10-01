@@ -12,6 +12,7 @@ import sys
 
 from . import __version__
 from .kernel import KernelConfig, UnifiedMind
+from .google_search import GoogleSearchClient
 
 
 MAX_REQUEST_CHARS = 1_000_000
@@ -31,8 +32,9 @@ def _json_result(value):
 
 
 class MindModule:
-    def __init__(self, config=None):
+    def __init__(self, config=None, *, google_client=None):
         self.mind = UnifiedMind(config if config is not None else KernelConfig())
+        self.google = google_client if google_client is not None else GoogleSearchClient()
 
     def execute(self, request):
         if not isinstance(request, dict):
@@ -43,9 +45,11 @@ class MindModule:
             'simulate': {'op', 'id', 'steps'},
             'reason': {'op', 'id', 'task', 'include_state'},
             'run_mechanism': {'op', 'id', 'name', 'inputs'},
+            'google_status': {'op', 'id'},
+            'google_search': {'op', 'id', 'query', 'num'},
         }
         if not isinstance(operation, str) or operation not in fields:
-            raise ValueError('op must be status, simulate, reason or run_mechanism')
+            raise ValueError('op must be status, simulate, reason, run_mechanism, google_status or google_search')
         if set(request) - fields[operation]:
             raise ValueError('unknown request fields')
         identifier = request.get('id')
@@ -70,6 +74,12 @@ class MindModule:
             if not include_state:
                 result.pop('state', None)
             return _json_result(result)
+        if operation == 'google_status':
+            return self.google.status()
+        if operation == 'google_search':
+            query = request.get('query')
+            num = request.get('num', 5)
+            return self.google.search(query, num)
         name, inputs = request.get('name'), request.get('inputs')
         if not isinstance(name, str) or not isinstance(inputs, dict):
             raise ValueError('name must be a string and inputs must be a JSON object')
