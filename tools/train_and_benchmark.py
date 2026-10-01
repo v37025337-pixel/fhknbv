@@ -87,6 +87,19 @@ def train_one(seed, steps):
         "l0_mean_innovation_weight": safe_number(
             l0.get("mean_innovation_weight")
         ),
+        "l0_final_weight": safe_number(mind.model.l0_weight),
+        "l0_shadow_weight": safe_number(mind.model.shadow_weight),
+        "l0_model_version": int(
+            mind.model.runtime.models["world_innovation"].version
+        ),
+        "l0_tail_baseline_loss": safe_number(
+            np.mean(mind.model.baseline_losses[-64:])
+            if mind.model.baseline_losses else None
+        ),
+        "l0_tail_ensemble_loss": safe_number(
+            np.mean(mind.model.ensemble_losses[-64:])
+            if mind.model.ensemble_losses else None
+        ),
         "questions_created": int(questions.get("created", 0)),
         "questions_predictively_explained": int(
             questions.get("predictively_explained", 0)
@@ -361,7 +374,7 @@ def negative_capability_probes():
     )
 
     try:
-        core.synthesize_mechanism({
+        result = core.synthesize_mechanism({
             "name": "reverse_text",
             "args": ["text"],
             "examples": [
@@ -369,14 +382,17 @@ def negative_capability_probes():
                 {"inputs": {"text": "xy"}, "output": "yx"},
             ],
         })
-        string_failure = False
-        evidence = "unexpectedly accepted string mechanism"
+        string_supported = result.get("status") == "FOUND"
+        evidence = (
+            f"status={result.get('status')}; "
+            f"explanation={result.get('explanation')}"
+        )
     except Exception as exc:
-        string_failure = True
+        string_supported = False
         evidence = f"{type(exc).__name__}: {exc}"
     probe(
         "string_program_synthesis",
-        not string_failure,
+        string_supported,
         evidence,
     )
 
