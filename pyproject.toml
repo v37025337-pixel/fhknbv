@@ -12,6 +12,7 @@ dependencies = ["numpy>=1.24", "scipy>=1.10"]
 [project.scripts]
 digital-mind = "digital_mind_core.__main__:main"
 digital-mind-module = "digital_mind_core.tool_module:main"
+digital-mind-plugin = "digital_mind_core.model_plugin:main"
 
 [tool.setuptools.packages.find]
 include = ["digital_mind_core*"]
