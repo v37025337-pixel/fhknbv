@@ -1,0 +1,29 @@
+name: Export full kernel snapshot
+
+on:
+  push:
+    branches:
+      - export-full-kernel-2227fb5e
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 2227fb5e3412e51ecbaabf22011f3c30e0158fca
+      - name: Write snapshot metadata
+        run: |
+          printf '%s\n'             'UnifiedKernel full source snapshot'             'commit=2227fb5e3412e51ecbaabf22011f3c30e0158fca'             'repository=v37025337-pixel/fhknbv'             > FULL_KERNEL_SNAPSHOT.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: UnifiedKernel_FULL_2227fb5e
+          path: |
+            .
+            !.git/**
+          include-hidden-files: true
